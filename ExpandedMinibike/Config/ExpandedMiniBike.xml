@@ -1,7 +1,36 @@
 <configs>
-	<config name="rwgmixer">
-		<set xpath="/rwgmixer/rulesets/ruleset[@name='vanilla']/@generation_distance">500</set>
-		<set xpath="/rwgmixer/biome_spawn_rules/biome_spawn_rule['radiated']/distance_from_center/@range">500,600</set>
+
+	<!-- Adjust the loot container size for the minibike -->
+	<config name="loot">
+		<set xpath="/lootcontainers/lootcontainer[@id='62']/@size">7,6</set>
+	</config>
+	<config name="XUi/windows">
+
+		<!-- Insert this snippet to add the combine menu to the windowVehicleStats -->
+		<insertAfter xpath="/windows/window[@name='windowVehicleStats']/rect[@name='content']" >
+			<panel pos="240, 0" style="header.panel">			
+				<sprite style="header.icon" sprite="ui_game_symbol_add"/>
+				<label style="header.name" text="COMBINE" text_key="xuiCombine"/>
+			</panel>
+
+			<!-- Adds the combine grid in the minibike -->
+			<rect pos="240, -46" height="230" width="228" controller="CombineGrid">
+				<sprite depth="2" name="backgroundMain" sprite="menu_empty3px" pos="0,1" width="228" height="230" color="[black]" type="sliced" fillcenter="false" />
+				<sprite name="background" color="[darkGrey]" pos="0,1" type="sliced"/>
+
+				<grid name="parts" rows="3" cols="1" pos="3,-2" cell_width="150" cell_height="76" repeat_content="true" >
+					<required_item_stack />
+				</grid>
+
+				<label depth="3" pos="90,-25" text="Item A" text_key="xuiCombineItemA" />
+				<label depth="3" pos="90,-100" text="Item B" text_key="xuiCombineItemB"/>
+				<label depth="3" pos="90,-175" text="Result" text_key="xuiResult"/>
+			</rect>				
+		</insertAfter>
+
+		<!-- Update the colum and rows for the storage -->
+		<set xpath="/windows/window[@name='windowVehicleStorage']/grid[@name='inventory']/@rows">6</set>
+		<set xpath="/windows/window[@name='windowVehicleStorage']/grid[@name='inventory']/@cols">7</set>
+		<set xpath="/windows/window[@name='windowVehicleStorage']/@width">530</set>
 	</config>
 </configs>
-
