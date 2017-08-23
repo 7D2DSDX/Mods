@@ -1,0 +1,39 @@
+<configs>
+	<!--  This tells SDX to add to the blocks.xml -->
+	<config name="blocks">	
+		<!-- This tells SDX to add the following block to the bottom of the block list -->
+		<append xpath="/blocks">	
+			<block id="" name="cubetest">
+				<property name="Material" value="Mconcrete" />
+				<property name="Shape" value="ModelEntity" />
+				<property name="Model" value="#Cube?CubePrefab" />
+				<property name="CustomIcon" value="ui_game_symbol_cubetest" />
+
+				<!-- ony needed if you want to enable picking up the block -->
+				<property name="CanPickup" value="true" />
+				<!-- used to fine tune block position in game if needed -->
+				<property name="ModelOffset" value="0,0,0" />
+				<!-- only needed only if the block's dimensions exceeds 1Mx1Mx1M -->
+				<property name="MultiBlockDim" value="1,1,1" />
+				<property name="Collide" value="movement,melee,bullet,arrow,rocket" />
+				<property name="DescriptionKey" value="cubetest" />
+				<drop event="Destroy" count="0" />
+				<drop event="Destroy" name="rockSmall" count="1" prob="1" />
+				<drop event="Fall" name="rockSmall" count="0" prob="1" stick_chance="1" />
+				<drop event="Fall" name="rockSmall" count="1" prob=".75" stick_chance="1" />
+			</block>
+		</append>
+	</config>
+	
+	<!-- Adding a new recipe for the mod -->
+	<config name="recipes">
+		<append xpath="/recipes" >
+			<recipe name="cubetest" count="1" craft_area="forge" material_based="true">
+				<ingredient name="unit_stone" count="10" />
+				<ingredient name="unit_clay" count="60" />
+			</recipe>
+		</append>
+	</config>
+
+
+</configs>

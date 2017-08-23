@@ -1,0 +1,3 @@
+Key,Source,Context,Changes,English,French,German,Klingon,Spanish
+katanamichonne,items,Melee,KgNone,Michionne's katana,,,,
+katanamichonneDesc,items,Melee,New,Michionne's katana is ready to slice and dice up the zombies,,,,

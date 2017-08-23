@@ -1,0 +1,13 @@
+<configs>
+	<config name="XUi/windows">	
+		<!-- Back pack dimensions are set for 5 x 9, based on a 45 slot back pack -->
+		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@rows">5</set>
+		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cols">9</set>
+	</config>
+	
+	<!-- changing the scale of the panel to better fit -->
+	<config name="xui">
+		<set xpath="/xui/ruleset[@name='default']/@stackpanel_scale">1.03</set>
+	</config>
+</configs>
+

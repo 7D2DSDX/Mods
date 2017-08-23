@@ -1,0 +1,18 @@
+<mod>
+	<info>
+		<!-- Information about the Mod, the author and version information -->
+		<!-- These are displayed in the SDX Launcher -->
+		<author>xyth</author>
+		<name>CubeSample</name>
+		<description>Sample Cube Block SDX Mod</description>
+		<mod_version>1.0</mod_version>
+		<game_version>16.2</game_version>
+		<launcher_version>0.0.0</launcher_version>
+	</info>
+	
+	<!-- This references any config files that SDX needs to merge into your files -->
+	<config_mods>
+		<import file="Config\cubetest.xml" />
+    </config_mods>
+	
+</mod>

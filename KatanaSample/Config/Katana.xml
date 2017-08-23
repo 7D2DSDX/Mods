@@ -1,0 +1,15 @@
+<configs>
+	<!--  This tells SDX to add to the Items.xml -->
+	<config name="items">	
+		<!-- This tells SDX to add the following Items to the bottom of the Items list -->
+		<append xpath="/items">	
+
+			<!-- New item will be Katana -->
+			<item id="" name="katanamichonne">
+				<!-- Extend it from the machete, but add the custom mesh -->
+				<property name="Extends" value="machete"/>
+				<property name="Meshfile" value="#michonnekatana?katana" />
+			</item>
+		</append>
+	</config>
+</configs>
