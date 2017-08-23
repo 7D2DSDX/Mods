@@ -33,7 +33,7 @@ public class BiggerBackPack : IPatcherMod
         UpdateBackPack(module, "Bag", "GetSlots", 1);
         UpdateBackPack(module, "Bag", "SetSlots", 1);
 
-        // PlayerDataFile is difference, since we want to update it in the first three spots.
+        // PlayerDataFile is different, since we want to update it in the first three spots.
         UpdateBackPack(module, "PlayerDataFile", "Read", 3);
 
     }
@@ -58,7 +58,7 @@ public class BiggerBackPack : IPatcherMod
                 i.Operand = NewIntenvotrySize;
 
                 // When adjusting the PlaterDataFile, there's 3 places where the back pack size is set. We want to go through this loop, grabbing each one
-                // However, there are other "32" sizes that match, so we'll want to break faster the third one.
+                // However, there are other "32" sizes that match, so we'll want to break after the third one.
                 if ( ++count == maxCounter )
                     break;
             }
