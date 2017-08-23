@@ -8,7 +8,7 @@ using System.Linq;
 public class BiggerBackPack : IPatcherMod
 {
     private sbyte OldInventorySize = 32;
-    private sbyte NewIntenvotrySize = 45;
+    private sbyte NewInventorySize = 45;
 
     public bool Patch(ModuleDefinition module)
     {
@@ -55,7 +55,7 @@ public class BiggerBackPack : IPatcherMod
             if ((i.OpCode == OpCodes.Ldc_I4_S) && ((sbyte)i.Operand == OldInventorySize))
             {
                 // Update the value with the new backpack size, and break. There's nothing else we want to do in this method.
-                i.Operand = NewIntenvotrySize;
+                i.Operand = NewInventorySize;
 
                 // When adjusting the PlaterDataFile, there's 3 places where the back pack size is set. We want to go through this loop, grabbing each one
                 // However, there are other "32" sizes that match, so we'll want to break after the third one.
