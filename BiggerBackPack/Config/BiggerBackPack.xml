@@ -4,8 +4,8 @@
 		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@rows">5</set>
 		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cols">9</set>
 
-		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cell_width">76</set>
-		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cell_height">76</set>
+		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cell_width">67</set>
+		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cell_height">67</set>
 
 		<remove xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/item_stack" />
 		<append xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']">
