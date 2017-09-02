@@ -1,7 +1,0 @@
-<configs>
-	<config name="rwgmixer">
-		<set xpath="/rwgmixer/rulesets/ruleset[@name='vanilla']/@generation_distance">500</set>
-		<set xpath="/rwgmixer/biome_spawn_rules/biome_spawn_rule['radiated']/distance_from_center/@range">500,600</set>
-	</config>
-</configs>
-

@@ -1,0 +1,87 @@
+<configs>
+	<config name="blocks">
+		<append xpath="/blocks">
+			<block id="1630" name="Neon Open Sign">
+				<property name="Extends" value="ceilingLight02_player" />
+				<property name="CustomIcon" value="openSign" />
+				<property name="Class" value="NeonSign, Mods" />
+				<property name="Model" value="#NeonSign?NeonOpenSignPrefab"/>
+				<property name="Collide" value="movement,melee,rocket" />
+				<property name="HandleFace" value="South" />
+				<property name="TakeDelay" value="5" />
+				<property name="AllowRemotePower" value="false" />
+				<property name="LightObject" value="NeonText" />
+			</block>
+			<block id="1631" name="Neon Open Sign 2">
+				<property name="Extends" value="Neon Open Sign" />
+				<property name="Model" value="#NeonSign?NeonOpenSign2Prefab"/>
+				<!-- RGB Color Codes - An unlimited amount of colors can be set if the model is setup for it -->
+				<property name="color1" value="255, 0, 0" /> <!-- Red Text -->
+				<property name="Flash" value="false" />
+			</block>
+			<block id="1632" name="Neon Bowling Sign">
+				<property name="Extends" value="Neon Open Sign" />
+				<property name="CustomIcon" value="neonBowlingSign" />
+				<property name="Model" value="#NeonSign?BowlingNeonSignPrefab"/>
+				<property name="Flash" value="true" />
+				<property name="FlashSpeed" value="1" />
+				<property name="color1" value="0, 0, 255" /> <!-- Blue --> <!-- Ball -->
+				<property name="color2" value="0, 255, 0" /> <!-- Green --> <!-- Holes -->
+				<property name="color3" value="255, 215, 0" /> <!-- Gold --> <!-- Pin -->
+				<property name="color4" value="255, 0, 255" /> <!-- Magenta --> <!-- Stripes -->
+			</block>
+			<block id="1633" name="Neon Pizza Sign">
+				<property name="Extends" value="Neon Open Sign" />
+				<property name="CustomIcon" value="pizzaSign" />
+				<property name="Model" value="#NeonSign?PizzaSignPrefab"/>
+				<property name="MultiBlockDim" value="3,2,1" />
+				<property name="color1" value="0, 255, 0" /> <!-- Lime --> <!-- Crusts & Slice -->
+				<property name="color2" value="0, 128, 128" /> <!-- Teal --> <!-- 3 x Topping -->
+				<property name="color3" value="255, 0, 0" /> <!-- Red --> <!-- 4 x Topping -->
+				<property name="color4" value="255, 255, 0" /> <!-- Yellow --> <!-- Steam -->
+				<property name="color5" value="0, 128, 0" /> <!-- Green --> <!-- Letter P -->
+				<property name="color6" value="0, 128, 0" /> <!-- Green --> <!-- Letter I -->
+				<property name="color7" value="0, 128, 0" /> <!-- Green --> <!-- Letter Z -->
+				<property name="color8" value="0, 128, 0" /> <!-- Green --> <!-- Letter Z -->
+				<property name="color9" value="0, 128, 0" /> <!-- Green --> <!-- Letter A --> 
+			</block>
+			<block id="1634" name="Neon Pizza Sign 2">
+				<property name="Extends" value="Neon Pizza Sign" />
+				<property name="Flash" value="true" />
+				<property name="FlashSpeed" value="1" />
+				<property name="color5" value="255, 0, 0" /> <!-- Red --> <!-- Letter P -->
+				<property name="color6" value="0, 128, 0" /> <!-- Green --> <!-- Letter I -->
+				<property name="color7" value="0, 0, 255" /> <!-- Blue --> <!-- Letter Z -->
+				<property name="color8" value="255, 255, 0" /> <!-- Yellow --> <!-- Letter Z -->
+				<property name="color9" value="255, 0, 255" /> <!-- Magenta --> <!-- Letter A --> 
+			</block>
+			<block id="1635" name="Neon Gun Sign">
+				<!-- This model is setup with 14 color options, you can change the color of every part by adding color1 - color14. You dont have to set every color, you can just change the parts you need -->
+				<property name="Extends" value="Neon Open Sign" />
+				<property name="Model" value="#NeonSign?GunNeonSignPrefab"/>
+				<property name="CustomIcon" value="handGunSign" />
+				<property name="LightObject" value="LitObjects" />
+				<property name="Flash" value="false" />
+				<property name="FlashSpeed" value="1" />
+				<property name="MultiBlockDim" value="3,1,1" />
+			</block>
+
+      <block id="*" name="Neon Hotdog Sign">
+        <property name="Extends" value="Neon Open Sign" />
+        <property name="CustomIcon" value="neonBowlingSign" />
+        <property name="Model" value="#NeonSignHotdog?NeonSignHotdogPrefab"/>
+        <property name="LightObject" value="LitObjects" />
+
+        <property name="colorMeat" value="0, 0, 255" />
+        <!-- Blue -->
+        <!-- Ball -->
+        <property name="colorBun" value="0, 255, 0" />
+        <!-- Green -->
+        <!-- Holes -->
+        <property name="colorMustard" value="255, 215, 0" />
+        <!-- Gold -->
+        <!-- Pin -->
+      </block>
+		</append>
+	</config>
+</configs>

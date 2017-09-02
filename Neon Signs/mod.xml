@@ -1,0 +1,48 @@
+<mod>
+	<info>
+		<author>308</author>
+		<name>Neon Signs</name>
+		<description>
+		
+		Neon Signs
+		
+		Update Notes v1.0.2 
+		* Added flash option to xml
+		* Added RGM color settings so you can change the color of the parts, there are some examples in the xml of how to do this.
+		* Added bowling sign
+		* Added pizza sign
+		
+		Adding your own models
+		* You need 2 sets of meshes, 1 for lit and 1  for unlit.
+		* Make a empty gameObject to hold your lit meshes and set its transform to zero, rename it to "LitObjects"
+		* Make another empty gameObject for each of the parts or groups of part that you want to have its own color option, the empty gameObjects must have "color" in the name (case sensitive)
+		* Set your empty color gameObjects transform to zero and put your parts or groups into them
+		* Put all your color gameObjects that now contain the lit meshes into the "LitObjects" empty gameObject you made before
+		* Every mesh in the color objects need a material and its shader must have an emissive color
+		* Add the names of the color gameObjects as a xml property set the value using RGB color codes
+		* For now you need to add a property named "LightObject" with value "LitObjects" to the xml, later this will be default and you wont need to do this step unless you change the object name in step 2
+		
+		Update Notes v1.0.1 
+		
+		* Updated to work on servers (See remote power instrutions) 
+		* Moved the power cord back a little
+		* Added xml option to use remote power in sp like the server does, in sp you can still power the sign directly even with remote power on.
+		
+		Remote Power Instrutions
+		
+		* Only 1 relay needs to be powered
+		* Relays can be in any of the following locations
+		* 2 blocks to the left or right
+		* 2 blocks directly above or bellow
+		* 2 blocks to the front or back.
+		
+		
+		</description>
+		<mod_version>v1.0.2 </mod_version>
+		<game_version>Alpha 16.2</game_version>
+		<launcher_version>SDX7</launcher_version>
+	</info>
+	<config_mods>
+		<import file="Configs\Neon Signs.xml" />
+	</config_mods>
+</mod>
