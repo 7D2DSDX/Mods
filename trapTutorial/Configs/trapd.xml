@@ -1,0 +1,22 @@
+<config name="blocks">
+	<append xpath="/blocks">
+		<block id="" name="trapD">
+			<property name="Class" value="TrapTutorial, Mods" />
+			<property name="Material" value="metal" />		
+			<property name="Shape" value="ModelEntity" />
+			<property name="Model" value="#trapDoor?trapD" />
+			<property name="Collide" value="movement,bullet,rocket,melee" />
+			<property name="FuelValue" value="36" />
+			<property name="OpenSound" value="" />
+			<property name="CloseSound" value="" />		
+			<!-- until better solution this is just to allow interaction -->
+			<property name="CanPickup" value="true" />
+			<drop event="Fall" name="woodDebris" count="1" prob="1.0" stick_chance=".75" />
+			<property name="Group" value="Tools/Traps" />
+			<property name="debug" value="false" />
+			<drop event="Harvest" name="" count="0" tool_category="Disassemble" />
+			<drop event="Destroy" count="0" />
+			<drop event="Destroy" name="trapD" count="1" tool_category="Disassemble" />
+		</block>
+	</append>
+</config>
