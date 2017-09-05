@@ -5,11 +5,12 @@ using UnityEngine;
 /// Custom class for simple unpowered traps
 /// Mortelentus 2017 - v1.0
 /// We inherit Block class. This is the Basic Vanilla block without any special behaviour.
+/// In the XML, Block classes are always referenced by removing the block word. In this case it would be "TrapTutorial, Mods"
 /// </summary>
 public class BlockTrapTutorial : Block
 {
-    private string WJ;
-    private string EJ;
+    private string openSound;
+    private string closeSound;
 
 	// overriding the initialization function.
     public override void Init()
@@ -17,9 +18,9 @@ public class BlockTrapTutorial : Block
         base.Init();
 		// assign custom sounds to open and close, IF configured in xml
         if (this.Properties.Values.ContainsKey("OpenSound"))
-            this.WJ = this.Properties.Values["OpenSound"];
+            this.openSound = this.Properties.Values["OpenSound"];
         if (this.Properties.Values.ContainsKey("CloseSound"))
-            this.EJ = this.Properties.Values["CloseSound"];
+            this.closeSound = this.Properties.Values["CloseSound"];
         this.IsRandomlyTick = true;
     }
 
@@ -63,7 +64,7 @@ public class BlockTrapTutorial : Block
                 // if the trap was triggered while ready, we'll play open animation
 				// if you remember the animator, we used the trigger openT to run the open animation.
 				// if a open sound exists, it will also be played!
-                Audio.Manager.BroadcastPlay(_blockPos.ToVector3(), WJ);
+                Audio.Manager.BroadcastPlay(_blockPos.ToVector3(), openSound);
                 animator.SetTrigger("openT");
             }
             else if (!BlockTrapTutorial.IsTrapFired(_blockValue.meta) && BlockTrapTutorial.IsTrapFired(_oldBlockValue.meta))
@@ -71,7 +72,7 @@ public class BlockTrapTutorial : Block
                 // if the trap is being reseted by a player, we'll play close animation
 				// if you remember the animator, we used the trigger closeT to run the open animation.
 				// if a close sound exists, it will also be played!
-                Audio.Manager.BroadcastPlay(_blockPos.ToVector3(), EJ);
+                Audio.Manager.BroadcastPlay(_blockPos.ToVector3(), closeSound);
                 animator.SetTrigger("closeT");
             }                      
         }
