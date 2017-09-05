@@ -27,7 +27,7 @@ public class CraftingLagFix : IPatcherMod
         Workstations.Add("XUiC_WorkstationOutputGrid");
         Workstations.Add("XUiC_WorkstationInputGrid");
         Workstations.Add("XUiC_WorkstationFuelGrid");
-        Workstations.Add("XUiC_WorkstationToolGrid");
+       // Workstations.Add("XUiC_WorkstationToolGrid");
 
         // We want to remove the SetAllChildrenDirty from most calls, so find the reference in the XUIController class, then the method.
         var XUIControllerClass = module.Types.First(d => d.Name == "XUiController");
@@ -186,12 +186,6 @@ public class CraftingLagFix : IPatcherMod
                     delNextLines--;
                 }
 
-                if (i.OpCode == OpCodes.Ret)
-                {
-                    pro.InsertBefore(i, Instruction.Create(OpCodes.Ldarg_0));
-                    pro.InsertBefore(i, Instruction.Create(OpCodes.Ldc_I4_1));
-                    pro.InsertBefore(i, Instruction.Create(OpCodes.Stfld, isDirty));
-                }
             }
 
   
