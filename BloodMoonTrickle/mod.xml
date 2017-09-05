@@ -1,0 +1,19 @@
+<mod>
+	<info>
+		<!-- Information about the Mod, the author and version information -->
+		<!-- These are displayed in the SDX Launcher -->
+		<author>sphereii</author>
+		<name>Guppycur's Blood Moon Trickle Fix</name>
+		<description>Remove the trickle, and keep the horde magic going all night.</description>
+		<mod_version>1.0</mod_version>
+		<game_version>16.2</game_version>
+		<launcher_version>0.0.0</launcher_version>
+		<type>XML</type>
+	</info>
+	
+	<!-- This references any config files that SDX needs to merge into your files -->
+	<config_mods>
+		<import file="Config\GameStage.xml" />
+    </config_mods>
+	
+</mod>

@@ -1,0 +1,10 @@
+<configs>
+
+
+<!-- Updates the Game stages, under the BloodMoonHorde, to change the maxAlive to 50 for all nodes -->
+<!-- By default, it only looks at the the game stages that have a 4 element into it, so it doesn't kick in until gamestage 23 -->
+  <config name="gamestages">
+		<set xpath="/gamestages/spawner[@name='BloodMoonHorde']/*/spawn[4]/@maxAlive">50</set>
+	</config>
+
+</configs>
