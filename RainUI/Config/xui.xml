@@ -1,0 +1,26 @@
+<configs>
+
+	<!-- Read the xui.xml and remove the window groups -->
+	<config name="xui">
+		<!-- Add to the Backpack -->
+		<append xpath="/xui/ruleset[@name='default']/window_group[@name='backpack']" >
+			<window name="HUDLeftStatBars" anchor="LeftBottom" />
+			<window name="windowTime"/>    
+		</append>
+
+		<!-- Add to the compass -->
+		<append xpath="/xui/ruleset[@name='default']/window_group[@name='compass']" >
+			<window name="windowPlayer"/>
+			<window name="windowTime"/>
+			<window name="HUDLeftStatBars" anchor="LeftBottom" />
+		</append>
+
+		<!-- Removing the LeftStatsBar, and adding in the HUDBuffs -->
+		<remove xpath="/xui/ruleset[@name='default']/window_group[@name='toolbelt']/window[@name='HUDLeftStatBars']" />
+		<append xpath="/xui/ruleset[@name='default']/window_group[@name='toolbelt']" >
+			<window name="HUDBuffs" anchor="LeftBottom" />
+		</append>
+	</config>
+
+
+</configs>

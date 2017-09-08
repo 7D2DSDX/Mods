@@ -1,0 +1,154 @@
+<configs>
+
+
+	<config name="XUi/styles">
+		<insertBefore xpath="/styles/global">
+			<!-- RAIN START -->
+			<style name="time.window" type="window">
+				<style_entry name="pos" value="0,0"/>
+				<style_entry name="size" value="400,43"/>
+			</style>
+			<style name="time.window.compass.texture" type="texture">
+				<style_entry name="depth" value="8"/>
+				<style_entry name="height" value="23" />
+				<style_entry name="width" value="300" />
+				<style_entry name="pos" value="9999,9999" />
+				<style_entry name="color" value="[iconColor]"/>
+				<style_entry name="tooltip" value="CHARACTER" />
+				<style_entry name="texture" value="Textures/UI/ui_game_compass" />
+			</style>
+		</insertBefore>
+		<insertBefore xpath="/styles/global/style_entry[@name='limeGreen']" >
+
+			<!-- Toolbelt slots -->
+			<!-- Slot Borders -->
+			<style_entry name="slot1"	value="@https://i.imgur.com/kjOdrxi.png"/>
+			<style_entry name="slot2"	value="@https://i.imgur.com/F0dYfUQ.png"/>
+			<style_entry name="slot3"	value="@https://i.imgur.com/XkDuKFH.png"/>
+			<style_entry name="slot4"	value="@https://i.imgur.com/Xm6rDca.png"/>
+			<style_entry name="slot5"	value="@https://i.imgur.com/Ketg8x7.png"/>
+			<style_entry name="slot6"	value="@https://i.imgur.com/Ttie6bX.png"/>
+			<style_entry name="slot7"	value="@https://i.imgur.com/gMYDQGS.png"/>
+			<style_entry name="slot8"	value="@https://i.imgur.com/9GDOY3o.png"/>
+			<!-- Stat Bar -->
+			<style_entry name="statbar"	value="@https://i.imgur.com/8vrhLEG.png"/>
+
+			<!-- UI Elements & Slot Background : Default (Dark)   -->
+			<style_entry name="slotbg"	value="@https://i.imgur.com/fLp6vEi.png"/>
+			<style_entry name="compass"	value="@https://i.imgur.com/o1RXEcj.png"/>
+			<style_entry name="left"	value="@https://i.imgur.com/LsNs9Ch.png"/>
+			<style_entry name="buffitem"	value="@https://i.imgur.com/2ffYQJl.png"/>
+			<style_entry name="activequest"	value="@https://i.imgur.com/Iwwt03C.png"/>
+			<style_entry name="objective"	value="@https://i.imgur.com/dJQuti3.png"/>
+			<style_entry name="panel"	value="@https://i.imgur.com/MOFq4k1.png"/>
+			<style_entry name="active"	value="@https://i.imgur.com/CpIz7Bp.png"/>
+			<style_entry name="collected"	value="@https://i.imgur.com/ZSwcUIN.png"/>
+			<style_entry name="vehicle"	value="@https://i.imgur.com/a3nwpTD.png"/>
+
+			<!-- UI Elements & Slot Background : Green 
+		<style_entry name="slotbg"	value="@http://i.imgur.com/ibt6SaC.png"/>
+		<style_entry name="compass"	value="@http://i.imgur.com/frJt5Fn.png"/>
+		<style_entry name="left"	value="@http://i.imgur.com/h0D76rT.png"/>
+		<style_entry name="buffitem"	value="@http://i.imgur.com/pa2tejb.png"/>
+		<style_entry name="activequest"	value="@http://i.imgur.com/18wGPfP.png"/>
+		<style_entry name="objective"	value="@http://i.imgur.com/B8hk4ih.png"/>
+		<style_entry name="panel"	value="@http://i.imgur.com/6fomXm9.png"/>
+		<style_entry name="active"	value="@http://i.imgur.com/ts4pt9h.png"/>
+		<style_entry name="collected"	value="@http://i.imgur.com/hJog4uN.png"/>
+		<style_entry name="vehicle"	value="@http://i.imgur.com/4g5PTqK.png"/>  -->
+
+			<!-- UI Elements & Slot Background : Red 
+		<style_entry name="slotbg"	value="@http://i.imgur.com/MNPwZZd.png"/>
+		<style_entry name="compass"	value="@http://i.imgur.com/SCrBRU0.png"/>
+		<style_entry name="left"	value="@http://i.imgur.com/x0ia4zU.png"/>
+		<style_entry name="buffitem"	value="@http://i.imgur.com/Bi5RWjm.png"/>
+		<style_entry name="activequest"	value="@http://i.imgur.com/ee5DjFg.png"/>
+		<style_entry name="objective"	value="@http://i.imgur.com/3DZ9jkc.png"/>
+		<style_entry name="panel"	value="@http://i.imgur.com/MgVOZpi.png"/>
+		<style_entry name="active"	value="@http://i.imgur.com/xuOuoDN.png"/>
+		<style_entry name="collected"	value="@http://i.imgur.com/tnNrlNe.png"/>
+		<style_entry name="vehicle"	value="@http://i.imgur.com/nKGQOPs.png"/>   -->
+
+			<!-- UI Elements & Slot Background : Pink 
+		<style_entry name="slotbg"	value="@http://i.imgur.com/Mg1pR5u.png"/>
+		<style_entry name="compass"	value="@http://i.imgur.com/RL0CzJZ.png"/>
+		<style_entry name="left"	value="@http://i.imgur.com/pcdZZor.png"/>
+		<style_entry name="buffitem"	value="@http://i.imgur.com/0JyrvAQ.png"/>
+		<style_entry name="activequest"	value="@http://i.imgur.com/o6BU8WL.png"/>
+		<style_entry name="objective"	value="@http://i.imgur.com/HLC5V5u.png"/>
+		<style_entry name="panel"	value="@http://i.imgur.com/uimDsFH.png"/>
+		<style_entry name="active"	value="@http://i.imgur.com/6PZIIdA.png"/>
+		<style_entry name="collected"	value="@http://i.imgur.com/EZ9BrDK.png"/>
+		<style_entry name="vehicle"	value="@http://i.imgur.com/vNPR5y1.png"/>  -->
+
+			<!-- UI Elements & Slot Background : Purple  
+		<style_entry name="slotbg"	value="@http://i.imgur.com/GSioL2B.png"/>
+		<style_entry name="compass"	value="@http://i.imgur.com/ccpr1Uz.png"/>
+		<style_entry name="left"	value="@http://i.imgur.com/dXp14V9.png"/>
+		<style_entry name="buffitem"	value="@http://i.imgur.com/uenyT3V.png"/>
+		<style_entry name="activequest"	value="@http://i.imgur.com/fLUrKwJ.png"/>
+		<style_entry name="objective"	value="@http://i.imgur.com/zzYuIXl.png"/>
+		<style_entry name="panel"	value="@http://i.imgur.com/w1Jxewo.png"/>
+		<style_entry name="active"	value="@http://i.imgur.com/PntlPHm.png"/>
+		<style_entry name="collected"	value="@http://i.imgur.com/oMEza3p.png"/>
+		<style_entry name="vehicle"	value="@http://i.imgur.com/f12uL5u.png"/>  -->
+
+			<!-- UI Elements & Slot Background : Blue 
+		<style_entry name="slotbg"	value="@http://i.imgur.com/qICBpiR.png"/>
+		<style_entry name="compass"	value="@http://i.imgur.com/c5IXQwI.png"/>
+		<style_entry name="left"	value="@http://i.imgur.com/oA3BE6W.png"/>
+		<style_entry name="buffitem"	value="@http://i.imgur.com/3Rsyd6F.png"/>
+		<style_entry name="activequest"	value="@http://i.imgur.com/LZo6eKx.png"/>
+		<style_entry name="objective"	value="@http://i.imgur.com/tIzXFaG.png"/>
+		<style_entry name="panel"	value="@http://i.imgur.com/8bwUFbD.png"/>
+		<style_entry name="active"	value="@http://i.imgur.com/NNNoXk0.png"/>
+		<style_entry name="collected"	value="@http://i.imgur.com/0I7x6hF.png"/>
+		<style_entry name="vehicle"	value="@http://i.imgur.com/ezjwsIb.png"/>   -->
+			<!-- RAIN END -->
+		</insertBefore>
+		<insertAfter xpath="/styles/global/style_entry[@name='green'] ">
+			<style_entry name="blue" 					value="0,0,255"/>
+		</insertAfter>
+
+		<!-- Insert it after the style type label with the name protection-->
+		<insertAfter xpath="/styles/style[@type='label'][@name='protection'] ">
+			<style type="label" name="protection.hud">
+				<style_entry name="width" value="50"/>
+				<style_entry name="height" value="20"/>
+				<style_entry name="font_size" value="20"/>
+			</style>
+		</insertAfter>
+
+		<insertAfter xpath="/styles/style[@type='sprite'][@name='protection'] ">
+			<style type="sprite" name="protection.hud">
+				<style_entry name="color" value="[iconColor]"/>
+				<style_entry name="width" value="15"/>
+				<style_entry name="height" value="15"/>
+				<style_entry name="foregroundlayer" value="true"/>
+			</style>
+		</insertAfter>
+
+		<insertAfter xpath="/styles/style[@type='button'][@name='icon22px'] ">
+			<style name="toolbelt">
+				<style_entry name="select_color" value="[beige]"/>
+				<style_entry name="press_color" value="[limeGreen]"/>
+				<style_entry name="final_pressed_color" value="[lightGrey]"/>
+				<style_entry name="background_color" value="[transparent]"/>
+				<style_entry name="highlight_color" value="[hoverColor]"/>
+				<style_entry name="holding_color" value="[white]"/>
+				<style_entry name="width" value="75"/>
+				<style_entry name="height" value="75"/>
+				<style_entry name="hover_icon_grow" value="1.5"/>
+				<style_entry name="on_press" value="true"/>
+				<style_entry name="sound_volume" value="0.75"/>
+				<style_entry name="pickup_sound" value="[pickup_click]"/>
+				<style_entry name="place_sound" value="[place_click]"/>
+			</style>
+		</insertAfter>
+
+		<!-- changing the background color-->
+		<set xpath="/styles/style[@name='itemStack']/style_entry[@name='background_color']/@value">[transparent]</set>
+		<set xpath="/styles/style[@name='compass.window']/style_entry[@name='pos']/@value">-200,0</set>
+	</config>
+
+</configs>
