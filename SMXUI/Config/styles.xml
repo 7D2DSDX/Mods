@@ -1,0 +1,154 @@
+<configs>
+
+
+  <config name="XUi/styles">
+    <insertBefore xpath="/styles/global">
+
+      <!-- <<< SMX A16.3B12R1 START - BY SIRILLION >>> -->
+
+      <style name="SMXUnitFrameWindow" type="window">
+        <style_entry name="pos" value="9,20" />
+        <style_entry name="size" value="140,96" />
+        <style_entry name="anchor" value="BottomLeft" />
+      </style>
+
+      <style name="SMXTBItemStack">
+        <style_entry name="select_color" value="[beige]" />
+        <style_entry name="press_color" value="[limeGreen]" />
+        <style_entry name="final_pressed_color" value="[lightGrey]" />
+        <style_entry name="background_color" value="[mediumGrey]" />
+        <style_entry name="highlight_color" value="[hoverColor]" />
+        <style_entry name="holding_color" value="[white]" />
+        <style_entry name="width" value="82" />
+        <style_entry name="height" value="82" />
+        <style_entry name="hover_icon_grow" value="1.5" />
+        <style_entry name="on_press" value="true" />
+        <style_entry name="sound_volume" value="0.75" />
+        <style_entry name="pickup_sound" value="[pickup_click]" />
+        <style_entry name="place_sound" value="[place_click]" />
+      </style>
+
+      <style name="SMXBPItemStack">
+        <style_entry name="select_color" value="[beige]" />
+        <style_entry name="press_color" value="[limeGreen]" />
+        <style_entry name="final_pressed_color" value="[lightGrey]" />
+        <style_entry name="background_color" value="[mediumGrey]" />
+        <style_entry name="highlight_color" value="[hoverColor]" />
+        <style_entry name="holding_color" value="[white]" />
+        <style_entry name="width" value="49" />
+        <style_entry name="height" value="49" />
+        <style_entry name="hover_icon_grow" value="1.5" />
+        <style_entry name="on_press" value="true" />
+        <style_entry name="sound_volume" value="0.75" />
+        <style_entry name="pickup_sound" value="[pickup_click]" />
+        <style_entry name="place_sound" value="[place_click]" />
+      </style>
+
+      <style name="SMXcompass.window" type="window">
+        <style_entry name="pos" value="-200,-9" />
+        <style_entry name="size" value="400,43" />
+        <style_entry name="anchor" value="CenterTop" />
+      </style>
+
+      <style name="SMXcompass.window.background" type="texture">
+        <style_entry name="depth" value="0" />
+        <style_entry name="texture" value="@file:Mods\SDX\ItemIcons\smxcpsbg.png" />
+        <style_entry name="type" value="sliced" />
+        <style_entry name="size" value="492,140" />
+        <style_entry name="pos" value="-60,12" />
+      </style>
+
+      <style name="SMXcompass.window.background3SIRMOD" type="sprite">
+        <style_entry name="depth" value="1"/>
+        <style_entry name="type" value="sliced"/>
+        <style_entry name="size" value="300,37"/>
+        <style_entry name="pos" value="50,-3"/>
+        <style_entry name="color" value="128,128,128,100"/>
+      </style>
+
+      <style name="SMXcompass.window.background.border3SIRMOD" type="sprite">
+        <style_entry name="depth" value="0"/>
+        <style_entry name="size" value="305,43"/>
+        <style_entry name="pos" value="48,0"/>
+        <style_entry name="type" value="sliced"/>
+        <style_entry name="color" value="0,0,0,100"/>
+      </style>
+
+      <style name="SMXcompass.window.compass.background3SIRMOD" type="sprite">
+        <style_entry name="depth" value="5"/>
+        <style_entry name="type" value="sliced"/>
+        <style_entry name="color" value="0,0,0,100"/>
+        <style_entry name="pos" value="50,-3"/>
+        <style_entry name="width" value="300" />
+        <style_entry name="height" value="37" />
+      </style>
+
+      <style name="SMXcompass.window.indicator" type="texture">
+        <style_entry name="depth" value="9" />
+        <style_entry name="texture" value="@file:Mods\SDX\ItemIcons\smxcpsind.png" />
+        <style_entry name="type" value="sliced" />
+        <style_entry name="size" value="32,48" />
+        <style_entry name="pos" value="184,10" />
+      </style>
+
+      <style name="SMXcompass.window.indicator2VALMOD" type="texture">
+        <style_entry name="depth" value="9" />
+        <style_entry name="texture" value="@file:Mods\SDX\ItemIcons\vmcpsind.png" />
+        <style_entry name="type" value="sliced" />
+        <style_entry name="size" value="32,48" />
+        <style_entry name="pos" value="184,10" />
+      </style>
+
+      <style name="SMXcompass.window.compass.texture" type="texture">
+        <style_entry name="depth" value="8" />
+        <style_entry name="height" value="23" />
+        <style_entry name="width" value="300" />
+        <style_entry name="pos" value="50, -3" />
+        <style_entry name="color" value="[iconColor]" />
+        <style_entry name="tooltip" value="CHARACTER" />
+        <style_entry name="texture" value="Textures/UI/ui_game_compass" />
+        <!--	<style_entry name="texture" value="@file:Mods\SDX\Textures\Compass\smxcpsbar.png" /> -->
+        <!-- WARNING! Do NOT enable. Causes major memory leak! -->
+      </style>
+
+      <style name="SMXDayTimeFrame.window" type="window">
+        <style_entry name="pos" value="-12,50" />
+        <style_entry name="size" value="100,100" />
+        <style_entry name="anchor" value="LeftTop" />
+      </style>
+
+      <style name="SMXDayTimeFrame2.window" type="window">
+        <style_entry name="pos" value="9,50"/>
+        <style_entry name="size" value="400,400"/>
+        <style_entry name="anchor" value="LeftTop"/>
+      </style>
+
+      <style name="SMXLevelXP.window" type="window">
+        <style_entry name="pos" value="-30,-15" />
+        <style_entry name="size" value="140,96" />
+        <style_entry name="anchor" value="LeftTop" />
+      </style>
+
+      <style name="SMXTempFrame.window" type="window">
+        <style_entry name="pos" value="-180,140" />
+        <style_entry name="size" value="300,100" />
+        <style_entry name="anchor" value="LeftBottom" />
+      </style>
+
+      <style type="sprite" name="SMXicon15px">
+        <style_entry name="color" value="[iconColor]"/>
+        <style_entry name="width" value="15"/>
+        <style_entry name="height" value="15"/>
+        <style_entry name="foregroundlayer" value="true" />
+      </style>
+
+      <!-- <<< SMX A16.3B12R1 END - BY SIRILLION >>> -->
+
+    </insertBefore>
+    <insertBefore xpath="/styles/global/style_entry[@name='limeGreen']" >
+      <style_entry name="yellow"		value="247,255,0"/>
+      <style_entry name="gold" 		value="245,196,0"/>
+    </insertBefore>
+  </config>
+
+</configs>

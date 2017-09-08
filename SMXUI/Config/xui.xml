@@ -1,0 +1,38 @@
+<configs>
+
+	<!-- Read the xui.xml and remove the window groups -->
+	<config name="xui">
+	
+		<!-- Add to the compass -->
+    <remove xpath="/xui/ruleset[@name='default']/window_group[@name='compass']/window[@name='windowCompass']"  />
+		<append xpath="/xui/ruleset[@name='default']/window_group[@name='compass']" >
+      <window name="SMXCompass1SMX" anchor="CenterTop" />
+      <window name="SMXDayTimeFrame1SMX" anchor="LeftTop" />
+      <window name="SMX" anchor="RightTop" />
+      <window name="SMXLevelXPUF1SMX" anchor="LeftTop" />
+		</append>
+
+		<!-- Removing the LeftStatsBar, and adding in the HUDBuffs -->
+		<remove xpath="/xui/ruleset[@name='default']/window_group[@name='toolbelt']" />
+ 
+
+    <insertAfter xpath="/xui/ruleset[@name='default']/window_group[@name='timer']" >
+      <window_group name="toolbelt" actionSet="false">
+        <window name="SMXToolbelt1SMX" anchor="CenterBottom" />
+        <window name="SMXUnitFrame1SMX" anchor="LeftBottom" />
+        <window name="SMXBuffFrame4" anchor="LeftBottom" />
+        <window name="SMXHudOther" anchor="RightBottom" />
+        <window name="SMXTempFrameUF1SMX" />
+        <window name="SMXQuestTracker" anchor="RightTop" />
+      </window_group>
+      </insertAfter>
+    <remove xpath="/xui/ruleset[@name='default']/window_group[@name='ingameMenu']" />
+    <insertAfter xpath="/xui/ruleset[@name='default']/window_group[@name='spawnMenu']">
+      <window_group name="ingameMenu">
+        <window name="SMXingameMenu" />
+      </window_group>
+     </insertAfter>
+	</config>
+
+
+</configs>
