@@ -1,0 +1,26 @@
+<configs>
+
+  <!-- Read the xui.xml and remove the window groups -->
+  <config name="xui">
+    <!-- Remove these entitiys from the default view of the tool belt -->
+
+    <remove xpath="/xui/ruleset[@name='default']/window_group[@name='toolbelt']/window[@name='HUDLeftStatBars']" />
+    <remove xpath="/xui/ruleset[@name='default']/window_group[@name='toolbelt']/window[@name='HUDRightStatBars']" />
+    <remove xpath="/xui/ruleset[@name='default']/window_group[@name='toolbelt']/window[@name='windowToolbelt']" />
+
+    <!-- Remove quest tracker -->
+    <remove xpath="/xui/ruleset[@name='default']/window_group[@name='toolbelt']/window[@name='windowQuestTracker']" />
+
+    <!-- Window timer has to go -->
+    <remove xpath="/xui/ruleset[@name='default']/window_group[@name='timer']/window[@name='windowTimer']" />
+
+    <!-- Compass has to go  
+    <remove xpath="/xui/ruleset[@name='default']/window_group[@name='compass']/window[@name='windowCompass']" />
+-->
+    <append xpath="/xui/ruleset[@name='default']/window_group[@name='backpack']" >
+      <window name="windowToolbelt" anchor="CenterBottom" />
+      <window name="HUDLeftStatBars" anchor="LeftBottom" />
+      <window name="HUDRightStatBars" anchor="RightBottom" />
+    </append>
+  </config>
+</configs>
