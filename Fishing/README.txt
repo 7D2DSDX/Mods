@@ -1,5 +1,7 @@
 Fishing MOD by Mortelentus
 
+IMPORTANT NOTE: if you want the custom UIs to work, you will need to install the UIIcons mod too!
+
 Fishing,  just as in real life,  is not a quick or immediately rewarding activity,  but fish is fundamental for good health.
 
 FISHING:
