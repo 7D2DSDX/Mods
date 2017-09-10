@@ -1,0 +1,766 @@
+<configs>
+<config name="recipes">
+<append xpath="/recipes">
+	<!-- FISHING -->
+	<recipe name="hook" count="1">
+		<ingredient name="scrapLead" count="4" />
+	</recipe>
+	<recipe name="cane" count="1">
+		<ingredient name="bambooPole" count="4" />
+		<ingredient name="hook" count="1" />
+		<ingredient name="ductTape" count="1" />
+		<ingredient name="glue" count="1" />
+	</recipe>
+	<recipe name="improvedCane" count="1">
+		<ingredient name="bambooPole" count="10" />
+		<ingredient name="forgedIron" count="2" />
+		<ingredient name="hook" count="1" />
+		<ingredient name="ductTape" count="2" />
+		<ingredient name="glue" count="2" />
+	</recipe>
+	<recipe name="bambooRaft" count="1">
+		<ingredient name="bambooPole" count="30" />
+		<ingredient name="ductTape" count="5" />
+		<ingredient name="glue" count="5" />
+	</recipe>
+	<recipe name="barge" count="1">
+		<ingredient name="wood" count="1000" />
+		<ingredient name="leather" count="20" />
+		<ingredient name="yuccaFibers" count="500" />
+		<ingredient name="burningBarrel" count="8" />
+		<ingredient name="nail" count="25" />
+	</recipe>
+	<recipe name="grilledBass" count="1" craft_area="campfire" craft_tool="cookingGrill">
+		<ingredient name="bassMeat" count="1" />
+	</recipe>
+	<recipe name="grilledSalmon" count="1" craft_area="campfire" craft_tool="cookingGrill">
+		<ingredient name="salmonMeat" count="1" />
+	</recipe>	
+	<recipe name="grilledFish" count="1" craft_area="campfire" craft_tool="cookingGrill">
+		<ingredient name="fishFillet" count="1" />
+	</recipe>
+	<recipe name="fishingLure1" count="1">
+		<ingredient name="moldyBread" count="2"/>
+		<ingredient name="bottledWater" count="1"/>
+		<ingredient name="paper" count="2"/>
+	</recipe>
+	<recipe name="fishingLure2" count="1">
+		<ingredient name="moldyBread" count="1"/>
+		<ingredient name="cornMeal" count="3"/>
+		<ingredient name="bottledWater" count="1"/>
+		<ingredient name="paper" count="2"/>
+	</recipe>
+	<recipe name="fishingLure3" count="1">
+		<ingredient name="moldyBread" count="2"/>
+		<ingredient name="fishFillet" count="5"/>
+		<ingredient name="bottledWater" count="2"/>
+		<ingredient name="clayLump" count="10"/>
+		<ingredient name="paper" count="4"/>
+	</recipe>
+	<recipe name="fishingLure4" count="1">
+		<ingredient name="moldyBread" count="2"/>
+		<ingredient name="earthworm" count="5"/>
+		<ingredient name="bottledWater" count="2"/>
+		<ingredient name="bakedPotato" count="2"/>
+		<ingredient name="paper" count="4"/>
+	</recipe>
+	<recipe name="fishingLure5" count="1">
+		<ingredient name="moldyBread" count="1"/>
+		<ingredient name="bakedPotato" count="2"/>
+		<ingredient name="bottledWater" count="1"/>
+		<ingredient name="paper" count="2"/>
+	</recipe>
+	<!-- FISHING -->
+</append>
+</config>
+<config name="items">
+<append xpath="/items">
+	<!-- FISHING -->
+	<item id="1488" name="cane">
+		<property name="Class" value="ItemClassFishing, Mods" />
+		<property name="Meshfile" value="#fishing1?cane" />
+		<property name="Material" value="wood" />
+		<property name="RepairTools" value="bambooPole" />
+		<property name="HoldType" value="20" />
+		<property name="DegradationBreaksAfter" value="true" />
+		<property name="SoundJammed" value="ItemNeedsRepair" />
+		<property name="SoundDestroy" value="wooddestroy1" />
+		<property name="FuelValue" value="30" />
+		<property class="Action0">
+			<!-- AttackAction -->
+			<property name="Class" value="Melee" />
+			<property name="Delay" value="1.33" />
+			<property name="Range" value="0" />
+			<property name="Sphere" value="0" />
+			<property name="Sound_start" value="swoosh" />
+			<property name="Stamina_usage" value="0" />
+			<property name="DamageBonus.head" value="0" />
+			<!-- these are multipliers -->
+			<property name="DamageBonus.glass" value="0" />
+			<property name="ActionExp" value="0" />
+			<property name="ActionExpBonusMultiplier" value="0" />
+		</property>
+		<property class="Attributes">
+			<property name="DegradationMax" value="20,600" />
+			<property name="DegradationRate" value="3,1" />
+		</property>
+		<property name="Group" value="Tools/Traps" />
+		<property name="ActionSkillGroup" value="Fisherman" />
+		<property name="CraftingSkillGroup" value="Fisherman" />
+		<!-- <property name="PickupJournalEntry" value="fishingTip" /> -->
+		<property name="RepairExpMultiplier" value="5.5" />
+	</item>
+	<item id="1489" name="improvedCane">
+		<property name="Extends" value="cane" />
+		<property name="DescriptionKey" value="caneDesc" />
+		<property name="Meshfile" value="#fishing1?caneW" />
+		<property name="ActionSkillGroup" value="Fisherman" />
+		<property name="CraftingSkillGroup" value="Fisherman" />
+	</item>
+	<item id="1490" name="earthworm">
+		<property name="Meshfile" value="#worms?earthworms" />
+		<property name="Material" value="organic" />
+		<property name="HoldType" value="3" />
+		<property name="Stacknumber" value="50" />
+		<!-- STK food -->
+		<property name="CraftingIngredientTime" value="15" />
+		<property class="Action1">
+			<property name="Class" value="Eat" />
+			<property name="Delay" value="1.0" />
+			<property name="Use_time" value="..." />
+			<property name="Gain_health" value="1" />
+			<property name="Gain_food" value="1" />
+			<property name="Gain_water" value="1" />
+			<property name="Gain_stamina" value="0" />
+			<property name="Gain_wellness" value="-0.1" />
+			<property name="Gain_sickness" value="30" />
+			<property name="Buff" value="foodPoisoning" />
+			<property name="Sound_start" value="UseActions/player_eating" />
+		</property>
+		<property name="Smell" value="smallSmell" />
+		<property name="Group" value="Food/Cooking" />
+		<property name="EconomicValue" value="10" />
+	</item>
+	<item id="1491" name="fishFillet">
+		<property name="Meshfile" value="#fishes?rawFish" />
+		<property name="Material" value="organic" />
+		<property name="HoldType" value="3" />
+		<property name="Stacknumber" value="50" />
+		<!-- STK food -->
+		<property name="CraftingIngredientTime" value="15" />
+		<property class="Action1">
+			<property name="Class" value="Eat" />
+			<property name="Delay" value="1.0" />
+			<property name="Use_time" value="..." />
+			<property name="Gain_health" value="2" />
+			<property name="Gain_food" value="10" />
+			<property name="Gain_water" value="0" />
+			<property name="Gain_stamina" value="0" />
+			<property name="Gain_sickness" value="30" />
+			<property name="Buff" value="foodPoisoning" />
+			<property name="Sound_start" value="UseActions/player_eating" />
+		</property>
+		<property name="foodSpoilImmune" value="20" />
+		<property name="Smell" value="ExLargeSmell" />
+		<property name="Group" value="Food/Cooking" />
+		<property name="EconomicValue" value="20" />
+	</item>
+	<item id="1492" name="bassMeat">
+		<property name="Extends" value="fishFillet" />
+		<property name="EconomicValue" value="29" />
+	</item>
+	<item id="1493" name="salmonMeat">
+		<property name="Extends" value="fishFillet" />
+		<property name="EconomicValue" value="32" />
+	</item>
+	<item id="1494" name="grilledFish">
+		<property name="Meshfile" value="Items/Misc/parcelPrefab" />
+		<property name="Material" value="organic" />
+		<property name="HoldType" value="31" />
+		<property name="Stacknumber" value="10" />
+		<!-- STK food -->
+		<property class="Action1">
+			<property name="Class" value="Eat" />
+			<property name="Delay" value="2.1" />
+			<property name="Use_time" value="..." />
+			<property name="Gain_health" value="2" />
+			<property name="Gain_food" value="6" />
+			<property name="Gain_water" value="-2" />
+			<property name="Gain_wellness" value="0.3" />
+			<!-- <property name="Buff" value="fishy,goodFoodBuff" /> -->
+			<property name="Sound_start" value="UseActions/player_eating" />
+		</property>
+		<property name="foodSpoilImmune" value="50" />
+		<property name="Smell" value="mediumSmell" />
+		<property name="Group" value="Food/Cooking" />
+	</item>
+	<item id="1495" name="grilledBass">
+		<property name="Extends" value="grilledFish" />
+		<property class="Action1">
+			<property name="Gain_food" value="10" />
+			<property name="Gain_water" value="1" />
+			<property name="Gain_wellness" value="0.7" />
+		</property>
+	</item>
+	<item id="1496" name="grilledSalmon">
+		<property name="Extends" value="grilledFish" />
+		<property class="Action1">
+			<property name="Gain_food" value="8" />
+			<property name="Gain_water" value="3" />
+			<property name="Gain_wellness" value="0.9" />
+		</property>
+	</item>
+	<item id="1497" name="bambooPole">
+		<property name="Meshfile" value="#bamboo?bambooPole" />
+		<property name="DropMeshfile" value="#bamboo?bambooPole" />
+		<property name="Material" value="wood" />
+		<property name="RepairTime" value="1" />
+		<property name="RepairAmount" value="30" />
+		<property name="HoldType" value="17" />
+		<property name="Stacknumber" value="500" />
+		<!-- STK resource -->
+		<property name="SoundDestroy" value="wooddestroy1" />
+		<property class="Action0">
+			<!-- AttackAction -->
+			<property name="Class" value="Melee" />
+			<property name="Delay" value="1.33" />
+			<property name="Range" value="2.2" />
+			<property name="DamageEntity" value="7" />
+			<property name="DamageBlock" value="5" />
+			<property name="Sound_start" value="swoosh" />
+			<property name="Stamina_usage" value="4" />
+			<property name="DamageBonus.head" value="2" />
+		</property>
+		<property name="Group" value="Resources" />
+		<property name="EconomicValue" value="5" />
+	</item>
+	<item id="1498" name="bambooSeed">
+		<property name="Meshfile" value="Items/Food/seed_potato_quartersPrefab" />
+		<property name="Material" value="organic" />
+		<property name="HoldType" value="21" />
+		<property name="Stacknumber" value="500" />
+		<!-- STK resource -->
+		<property class="Action1">
+			<property name="Class" value="PlaceAsBlock" />
+			<property name="Delay" value="0.5" />
+			<property name="Blockname" value="plantedBamboo1" />
+		</property>
+		<property name="Group" value="Food/Cooking" />
+		<property name="EconomicValue" value="2" />
+	</item>
+	<item id="1499" name="hook">
+		<property name="Meshfile" value="#fishes?hook" />
+		<property name="DropMeshfile" value="#fishes?hook" />
+		<property name="Material" value="lead" />
+		<property name="HoldType" value="23" />		
+		<property name="Group" value="Medicine" />
+		<property class="Preview">
+			<property name="Zoom" value="28" />
+			<property name="Pos" value="-0.02,-0.1" />
+			<property name="Rot" value="90,45,0" />
+		</property>
+		<property name="CraftingSkillGroup" value="Fisherman" />
+		<property name="EconomicValue" value="8" />
+	</item>
+	<item id="1500" name="fishingLure1">
+		<property name="Meshfile" value="Items/Misc/sackPrefab" />
+		<property name="DropMeshfile" value="Items/Misc/sack_droppedPrefab" />
+		<property name="Material" value="organic" />
+		<property name="Weight" value="5" />
+		<property name="HoldType" value="45" />
+		<property name="Stacknumber" value="500" />
+		<property class="Action1">
+			<property name="Class" value="Eat" />
+			<property name="Delay" value="1.0" />
+			<property name="Use_time" value="..." />
+			<property name="Gain_health" value="0" />
+			<property name="Gain_food" value="0" />
+			<property name="Gain_water" value="0" />
+			<property name="Gain_stamina" value="0" />
+			<property name="Gain_sickness" value="0" />
+			<property name="Buff" value="lure1" />
+		</property>
+		<property name="Group" value="Resources" />
+		<property name="CraftingSkillGroup" value="Fisherman" />
+	</item>
+	<item id="1501" name="fishingLure2">
+		<property name="Extends" value="fishingLure1" />
+		<property class="Action1">
+			<property name="Buff" value="lure2" />
+		</property>
+	</item>
+	<item id="1502" name="fishingLure3">
+		<property name="Extends" value="fishingLure1" />
+		<property class="Action1">
+			<property name="Buff" value="lure3" />
+		</property>
+	</item>
+	<item id="1503" name="fishingLure4">
+		<property name="Extends" value="fishingLure1" />
+		<property class="Action1">
+			<property name="Buff" value="lure4" />
+		</property>
+	</item>
+	<item id="1504" name="fishingLure5">
+		<property name="Extends" value="fishingLure1" />
+		<property class="Action1">
+			<property name="Buff" value="lure5" />
+		</property>
+	</item>
+	<item id="1505" name="fishingLure6">
+		<property name="Extends" value="fishingLure1" />
+		<property class="Action1">
+			<property name="Buff" value="lure6" />
+		</property>
+	</item>
+	<item id="1506" name="skull1">
+		<property name="Meshfile" value="#skulls?skull1" />
+		<property name="DescriptionKey" value="skullDesc" />
+		<property name="Material" value="organic" />
+		<property name="HoldType" value="27" />
+		<property name="Stacknumber" value="1" />
+		<!-- STK torch -->
+		<property name="FuelValue" value="16" />
+		<property class="Action1">
+			<property name="Class" value="PlaceAsBlock" />
+			<property name="Delay" value="0.5" />
+			<property name="Blockname" value="skull1Wall" />
+		</property>
+		<property name="Group" value="Basics,Decor/Miscellaneous" />
+		<property name="EconomicValue" value="13" />
+	</item>
+	<item id="1507" name="skull2">
+		<property name="Extends" value="skull1" />
+		<property name="Meshfile" value="#skulls?skull2" />
+		<property class="Action1">
+			<property name="Blockname" value="skull2Wall" />
+		</property>
+	</item>
+	<item id="1508" name="head">
+		<property name="Extends" value="skull1" />
+		<property name="Meshfile" value="#skulls?skull3" />
+		<property name="DropMeshfile" value="#skulls?skull3" />
+		<property class="Action1">
+			<property name="Blockname" value="skull3Wall" />
+		</property>
+	</item>
+	<item id="1509" name="fish">
+		<property name="Meshfile" value="#fishes?fish" />
+		<property name="DropMeshfile" value="#fishes?fish" />
+		<property name="Material" value="organic" />
+		<property name="HoldType" value="27" />
+		<property name="Stacknumber" value="5" />
+		<property name="ModelOffset" value="0,0.2,0" />
+		<!-- STK torch -->
+		<property name="FuelValue" value="16" />
+		<property class="Action1">
+			<property name="Class" value="PlaceAsBlock" />
+			<property name="Delay" value="0.5" />
+			<property name="Blockname" value="fishWall" />
+		</property>
+		<property name="Group" value="Basics,Decor/Miscellaneous" />
+		<property name="EconomicValue" value="25" />
+	</item>
+	<item id="1510" name="bigFish">
+		<property name="Extends" value="fish" />
+		<property name="Meshfile" value="#fishes?bigFish" />
+		<property name="DropMeshfile" value="#fishes?bigFish" />
+		<property class="Action1">
+			<property name="Blockname" value="bigFishWall" />
+		</property>
+		<property name="EconomicValue" value="70" />
+	</item>
+	<item id="1511" name="rudFish">
+		<property name="Extends" value="fish" />
+		<property name="DescriptionKey" value="fishDesc" />
+		<property name="Meshfile" value="#fishes?rudFish" />
+		<property name="DropMeshfile" value="#fishes?rudFish" />
+		<property class="Action1">
+			<property name="Blockname" value="rudFishWall" />
+		</property>
+		<property name="EconomicValue" value="20" />
+	</item>
+	<item id="1512" name="bass">
+		<property name="Extends" value="fish" />
+		<property name="Meshfile" value="#fishes?bass" />
+		<property name="DropMeshfile" value="#fishes?bass" />
+		<property class="Action1">
+			<property name="Blockname" value="bassWall" />
+		</property>
+		<property name="EconomicValue" value="30" />
+	</item>
+	<item id="1513" name="bigBass">
+		<property name="Extends" value="bass" />
+		<property class="Action1">
+			<property name="Blockname" value="bigBassWall" />
+		</property>
+		<property name="EconomicValue" value="80" />
+	</item>
+	<item id="1514" name="salmon">
+		<property name="Extends" value="fish" />
+		<property name="Meshfile" value="#fishes?salmon" />
+		<property name="DropMeshfile" value="#fishes?salmon" />	
+		<property class="Action1">
+			<property name="Blockname" value="salmonWall" />
+		</property>
+		<property name="EconomicValue" value="35" />
+	</item>
+	<item id="1515" name="bigSalmon">
+		<property name="Extends" value="salmon" />
+		<property class="Action1">
+			<property name="Blockname" value="bigSalmonWall" />
+		</property>
+		<property name="EconomicValue" value="100" />
+	</item>
+	<item id="1516" name="bambooRaft">
+		<property name="Class" value="ItemClassFloater, Mods" />
+		<property name="Meshfile" value="#rafts?bambooRaftS" />
+		<property name="DropMeshfile" value="#rafts?bambooRaftS" />
+		<property name="Material" value="MbambooRaft" />
+		<property name="HoldType" value="45" />
+		<property name="Stacknumber" value="1" />
+		<property name="Weight" value="5" />
+		<property name="HoldType" value="45" />	
+		<property name="Group" value="Resources" />
+		<property name="CraftingSkillGroup" value="Fisherman" />
+	</item>
+	<item id="1789" name="barge">
+		<property name="Extends" value="bambooRaft" />
+		<property name="Meshfile" value="#floatPlat?BargeS" />
+	</item>
+	<!-- FISHING -->
+</append>
+</config>
+<config name="blocks">
+	<insertAfter xpath="/blocks/block[@name='dirt']/property[@name='LPHardnessScale']">
+		<drop event="Harvest" name="earthworm" count="1" prob="0.15" />
+		<drop event="Harvest" name="earthworm" count="1" prob="0.15" />
+		<drop event="Harvest" name="earthworm" count="1" prob="0.15" />
+		<drop event="Destroy" name="earthworm" count="1" prob="0.15" />
+	</insertAfter>
+<append xpath="/blocks">
+	<!-- FISHING -->
+	<block id="90" name="fishWall">
+		<property name="Material" value="organicF" />
+		<property name="StabilitySupport" value="false" />
+		<property name="Shape" value="ModelEntity" />
+		<property name="Model" value="#fishes?fish" />
+		<property name="Weight" value="10" />
+		<property name="CanPickup" value="false" />
+		<property name="ModelOffset" value="0,0.1,0" />
+		<property name="Place" value="TowardsPlacer" />
+		<property name="Stacknumber" value="5" />
+		<drop event="Destroy" count="0" />
+		<drop event="Harvest" name="fishFillet" count="1" />
+		<property name="Group" value="Building" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="91" name="bigFishWall">
+		<property name="Extends" value="fishWall" />
+		<property name="Model" value="#fishes?bigFish" />
+		<drop event="Harvest" name="fishFillet" count="2,3" prob="1" />
+		<property name="ModelOffset" value="0,0.2,0" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="92" name="rudFishWall">		
+		<property name="Extends" value="fishWall" />
+		<drop event="Harvest" name="fishFillet" count="1" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="93" name="bassWall">
+		<property name="Extends" value="fishWall" />
+		<property name="Model" value="#fishes?bass" />
+		<drop event="Harvest" name="bassMeat" count="1" />
+		<property name="ModelOffset" value="0,0.2,0" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="94" name="bigBassWall">
+		<property name="Extends" value="fishWall" />
+		<property name="Model" value="#fishes?bigBass" />
+		<drop event="Harvest" name="bassMeat" count="2,3" prob="1" />
+		<property name="ModelOffset" value="0,0.2,0" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="95" name="salmonWall">
+		<property name="Extends" value="fishWall" />
+		<property name="Model" value="#fishes?salmon" />
+		<drop event="Harvest" name="salmonMeat" count="1" />
+		<property name="ModelOffset" value="0,0.2,0" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="96" name="bigSalmonWall">
+		<property name="Extends" value="fishWall" />				
+		<property name="Model" value="#fishes?bigSalmon" />
+		<drop event="Harvest" name="salmonMeat" count="2,3" prob="1" />
+		<property name="ModelOffset" value="0,0.2,0" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="97" name="plantedBamboo1">
+		<property name="IsDeveloper" value="true" />
+		<property name="CustomIcon" value="potatoSeed" />
+		<property name="Class" value="PlantGrowing" />
+		<property name="AllowSize" value="1,1,1" />
+		<property name="Material" value="plants" />
+		<property name="StabilitySupport" value="false" />
+		<property name="Shape" value="ModelEntity" />				
+		<property name="Model" value="#bamboo?plantedBamboo1" />
+		<property name="Collide" value="melee" />
+		<property name="IsTerrainDecoration" value="true" />
+		<drop event="Destroy" name="bambooSeed" count="1" prob="1" />
+		<property name="PlantGrowing.Next" value="plantedBamboo2" />
+		<property name="PlantGrowing.GrowthRate" value="60" />
+		<property name="PlantGrowing.FertileLevel" value="5" />
+		<property name="PlantGrowing.IsRandom" value="false" />
+	</block>
+	<block id="98" name="plantedBamboo2">
+		<property name="Extends" value="plantedBamboo1" />
+		<property name="IsDeveloper" value="true" />
+		<property name="Model" value="#bamboo?plantedBamboo2" />
+		<property name="PlantGrowing.Next" value="plantedBamboo3Harvest" />
+	</block>
+	<block id="99" name="plantedBamboo3Harvest">
+		<!-- <property name="Class" value="ModelTreeEx, Mods" /> -->
+		<property name="Class" value="ModelTree" />
+		<property name="Shape" value="ModelTree" />
+		<property name="AllowSize" value="0,0,0" />
+		<property name="Material" value="treeWoodSmall" />
+		<property name="Shape" value="ModelEntity" />
+		<property name="Tag" value="TreeTrunk" />
+		<property name="BigDecorationRadius" value="1" />
+		<property name="Model" value="#BambooClump1?BambooClump1Prefab" />
+		<property name="UpwardsCount" value="3" />
+		<property name="Collide" value="melee" />
+		<property name="IsPlant" value="true" />
+		<property name="ModelOffset" value="0,0,0" />
+		<drop event="Harvest" name="bambooPole" count="3" />
+		<drop event="Destroy" name="bambooSeed" count="2" prob="1" />
+		<property name="FallOver" value="false" />
+	</block>
+	<block id="100" name="trashBagFull">
+		<property name="Class" value="Loot" />
+		<property name="Material" value="trash" />
+		<property name="Shape" value="Ext3dModel" />
+		<property name="Mesh" value="models" />
+		<property name="Model" value="LootContainers/trash_pile01" param1="main_mesh" />
+		<property name="Collide" value="melee,bullet,rocket" />
+		<property name="LootList" value="86" />
+		<drop event="Destroy" count="0" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="101" name="trashBag">
+		<property name="Extends" value="trashBagFull" />
+		<property name="Class" value="UpgradeRated" />
+		<property name="UpgradeRated.ToBlock" value="trashBagFull" />
+		<property name="UpgradeRated.Rate" value="1" />
+		<property name="IsTerrainDecoration" value="true" />
+	</block>
+	<block id="102" name="skull1Wall">
+		<property name="Material" value="organic" />
+		<property name="StabilitySupport" value="false" />
+		<property name="Shape" value="ModelEntity" />
+		<property name="Model" value="#skulls?skull1" />
+		<property name="CanPickup" value="true" param1="skull1" />
+		<property name="Group" value="Building" />
+		<property name="Place" value="TowardsPlacerInverted" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="103" name="skull2Wall">
+		<property name="Extends" value="skull1Wall" />
+		<property name="Model" value="#skulls?skull2" />
+		<property name="CanPickup" value="true" param1="skull2" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="104" name="skull3Wall">
+		<property name="Extends" value="skull1Wall" />
+		<property name="Model" value="#skulls?skull3" />
+		<property name="CanPickup" value="true" param1="head" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<block id="105" name="bambooRaftB">
+		<property name="Class" value="MorteFloater, Mods" />
+		<property name="Material" value="MbambooRaft" />
+		<property name="StabilitySupport" value="false" />
+		<property name="Shape" value="ModelEntity" />
+		<property name="Model" value="#rafts?bambooRaft" />
+		<property name="ModelOffset" value="0,0.3,0" />
+		<property name="CanPickup" value="true" param1="bambooRaft" />
+		<property name="IsDeveloper" value="true" />
+		<property name="debug" value="false" />
+		<drop event="Destroy" count="0" />
+	</block>
+	<block id="106" name="bargeB">
+		<property name="Extends" value="bambooRaftB" />
+		<property name="Model" value="#floatPlat?barrelRaft" />
+		<property name="ModelOffset" value="0,0,0" />
+		<property name="CanPickup" value="true" param1="barge" />
+		<property name="IsDeveloper" value="true" />
+	</block>
+	<!-- FISHING -->
+</append>
+</config>
+<config name="materials">
+<append xpath="/materials">
+	<material id="MbambooRaft">
+		<property name="damage_category" value="wood" />
+		<property name="surface_category" value="water" />
+		<property name="Hardness" type="float" value="1" />
+		<property name="stepsound" value="wood" />
+		<property name="stability_glue" value="1" />
+		<property name="Mass" type="int" value="1" />
+		<property name="MaxDamage" value="100" />
+	</material>
+	<material id="organicF">
+		<property name="damage_category" value="organic" />
+		<property name="surface_category" value="organic" />
+		<property name="particle_category" value="organic" />
+		<property name="Hardness" type="float" value="1" />
+		<property name="stepsound" value="organic" />
+		<property name="Mass" type="int" value="1" />
+		<property name="movement_factor" value="0.5" />
+		<property name="MaxDamage" value="50" />
+	</material>
+</append>
+</config>
+<config name="progression">
+<append xpath="/progression/skills">
+	<!-- FISHING -->
+	<crafting_skill name="Fisherman" exp_to_level="100" icon="fishing" description_key="fishermanDesc" title_key="fisherman" group="Fishing">
+			<recipe name="fishingLure2" unlock_level="10" />
+			<recipe name="fishingLure5" unlock_level="15" />
+			<recipe name="fishingLure4" unlock_level="20" />
+			<!-- Maybe here add a better cane -->
+			<effect name="CraftingTime">
+				<multiply skill_level="1,20" value="1.00,0.76" />
+				<multiply skill_level="20,40" value="0.76,0.66" />
+				<multiply skill_level="40,60" value="0.66,0.59" />
+				<multiply skill_level="60,80" value="0.59,0.53" />
+				<multiply skill_level="80,100" value="0.53,0.47" />
+			</effect>
+			<effect name="CraftingQuality">
+				<setvalue skill_level="1,20" value="1,239" />
+				<setvalue skill_level="20,30" value="239,260" />
+				<setvalue skill_level="30,40" value="260,300" />
+				<setvalue skill_level="40,50" value="300,325" />
+				<setvalue skill_level="50,60" value="325,350" />
+				<setvalue skill_level="60,70" value="350,375" />
+				<setvalue skill_level="70,80" value="375,400" />
+				<setvalue skill_level="80,90" value="400,450" />
+				<setvalue skill_level="90,100" value="450,500" />
+			</effect>
+			<effect name="RepairTime">
+				<multiply skill_level="1,20" value="1.00,0.61" />
+				<multiply skill_level="20,30" value="0.61,0.54" />
+				<multiply skill_level="30,40" value="0.54,0.48" />
+				<multiply skill_level="40,50" value="0.48,0.43" />
+				<multiply skill_level="50,60" value="0.43,0.39" />
+				<multiply skill_level="60,70" value="0.39,0.35" />
+				<multiply skill_level="70,80" value="0.35,0.31" />
+				<multiply skill_level="80,90" value="0.31,0.28" />
+				<multiply skill_level="90,100" value="0.28,0.25" />
+			</effect>
+			<effect name="RepairAmount">
+				<add skill_level="1,20" value="1,27" />
+				<add skill_level="20,30" value="27,31" />
+				<add skill_level="30,40" value="31,35" />
+				<add skill_level="40,50" value="35,38" />
+				<add skill_level="50,60" value="38,41" />
+				<add skill_level="60,70" value="41,43" />
+				<add skill_level="70,80" value="43,46" />
+				<add skill_level="80,90" value="46,48" />
+				<add skill_level="90,100" value="48,50" />
+			</effect>
+			<effect name="RepairQualityLoss">
+				<multiply skill_level="1,20" value="1.00,0.53" />
+				<multiply skill_level="20,30" value="0.53,0.44" />
+				<multiply skill_level="30,40" value="0.44,0.38" />
+				<multiply skill_level="40,50" value="0.38,0.32" />
+				<multiply skill_level="50,60" value="0.32,0.27" />
+				<multiply skill_level="60,70" value="0.27,0.22" />
+				<multiply skill_level="70,80" value="0.22,0.18" />
+				<multiply skill_level="80,90" value="0.18,0.14" />
+				<multiply skill_level="90,100" value="0.14,0.10" />
+			</effect>
+	</crafting_skill>
+	<!-- I'll probably limit max quality on this one, and create a deepwater with a better cane and more quality -->
+	<crafting_skill name="Deep Water" exp_to_level="150" icon="fishing" description_key="deepWaterDesc" title_key="deepWater" max_level="7" group="Fishing">
+			<requirement skill_level="1" required_skill_name="Fisherman" required_skill_level="40" />
+			<requirement skill_level="2" required_skill_name="Fisherman" required_skill_level="50" />
+			<requirement skill_level="3" required_skill_name="Fisherman" required_skill_level="60" />
+			<requirement skill_level="4" required_skill_name="Fisherman" required_skill_level="70" />
+			<requirement skill_level="5" required_skill_name="Fisherman" required_skill_level="80" />
+			<requirement skill_level="6" required_skill_name="Fisherman" required_skill_level="90" />
+			<requirement skill_level="7" required_skill_name="Fisherman" required_skill_level="100" />
+			<recipe name="fishingLure3" unlock_level="1" />
+			<recipe name="improvedCane" unlock_level="1" />
+			<recipe name="bambooRaft" unlock_level="2" />
+			<recipe name="barge" unlock_level="5" />
+			<effect name="CraftingTime">
+				<multiply skill_level="1,2" value="1.00,0.76" />
+				<multiply skill_level="2,4" value="0.76,0.66" />
+				<multiply skill_level="4,5" value="0.66,0.59" />
+				<multiply skill_level="5,6" value="0.59,0.53" />
+				<multiply skill_level="6,7" value="0.53,0.47" />
+			</effect>
+			<effect name="CraftingQuality">
+				<setvalue skill_level="1,1" value="350,416" />
+				<setvalue skill_level="1,4" value="416,520" />
+				<setvalue skill_level="4,6" value="520,575" />
+				<setvalue skill_level="6,7" value="575,600" />
+			</effect>
+			<effect name="RepairTime">
+				<multiply skill_level="1,2" value="1.00,0.61" />
+				<multiply skill_level="2,3" value="0.61,0.54" />
+				<multiply skill_level="3,4" value="0.54,0.48" />
+				<multiply skill_level="4,5" value="0.48,0.43" />
+				<multiply skill_level="5,6" value="0.43,0.39" />
+				<multiply skill_level="6,7" value="0.39,0.35" />
+			</effect>
+			<effect name="RepairAmount">
+				<add skill_level="1,2" value="1,27" />
+				<add skill_level="2,3" value="27,31" />
+				<add skill_level="3,4" value="31,35" />
+				<add skill_level="4,5" value="35,38" />
+				<add skill_level="5,6" value="38,41" />
+				<add skill_level="6,7" value="41,43" />
+			</effect>
+			<effect name="RepairQualityLoss">
+				<multiply skill_level="1,2" value="1.00,0.53" />
+				<multiply skill_level="2,3" value="0.53,0.44" />
+				<multiply skill_level="3,4" value="0.44,0.38" />
+				<multiply skill_level="4,5" value="0.38,0.32" />
+				<multiply skill_level="5,6" value="0.32,0.27" />
+				<multiply skill_level="6,7" value="0.27,0.22" />
+			</effect>
+	</crafting_skill>
+	<!-- FISHING -->
+</append>
+</config>
+<config name="loot">
+<append xpath="/lootcontainers/lootgroup[@name='seeds']">
+		<item name="bambooSeed" />
+</append>
+<append xpath="/lootcontainers">
+	<!-- FISHING -->
+	<lootcontainer id="100" count="0,2" size="4,3" sound_open="UseActions/open_garbage" sound_close="UseActions/close_garbage" loot_quality_template="baseTemplate" destroy_on_close="true">
+		<item group="junk" />
+		<item name="skull1" count="1" prob="0.01"/>
+		<item name="skull2" count="1" prob="0.01"/>
+		<item name="head" count="1" prob="0.01"/>
+	</lootcontainer>
+	<!-- FISHING -->
+</append>
+</config>
+<config name="buffs">
+<append xpath="/buffs">
+	<!-- FISHING -->
+	<buff id="lure1" duration="300" name_key="lure1" smell="smallSmell" description_key="lureFish" tooltip_key="lureFish" icon="ui_game_symbol_lure1"/>
+	<buff id="lure2" duration="300" name_key="lure2" smell="mediumSmell" description_key="lureFish" tooltip_key="lureFish" icon="ui_game_symbol_lure2"/>
+	<buff id="lure3" duration="300" name_key="lure3" smell="largeSmell" description_key="lureFish" tooltip_key="lureFish" icon="ui_game_symbol_lure3"/>
+	<buff id="lure4" duration="300" name_key="lure4" smell="mediumSmell" description_key="lureFish" tooltip_key="lureFish" icon="ui_game_symbol_lure4"/>
+	<buff id="lure5" duration="300" name_key="lure5" smell="largeSmell" description_key="lureFish" tooltip_key="lureFish" icon="ui_game_symbol_lure5"/>
+	<buff id="lure6" duration="480" name_key="lure6" smell="largeSmell" description_key="lureFish" tooltip_key="lureFish" icon="ui_game_symbol_lure6"/>
+	<buff id="fishingWater" duration="0" name_key="fishingWater" description_key="fishingWaterDesc" icon="ui_game_symbol_fishing"/>
+	<!-- FISHING -->
+</append>
+</config>
+</configs>

@@ -1,0 +1,14 @@
+<mod>
+	<info>
+		<author>StompyNZ</author>
+		<name>UI Icons</name>
+		<description>Changes XUI to enable using custom buff and skill icons</description>
+		<mod_version>1.0</mod_version>
+		<game_version>16.2</game_version>
+		<launcher_version>0.7.1</launcher_version>
+		<guid>UI_Icons</guid>
+	</info>
+	<config_mods>
+		<import file="Configs\ui.xml" />
+	</config_mods>
+</mod>

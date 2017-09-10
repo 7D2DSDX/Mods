@@ -1,0 +1,7 @@
+By downloading Fishing Mod, you agree that:
+
+1. You can copy the material in any medium or format for your personal use.
+
+2. If you remix, transform, or build upon the material, you may not distribute the modified material, without asking for my permission first. This includes c# code, xml configurations and all included models and icons.
+
+3. If permission is given, you must give appropriate credit, provide a link to this license, and indicate what changes were made. You may do so in any reasonable manner, but not in any way that suggests the licensor endorses you or your use. 
