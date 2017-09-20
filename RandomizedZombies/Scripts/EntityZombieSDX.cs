@@ -8,6 +8,8 @@ public class EntityZombieSDX: EntityZombie
     public static byte LightThreshold = 10;
     public static float CheckDelay = 1f;
 
+    public static System.Random random = new System.Random();
+
     private float nextCheck = 0;
     byte lightLevel;
 
@@ -20,7 +22,6 @@ public class EntityZombieSDX: EntityZombie
         int[] numbers = new int[9] { 1,2,2,3,5,5,6,7,8 };
 
         // Randomly generates a number between 0 and the maximum number of elements in the numbers.
-        System.Random random = new System.Random();
         int randomNumber = random.Next(0, numbers.Length);
 
         // return the randomly selected walk type

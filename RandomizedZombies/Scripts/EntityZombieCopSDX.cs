@@ -25,7 +25,7 @@ public class EntityZombieCopSDX : EntityZombieCop
             return fDefaultSpeed;
 
         if (GamePrefs.GetInt(EnumGamePrefs.ZombiesRun) == 1)
-            return this.speedApproach * UnityEngine.Random.Range(0.8f, 1.2f);
+            return this.speedApproach * fDefaultSpeed;
         else
         {
             // Rnadomize the zombie speeds types If you have the blRunInDark set to true, then it'll randomize it too.
