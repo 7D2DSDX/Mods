@@ -13,22 +13,30 @@ public class EntityZombieCrawlSDX : EntityZombieCrawl
     // Update the Approach speed, and add a randomized speed to it
     public override float GetApproachSpeed()
     {
+        // Find the default approach speed
+        float fDefaultSpeed = base.GetApproachSpeed();
+
+        // Grabs a random multiplier for the speed, with 0.2 being low, and 0.5 being high.
+        float fRandomMultiplier = UnityEngine.Random.Range(0.2f, 0.5f);
+
+        // if it's greater than 1, just use that value. 
+        // This would make the football and wights run even faster than they do now.
+        if (fDefaultSpeed > 1.0f)
+            return fDefaultSpeed;
 
         if (GamePrefs.GetInt(EnumGamePrefs.ZombiesRun) == 1)
-        {
-            return this.speedApproach * UnityEngine.Random.Range(0.8f, 1.2f); ;
-        }
+            return this.speedApproach * UnityEngine.Random.Range(0.8f, 1.2f);
         else
         {
             // Rnadomize the zombie speeds types If you have the blRunInDark set to true, then it'll randomize it too.
             if (blRunInDark && this.world.IsDark() || lightLevel < EntityZombieSDX.LightThreshold || this.Health < this.GetMaxHealth() * 0.4)
-            {
-                return this.speedApproachNight * UnityEngine.Random.Range(0.8f, 1.2f);
-            }
-            if (this.world.IsDark())  // Make them faster for a base run at night.
-                return this.speedApproachNight * UnityEngine.Random.Range(0.8f, 1.2f);
+                return this.speedApproachNight * fRandomMultiplier;
+
+            // If it's night time, then use the speedApproachNight value
+            if (this.world.IsDark())
+                return this.speedApproachNight * fRandomMultiplier;
             else
-                return this.speedApproach * UnityEngine.Random.Range(0.2f, 1.4f);
+                return this.speedApproach * fRandomMultiplier;
         }
     }
 
@@ -42,14 +50,8 @@ public class EntityZombieCrawlSDX : EntityZombieCrawl
         if (WalkType == 4)
             return WalkType;
 
-        // Randomize the Walk Type, between 1 and 8 
-        WalkType = UnityEngine.Random.Range(1, 8);
-
-        // If the Walk Type is randomized to 4, then just return the 2nd walk type.
-        if (WalkType == 4)
-            return 2;
-
-        return WalkType;
+        return EntityZombieSDX.GetRandomWalkType();
+      
     }
 
     public override void OnUpdateLive()
