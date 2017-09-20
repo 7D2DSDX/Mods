@@ -1,0 +1,7 @@
+<configs>
+	<config name="entityclasses">
+		<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombieTemplateMale')]/property[@name='Class']/@value">EntityZombieSDX, Mods</set>
+		<set xpath="/entity_classes/entity_class[starts-with(@name, 'fatzombiecop')]/property[@name='Class']/@value">EntityZombieCopSDX, Mods</set>
+		<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombieSteveCrawler')]/property[@name='Class']/@value">EntityZombieCrawlSDX, Mods</set>
+	</config>
+</configs>
