@@ -7,14 +7,24 @@ public class EntityZombieCrawlSDX : EntityZombieCrawl
     private float nextCheck = 0;
     byte lightLevel;
 
+    // Caching the walk types and approach speed
+    private int intWalkType = 0;
+    private float flApproachSpeed = 0.0f;
+
     // set to true if you want the zombies to run in the dark.
     bool blRunInDark = false;
 
     // Update the Approach speed, and add a randomized speed to it
     public override float GetApproachSpeed()
     {
+        // default approach speed is 0, so if we are already above that, just re-use the value.
+        if (this.flApproachSpeed > 0.0f)
+            return this.flApproachSpeed;
+
         // Find the default approach speed
         float fDefaultSpeed = base.GetApproachSpeed();
+
+
 
         // Grabs a random multiplier for the speed, with 0.2 being low, and 0.5 being high.
         float fRandomMultiplier = UnityEngine.Random.Range(0.2f, 0.5f);
@@ -43,6 +53,7 @@ public class EntityZombieCrawlSDX : EntityZombieCrawl
     // Randomize the Walk types.
     public override int GetWalkType()
     {
+
         // Grab the current walk type in the baes class
         int WalkType = base.GetWalkType();
 
@@ -50,9 +61,14 @@ public class EntityZombieCrawlSDX : EntityZombieCrawl
         if (WalkType == 4)
             return WalkType;
 
+        // If the WalkType is greater than the default, then return the already randomized one
+        if (this.intWalkType > 0)
+            return this.intWalkType;
+
         return EntityZombieSDX.GetRandomWalkType();
-      
+
     }
+
 
     public override void OnUpdateLive()
     {

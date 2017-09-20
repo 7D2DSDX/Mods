@@ -10,6 +10,11 @@ public class EntityZombieSDX: EntityZombie
 
     public static System.Random random = new System.Random();
 
+    // Caching the walk types and approach speed
+    private int intWalkType = 0;
+    private float flApproachSpeed = 0.0f;
+
+
     private float nextCheck = 0;
     byte lightLevel;
 
@@ -24,14 +29,21 @@ public class EntityZombieSDX: EntityZombie
         // Randomly generates a number between 0 and the maximum number of elements in the numbers.
         int randomNumber = random.Next(0, numbers.Length);
 
+    
         // return the randomly selected walk type
         return numbers[randomNumber];
     }
     // Update the Approach speed, and add a randomized speed to it
     public override float GetApproachSpeed()
     {
+        // default approach speed is 0, so if we are already above that, just re-use the value.
+        if (this.flApproachSpeed > 0.0f)
+            return this.flApproachSpeed;
+
         // Find the default approach speed
         float fDefaultSpeed = base.GetApproachSpeed();
+
+ 
 
         // Grabs a random multiplier for the speed, with 0.2 being low, and 0.5 being high.
         float fRandomMultiplier = UnityEngine.Random.Range(0.2f, 0.5f);
@@ -60,12 +72,17 @@ public class EntityZombieSDX: EntityZombie
     // Randomize the Walk types.
     public override int GetWalkType()
     {
+
         // Grab the current walk type in the baes class
         int WalkType = base.GetWalkType();
 
         // If the WalkType is 4, then just return, since this is the crawler animation
         if (WalkType == 4)
             return WalkType;
+
+        // If the WalkType is greater than the default, then return the already randomized one
+        if (this.intWalkType > 0)
+            return this.intWalkType;
 
         return GetRandomWalkType();     
 
