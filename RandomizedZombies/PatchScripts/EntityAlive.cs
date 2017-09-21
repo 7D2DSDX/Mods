@@ -16,18 +16,8 @@ public class EntityAliveChange : IPatcherMod
         var gm = module.Types.First(d => d.Name == "EntityAlive");
         var method = gm.Methods.First(d => d.Name == "GetWalkType");
         SetMethodToVirtual(method);
-
-        var field = gm.Fields.First(d => d.Name == "HS");
-        SetFieldToPublic(field);
+  
         return true;
-    }
-
-    private void SetFieldToPublic(FieldDefinition field)
-    {
-        field.IsFamily = false;
-        field.IsPrivate = false;
-        field.IsPublic = true;
-
     }
 
     // Called after the patching process and after scripts are compiled.
