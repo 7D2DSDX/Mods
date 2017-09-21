@@ -43,10 +43,8 @@ public class EntityZombieSDX: EntityZombie
         // Find the default approach speed
         float fDefaultSpeed = base.GetApproachSpeed();
 
- 
-
-        // Grabs a random multiplier for the speed, with 0.2 being low, and 0.5 being high.
-        float fRandomMultiplier = UnityEngine.Random.Range(0.2f, 0.5f);
+        // Grabs a random multiplier for the speed
+        float fRandomMultiplier = UnityEngine.Random.Range(0.0f, 0.5f);
 
         // if it's greater than 1, just use that value. 
         // This would make the football and wights run even faster than they do now.
@@ -54,19 +52,21 @@ public class EntityZombieSDX: EntityZombie
             return fDefaultSpeed;
 
         if (GamePrefs.GetInt(EnumGamePrefs.ZombiesRun) == 1)
-            return this.speedApproach * UnityEngine.Random.Range(0.8f, 1.2f);
+            flApproachSpeed = this.speedApproach + fRandomMultiplier;
         else
         {
             // Rnadomize the zombie speeds types If you have the blRunInDark set to true, then it'll randomize it too.
             if (blRunInDark && this.world.IsDark() || lightLevel < EntityZombieSDX.LightThreshold || this.Health < this.GetMaxHealth() * 0.4)
-                return this.speedApproachNight * fRandomMultiplier;
+                flApproachSpeed = this.speedApproachNight + fRandomMultiplier;
 
             // If it's night time, then use the speedApproachNight value
-            if (this.world.IsDark())  
-                return this.speedApproachNight * fRandomMultiplier;
+            if (this.world.IsDark())
+                flApproachSpeed = this.speedApproachNight + fRandomMultiplier;
             else
-                return this.speedApproach * fRandomMultiplier;
+                flApproachSpeed = this.speedApproach + fRandomMultiplier;
         }
+
+        return flApproachSpeed;
     }
 
     // Randomize the Walk types.
