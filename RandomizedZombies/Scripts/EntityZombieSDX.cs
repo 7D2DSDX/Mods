@@ -24,7 +24,7 @@ public class EntityZombieSDX: EntityZombie
     public static int GetRandomWalkType()
     {
         // Distribution of Walk Types in an array
-        int[] numbers = new int[9] { 1,2,2,3,5,5,6,7,8 };
+        int[] numbers = new int[9] { 1,2,2,3,4,5,6,7,8 };
 
         // Randomly generates a number between 0 and the maximum number of elements in the numbers.
         int randomNumber = random.Next(0, numbers.Length);
