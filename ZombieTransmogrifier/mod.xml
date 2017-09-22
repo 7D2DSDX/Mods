@@ -1,8 +1,8 @@
 <mod>
 	<info>
 		<author>sphereii</author>
-		<name>Hal's Run In Dark and Random WalkType and Speed</name>
-		<description>Randomizes Zombie walk types and speed on their approach, based on Hal's Run in the Dark mod.</description>
+		<name>Zombie Transmogrifier</name>
+		<description>SDX mod that re-writes the rules of what you know about zombies, and adds more randomized elements by changing walk types and speeds</description>
 		<mod_version>1.0</mod_version>
 		<game_version>16.3</game_version>
 		<launcher_version></launcher_version>

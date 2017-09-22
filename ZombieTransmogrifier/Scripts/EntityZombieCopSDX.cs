@@ -28,6 +28,11 @@ public class EntityZombieCopSDX : EntityZombieCop
 
         // scale down the zombies, or upscale them
         this.gameObject.transform.localScale = new Vector3(numbers[randomIndex], numbers[randomIndex], numbers[randomIndex]);
+
+
+        // leave a 5% chance of this zombie running in the dark.
+        if (random.Next(100) <= 5)
+            blRunInDark = true;
     }
     // Update the Approach speed, and add a randomized speed to it
     public override float GetApproachSpeed()
@@ -39,13 +44,38 @@ public class EntityZombieCopSDX : EntityZombieCop
         // Find the default approach speed from the base class to give us a reference.
         float fDefaultSpeed = base.GetApproachSpeed();
 
-        // Grabs a random multiplier for the speed
-        float fRandomMultiplier = UnityEngine.Random.Range(0.0f, 0.5f);
-
         // if it's greater than 1, just use the base value in the XML. 
         // This would otherwise make the football and wights run even faster than they do now.
         if (fDefaultSpeed > 1.0f)
             return fDefaultSpeed;
+
+
+        // Set the minimum speed and maxSpeed of the bonus we want to give the zombie
+        float minSpeed = 0.0f;
+        float maxSpeed = 0.3f;
+
+        // Grab the primary player's game stage, then divide it by 500. This will count how many times 500 goes into the 
+        // gamestage level. We'll use this number as a multiplier base to bump the minimum and maxmum speed of the zombies.
+        /*  
+         *  At Game Stage 537, the gameStageValue would be 1.074, then we multiply it by 0.1f to get a speed boost of 0.1074f to the minSpeed and maxSpeed
+         *  which effective gives the zombie a random multiplier of between 0.1074 to 0.4f, rather than the default of 0.0f to 0.3f.
+         *  
+         *  At Game Stage 3,000, the gameStageValule would be 6, multiplied by 0.1f to give the min and max speed boost of a 0.6. 
+         *  
+         */
+        EntityPlayerLocal player = this.world.GetPrimaryPlayer();
+        float gameStageValue = player.gameStage / 500;
+
+        // uncomment the minSpeed if you want to raise the minimum walk speed for higher game stages.
+        // minSpeed += gameStageValue * 0.1f;
+        maxSpeed += gameStageValue * 0.1f;
+
+        // We want to cap the low and top ends. The maxSpeed is the fatest speed boost possible.
+        minSpeed = Math.Max(minSpeed, 0.0f);
+        maxSpeed = Math.Min(maxSpeed, 1.0f);
+
+        // Grabs a random multiplier for the speed
+        float fRandomMultiplier = UnityEngine.Random.Range(minSpeed, maxSpeed);
 
         // If the zombies are set never to run, still apply the multiplier, but don't bother doing calulations based on the night speed.
         if (GamePrefs.GetInt(EnumGamePrefs.ZombiesRun) == 1)
@@ -63,8 +93,31 @@ public class EntityZombieCopSDX : EntityZombieCop
                 flApproachSpeed = this.speedApproach + fRandomMultiplier;
         }
 
-        return flApproachSpeed;
+        /*
+         * 
+         * a_embercrackle_oneshot1.wav
+         * a_yell_oneshot1.wav
+         * male_hate_death_02.wav
+         * male_hate_death_03.wav
+         * male_hate_death_04.wav
+         * male_hate_death_06.wav
+         * male_hate_death_07
+         * male_hate_pain_08.wav
+         * male_hate_roam_09
+         * player1painlg1
+         * player2death5.wav
+
+        if (random.Next(100) <= 1)
+        {
+            Audio.Manager.Play(this, "traderdislikegreeting");
+
+        }
+        */
+        // Cap the top end of the speed to be 1.35 or less, otherwise animations may go wonky.
+        return Math.Min(flApproachSpeed, 1.35f);
+
     }
+
     // Randomize the Walk types.
     public override int GetWalkType()
     {
