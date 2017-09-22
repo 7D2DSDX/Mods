@@ -25,6 +25,17 @@ public class EntityZombieSDX: EntityZombie
     // set to true if you want the zombies to run in the dark.
     bool blRunInDark = false;
 
+    public override void Init(int _entityClass)
+    {
+        base.Init(_entityClass);
+
+        // This is the distributed random heigh multiplier. Add or adjust values as you see fit. By default, it's just a small adjustment.
+        float[] numbers = new float[9] { 0.8f, 0.8f, 0.9f, 0.9f, 1.0f, 1.0f,1.0f,1.1f, 1.1f };
+        int randomIndex = random.Next(0, numbers.Length);
+
+        // scale down the zombies, or upscale them
+        this.gameObject.transform.localScale = new Vector3(numbers[ randomIndex], numbers[randomIndex], numbers[randomIndex]);
+    }
     // Returns a random walk type for the spawned entity
     public static int GetRandomWalkType()
     {
@@ -54,31 +65,6 @@ public class EntityZombieSDX: EntityZombie
     }
 
    
-    // Adding a bit of variety in the height of the zombies.
-    public override float GetEyeHeight()
-    {
-        // default eye height is 0.0 for this class, so if it's anything different, just return that value, since we've already set it once.
-        if (flEyeHeight > 0.0f)
-            return flEyeHeight;
-
-        // Grab the base Eye Heigth;
-        flEyeHeight = base.GetEyeHeight();
-        // If the walk types are 4 ( crawler) or 8 ( spider ), skip their heigh change
-        if (GetWalkType() == 4 || GetWalkType() == 8)
-        {
-            return flEyeHeight;
-        }
-
-
-        // This is the distributed random heigh multiplier. Add or adjust values as you see fit. By default, it's just a small adjustment.
-        float[] numbers = new float[9] { 0.5f,0.6f,0.7f, 0.7f, 0.8f, 0.8f, 0.9f, 0.9f, 1.0f };
-        float randomNumber = random.Next(0, numbers.Length);
-    
-        // We'll cache the random eye height, so there's not contstant adjustments.
-        flEyeHeight = (!this.IsCrouching) ? (base.height * randomNumber) : (base.height * 0.5f);
-        return flEyeHeight;
-    }
-
     // Update the Approach speed, and add a randomized speed to it
     public override float GetApproachSpeed()
     {

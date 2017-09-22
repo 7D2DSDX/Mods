@@ -15,8 +15,20 @@ public class EntityZombieCopSDX : EntityZombieCop
     // Caching the walk types and approach speed
     private int intWalkType = 0;
     private float flApproachSpeed = 0.0f;
-    
 
+    public static System.Random random = new System.Random();
+
+    public override void Init(int _entityClass)
+    {
+        base.Init(_entityClass);
+
+        // This is the distributed random heigh multiplier. Add or adjust values as you see fit. By default, it's just a small adjustment.
+        float[] numbers = new float[9] { 0.8f, 0.8f, 0.9f, 0.9f, 1.0f, 1.0f, 1.0f, 1.1f, 1.1f };
+        int randomIndex = random.Next(0, numbers.Length);
+
+        // scale down the zombies, or upscale them
+        this.gameObject.transform.localScale = new Vector3(numbers[randomIndex], numbers[randomIndex], numbers[randomIndex]);
+    }
     // Update the Approach speed, and add a randomized speed to it
     public override float GetApproachSpeed()
     {
