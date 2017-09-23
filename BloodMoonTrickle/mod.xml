@@ -6,7 +6,7 @@
 		<name>Guppycur's Blood Moon Trickle Fix</name>
 		<description>Remove the trickle, and keep the horde magic going all night.</description>
 		<mod_version>1.0</mod_version>
-		<game_version>16.2</game_version>
+		<game_version>16.3</game_version>
 		<launcher_version>0.0.0</launcher_version>
 		<type>XML</type>
 	</info>
