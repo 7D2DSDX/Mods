@@ -23,35 +23,35 @@ public class CraftingLagFix : IPatcherMod
 
 
 
-        // The HandleSlotChangedEvent in the XuC_ItemStackGrid makes a call to GetUISlots, and updates the BackEnd.
-        // however, the UpdateBackend does nothing, and the GetUISlot does all the work. Let's clean it up.
-        var gm = module.Types.First(d => d.Name == "XUiC_ItemStackGrid");
-        var method = gm.Methods.First(d => d.Name == "HandleSlotChangedEvent");
+        //// The HandleSlotChangedEvent in the XuC_ItemStackGrid makes a call to GetUISlots, and updates the BackEnd.
+        //// however, the UpdateBackend does nothing, and the GetUISlot does all the work. Let's clean it up.
+        //var gm = module.Types.First(d => d.Name == "XUiC_ItemStackGrid");
+        //var method = gm.Methods.First(d => d.Name == "HandleSlotChangedEvent");
 
-        var instructions = method.Body.Instructions;
-        var pro = method.Body.GetILProcessor();
-        var updateBack = gm.Methods.First(d => d.Name == "UpdateBackend");
+        //var instructions = method.Body.Instructions;
+        //var pro = method.Body.GetILProcessor();
+        //var updateBack = gm.Methods.First(d => d.Name == "UpdateBackend");
 
 
         
-        int delNextLines = 0;
-        foreach (var i in instructions.Reverse())
-        {
-            if (i.OpCode == OpCodes.Callvirt && i.Operand == updateBack)
-            {
-                Log("Removing UpdateBack");
-                delNextLines = 5;
-                instructions.Remove(i);
-                continue;
-            }
+        //int delNextLines = 0;
+        //foreach (var i in instructions.Reverse())
+        //{
+        //    if (i.OpCode == OpCodes.Callvirt && i.Operand == updateBack)
+        //    {
+        //        Log("Removing UpdateBack");
+        //        delNextLines = 5;
+        //        instructions.Remove(i);
+        //        continue;
+        //    }
 
-            // We want to delete the virtCall, plus the "this" attached to it, so enable the flag.
-            if (delNextLines > 0)
-            {
-                instructions.Remove(i);
-                delNextLines--;
-            }
-        }
+        //    // We want to delete the virtCall, plus the "this" attached to it, so enable the flag.
+        //    if (delNextLines > 0)
+        //    {
+        //        instructions.Remove(i);
+        //        delNextLines--;
+        //    }
+        //}
 
         return true;
     }

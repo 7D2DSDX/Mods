@@ -1,0 +1,19 @@
+<mod>
+	<info>
+		<!-- Information about the Mod, the author and version information -->
+		<!-- These are displayed in the SDX Launcher -->
+		<author>sphereii</author>
+		<name>SDX Stop Watch</name>
+		<description>Allows Instrumentation to measure time for a class or method.</description>
+		<mod_version>1.0</mod_version>
+		<game_version>16.3</game_version>
+		<launcher_version>0.0.0</launcher_version>
+		<type>Utility</type>
+	</info>
+	
+	<!-- This references any config files that SDX needs to merge into your files -->
+	<config_mods>
+		
+    </config_mods>
+	
+</mod>
