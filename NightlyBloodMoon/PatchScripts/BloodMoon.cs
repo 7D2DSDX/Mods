@@ -27,8 +27,16 @@ public class NightlyBloodMoonChange : IPatcherMod
         var myMethod = myClass.Methods.First(d => d.Name == "BloodMoon");
         var instructions = myMethod.Body.Instructions;
         var pro = myMethod.Body.GetILProcessor();
+		
+		int Counter = 0;
         foreach (var i in instructions.Reverse())
         {
+			    // This controls on when the Blood Moon Starts. by default, it starts past the 6th day.
+            if (( i.OpCode == OpCodes.Ldc_R4) && ((float)i.Operand == 6f) && Counter == 0)
+            {
+                i.Operand = 1;
+                Counter++;
+            }
             if ((i.OpCode == OpCodes.Ldc_R4) && ((float)i.Operand == OriginalBloodMoon))
             {
                 i.Operand = BloodMoonInterval;
