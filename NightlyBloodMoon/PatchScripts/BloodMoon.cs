@@ -34,7 +34,7 @@ public class NightlyBloodMoonChange : IPatcherMod
 			    // This controls on when the Blood Moon Starts. by default, it starts past the 6th day.
             if (( i.OpCode == OpCodes.Ldc_R4) && ((float)i.Operand == 6f) && Counter == 0)
             {
-                i.Operand = 1;
+                i.Operand = 1f;
                 Counter++;
             }
             if ((i.OpCode == OpCodes.Ldc_R4) && ((float)i.Operand == OriginalBloodMoon))
