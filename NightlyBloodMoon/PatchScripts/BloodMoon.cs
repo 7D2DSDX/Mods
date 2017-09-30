@@ -29,13 +29,19 @@ public class NightlyBloodMoonChange : IPatcherMod
         var pro = myMethod.Body.GetILProcessor();
 		
 		int Counter = 0;
-        foreach (var i in instructions.Reverse())
+        foreach (var i in instructions)
         {
 			    // This controls on when the Blood Moon Starts. by default, it starts past the 6th day.
             if (( i.OpCode == OpCodes.Ldc_R4) && ((float)i.Operand == 6f) && Counter == 0)
             {
-                i.Operand = 1f;
+                i.Operand = 0f;
                 Counter++;
+            }
+			
+			 if (( i.OpCode == OpCodes.Ldc_R4) && ((float)i.Operand == 0.6f))
+            {
+                i.Operand = 0f;
+                
             }
             if ((i.OpCode == OpCodes.Ldc_R4) && ((float)i.Operand == OriginalBloodMoon))
             {
@@ -50,12 +56,23 @@ public class NightlyBloodMoonChange : IPatcherMod
         {
             instructions = method.Body.Instructions;
             pro = method.Body.GetILProcessor();
+			
+			// If we change a 7 to the blood moon interval, there's another instruction afterwards that we want to switch from 1 to 0
+			bool blSearch = false;
             foreach (var i in instructions.Reverse())
             {
                 if ((i.OpCode == OpCodes.Ldc_I4_7) )
                 {
                     i.OpCode = OpCodes.Ldc_I4;
                     i.Operand = (int)BloodMoonInterval;
+					blSearch = true;
+                }
+			
+				// This dtermines if the number of days is above 1. Since we want the blood moon to start the first day, we need to change the greater than to greater than equal
+			if ((i.OpCode == OpCodes.Ble_S) && ( blSearch = true ))
+                {
+                    i.OpCode = OpCodes.Blt_S;
+					blSearch = false;
                 }
             }
         }
