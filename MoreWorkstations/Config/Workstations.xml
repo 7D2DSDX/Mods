@@ -1,0 +1,54 @@
+<configs>
+	<config name="blocks">
+		<append xpath="/blocks">	
+			<block id="*" name="WorkBench">
+				<property name="Extends" value="workbench" />
+				<property name="Model" value="#WorkBench?WorkBenchPrefab" />
+				<property name="MultiBlockDim" value="1,2,3" />
+				<property name="ModelOffset" value="-1,0.5,0" />
+			</block>
+			
+			<block id="*" name="Anvil">
+				<property name="Extends" value="workbench" />
+				<property name="Model" value="#Anvil?AnvilPrefab" />
+				<property name="MultiBlockDim" value="1,2,1" />
+			</block>	
+			
+			<block id="*" name="TanningRack">
+				<property name="Extends" value="workbench" />
+				<property name="Model" value="#Tannery?TanneryPrefab" />
+				<property name="MultiBlockDim" value="2,3,2" />
+			</block>	
+			<block id="*" name="GrindingWheel">
+				<property name="Extends" value="workbench" />
+				<property name="Model" value="#GrindingWheel?GrindingWheelPrefab" />
+				<property name="MultiBlockDim" value="1,2,1" />
+			</block>	
+			<block id="*" name="CampFire">
+				<property name="Extends" value="campfire" />
+				<property name="Model" value="#CookingPot?CookingPotPrefab" />
+				<property name="MultiBlockDim" value="1,2,2" />
+				<property name="ParticleOffset" value="0.5,0,0" />
+			</block>
+
+
+			<block id="*" name="ResearchDesk">
+				<property name="Extends" value="campfire" />
+				<property name="Model" value="#ResearchDesk?ResearchPrefab" />
+				<property name="MultiBlockDim" value="1,2,2" />
+			</block>
+
+			<block id="*" name="BigForge">
+				<property name="Extends" value="forge" />
+				<property name="Model" value="#Forge?ForgePrefab" />
+				<property name="MultiBlockDim" value="2,5,3" />
+				<property name="ParticleName" value="campfire" />
+				<property name="ParticleOffset" value="0,1.2,0.5" />
+				<property name="Shape" value="ModelEntity" />
+				<property name="ImposterDontBlock" value="true" />
+				<property name="Class" value="Campfire" />
+			</block>	
+			
+		</append>
+	</config>
+</configs>

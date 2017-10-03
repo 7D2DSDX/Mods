@@ -1,0 +1,13 @@
+<mod>
+	<info>
+		<author>sphereii</author>
+		<name>More Workstations</name>
+		<description>New resource assets for different types of workstations</description>
+		<mod_version>1.0</mod_version>
+		<game_version>16.3</game_version>
+		<launcher_version>0.7.1</launcher_version>
+	</info>
+	<config_mods>
+		<!-- import file="Config\Workstations.xml" /-->
+	</config_mods>
+</mod>
