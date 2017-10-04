@@ -8,6 +8,6 @@
 		<launcher_version>0.7.1</launcher_version>
 	</info>
 	<config_mods>
-		<!-- import file="Config\Workstations.xml" /-->
+		<import file="Config\Workstations.xml" />
 	</config_mods>
 </mod>
