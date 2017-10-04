@@ -1,0 +1,111 @@
+<configs>
+	<!--  This tells SDX to add to the blocks.xml -->
+	<config name="blocks">	
+		<!-- This tells SDX to add the following block to the bottom of the block list -->
+		<append xpath="/blocks">	
+			<block id="" name="BrokenTree4Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?BrokenTree4Prefab" />
+			</block>
+
+			<block id="" name="BrokenTree3Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?BrokenTree3Prefab" />
+			</block>
+
+
+			<block id="" name="BrokenTree2Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?BrokenTree2Prefab" />
+			</block>
+
+			<block id="" name="BrokenTreePrefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?BrokenTreePrefab" />
+			</block>
+
+			<block id="" name="PineTreePrefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?PineTreePrefab" />
+			</block>
+			<block id="" name="PineTree2Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?PineTree2Prefab" />
+			</block>
+
+			<block id="" name="Tree5Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?Tree5Prefab" />
+			</block>
+			<block id="" name="Tree4Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?Tree4Prefab" />
+			</block>
+
+			<block id="" name="Tree3Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?Tree3Prefab" />
+			</block>
+			<block id="" name="Tree2Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?Tree2Prefab" />
+			</block>
+
+			<block id="" name="TreePrefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?TreePrefab" />
+			</block>
+			<block id="" name="Conifer3Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?Conifer3Prefab" />
+			</block>
+
+			<block id="" name="Conifer2Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?Conifer2Prefab" />
+			</block>
+			<block id="" name="ConiferPrefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?ConiferPrefab" />
+			</block>
+
+			<block id="" name="Birch3Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?Birch3Prefab" />
+			</block>
+
+			<block id="" name="Birch2Prefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?Birch2Prefab" />
+			</block>
+			<block id="" name="BirchPrefab">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterWonderland?BirchPrefab" />
+			</block>
+
+		</append>
+	</config>
+
+	<config name="biomes">
+		<append xpath="/worldgeneration/biomes/biome[@name='snow']/decorations">	
+			<decoration type="block" blockname="treeWinterEverGreen" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="BrokenTree3Prefab" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="BrokenTree2Prefab" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="BrokenTreePrefab" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="PineTreePrefab" prob="0.0001" rotatemax="7" />
+			<decoration type="block" blockname="PineTree2Prefab" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="Tree5Prefab" prob="0.001" />
+			<decoration type="block" blockname="Tree4Prefab" prob="0.001" />
+			<decoration type="block" blockname="Tree3Prefab" prob="0.001" />
+			<decoration type="block" blockname="Tree2Prefab" prob="0.001" />
+			<decoration type="block" blockname="TreePrefab" prob="0.001" />
+			<decoration type="block" blockname="Conifer3Prefab" prob="0.001" />
+			<decoration type="block" blockname="ConiferPrefab" prob="0.001" />
+			<decoration type="block" blockname="Birch3Prefab" prob="0.001" />
+			<decoration type="block" blockname="Birch2Prefab" prob="0.001" />
+			<decoration type="block" blockname="BirchPrefab" prob="0.001" />
+		</append>
+
+
+	</config>
+</configs>
