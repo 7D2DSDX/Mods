@@ -1,0 +1,14 @@
+<mod>
+  <info>
+    <author>StompyNZ</author>
+    <name>Nanite Terrain</name>
+    <description>Adds blocks that expand and flow down slopes. Great for terrain shaping or creative play.</description>
+    <mod_version>1.0</mod_version>
+    <game_version>16.3</game_version>
+    <launcher_version>0.0.0</launcher_version>
+    <type>XML</type>
+  </info>
+  <config_mods>
+    <import file="Config\Blocks.xml" />
+  </config_mods>
+</mod>

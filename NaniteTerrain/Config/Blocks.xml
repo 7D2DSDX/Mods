@@ -1,0 +1,285 @@
+<configs>
+  <config name="blocks">
+  <append xpath="/blocks">
+  <!-- Nano Terrain -->
+  <block id="*" name="nano_silverOre">
+    <property name="Extends" value="silverOre"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="silverOre"/>
+    <property name="CustomIcon" value="silverOre"/>
+  </block>
+  <block id="*" name="nano_flagstoneBlock">
+    <property name="Extends" value="flagstoneBlock"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="flagstoneBlock"/>
+    <property name="CustomIcon" value="flagstoneBlock"/>
+  </block>
+  <block id="*" name="nano_cobblestoneBlock">
+    <property name="Extends" value="cobblestoneBlock"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="cobblestoneBlock"/>
+    <property name="CustomIcon" value="cobblestoneBlock"/>
+  </block>
+  <block id="*" name="nano_rConcreteBlock">
+    <property name="Extends" value="rConcreteBlock"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="rConcreteBlock"/>
+    <property name="CustomIcon" value="rConcreteBlock"/>
+  </block>
+  <block id="*" name="nano_stone">
+    <property name="Extends" value="stone"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="stone"/>
+    <property name="CustomIcon" value="stone"/>
+  </block>
+  <block id="*" name="nano_grass">
+    <property name="Extends" value="grass" param1="PlaceAltBlockValue"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="grass"/>
+    <property name="CustomIcon" value="grass"/>
+  </block>
+  <block id="*" name="nano_dirt">
+    <property name="Extends" value="dirt"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="dirt"/>
+    <property name="CustomIcon" value="dirt"/>
+  </block>
+  <block id="*" name="nano_plainsGround">
+    <property name="Extends" value="plainsGround" param1="PlaceAltBlockValue"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="plainsGround"/>
+    <property name="CustomIcon" value="plainsGround"/>
+  </block>
+  <block id="*" name="nano_radiated">
+    <property name="Extends" value="radiated"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="radiated"/>
+    <property name="CustomIcon" value="radiated"/>
+    <property name="Material" value="dirt"/>
+  </block>
+  <block id="*" name="nano_potassiumNitrate">
+    <property name="Extends" value="potassiumNitrate"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="potassiumNitrate"/>
+    <property name="CustomIcon" value="potassiumNitrate"/>
+    <property name="Material" value="coal"/>
+  </block>
+  <block id="*" name="nano_ironOre">
+    <property name="Extends" value="ironOre"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="ironOre"/>
+    <property name="CustomIcon" value="ironOre"/>
+  </block>
+  <block id="*" name="nano_sand">
+    <property name="Extends" value="sand"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="sand"/>
+    <property name="CustomIcon" value="sand"/>
+  </block>
+  <block id="*" name="nano_snow">
+    <property name="Extends" value="snow"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="snow"/>
+    <property name="CustomIcon" value="snow"/>
+  </block>
+  <block id="*" name="nano_clay">
+    <property name="Extends" value="clay"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="clay"/>
+    <property name="CustomIcon" value="clay"/>
+  </block>
+  <block id="*" name="nano_leadOre">
+    <property name="Extends" value="leadOre"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="leadOre"/>
+    <property name="CustomIcon" value="leadOre"/>
+  </block>
+  <block id="*" name="nano_bedrock">
+    <property name="Extends" value="bedrock"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="bedrock"/>
+    <property name="CustomIcon" value="bedrock"/>
+  </block>
+  <block id="*" name="nano_sandStone">
+    <property name="Extends" value="sandStone"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="sandStone"/>
+    <property name="CustomIcon" value="sandStone"/>
+  </block>
+  <block id="*" name="nano_desertGround">
+    <property name="Extends" value="desertGround"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="desertGround"/>
+    <property name="CustomIcon" value="desertGround"/>
+  </block>
+  <block id="*" name="nano_asphalt">
+    <property name="Extends" value="asphalt"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="asphalt"/>
+    <property name="CustomIcon" value="asphalt"/>
+  </block>
+  <block id="*" name="nano_gravel">
+    <property name="Extends" value="gravel"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="gravel"/>
+    <property name="CustomIcon" value="gravel"/>
+  </block>
+  <block id="*" name="nano_ice">
+    <property name="Extends" value="ice"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="ice"/>
+    <property name="CustomIcon" value="ice"/>
+  </block>
+  <block id="*" name="nano_fertileDirt">
+    <property name="Extends" value="fertileDirt"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="fertileDirt"/>
+    <property name="CustomIcon" value="fertileDirt"/>
+  </block>
+  <block id="*" name="nano_fertileGrass">
+    <property name="Extends" value="fertileGrass" param1="PlaceAltBlockValue"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="fertileGrass"/>
+    <property name="CustomIcon" value="grass"/>
+  </block>
+  <block id="*" name="nano_fertileFarmland">
+    <property name="Extends" value="fertileFarmland"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="fertileFarmland"/>
+    <property name="CustomIcon" value="fertileFarmland"/>
+  </block>
+  <block id="*" name="nano_burntForestGround">
+    <property name="Extends" value="burntForestGround" param1="PlaceAltBlockValue"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="burntForestGround"/>
+    <property name="CustomIcon" value="burntForestGround"/>
+  </block>
+  <block id="*" name="nano_forestGround">
+    <property name="Extends" value="forestGround" param1="PlaceAltBlockValue"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="forestGround"/>
+    <property name="CustomIcon" value="forestGround"/>
+  </block>
+  <block id="*" name="nano_destroyedStone">
+    <property name="Extends" value="destroyedStone"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="destroyedStone"/>
+    <property name="CustomIcon" value="destroyedStone"/>
+  </block>
+  <block id="*" name="nano_coalOre">
+    <property name="Extends" value="coalOre"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="coalOre"/>
+    <property name="CustomIcon" value="coalOre"/>
+  </block>
+  <block id="*" name="nano_terrainFiller">
+    <property name="Extends" value="terrainFiller"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="terrainFiller"/>
+    <property name="CustomIcon" value="terrainFiller"/>
+  </block>
+  <block id="*" name="nano_sod">
+    <property name="Extends" value="sod"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="sod"/>
+    <property name="CustomIcon" value="sod"/>
+  </block>
+  <block id="*" name="nano_hardSod">
+    <property name="Extends" value="hardSod"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="hardSod"/>
+    <property name="CustomIcon" value="sod"/>
+  </block>
+  <block id="*" name="nano_woodDebris">
+    <property name="Extends" value="woodDebris"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="woodDebris"/>
+    <property name="CustomIcon" value="woodDebris"/>
+  </block>
+  <block id="*" name="nano_oilDeposit">
+    <property name="Extends" value="oilDeposit"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="oilDeposit"/>
+    <property name="CustomIcon" value="oilDeposit"/>
+  </block>
+  <block id="*" name="nano_fertilizedFarmland">
+    <property name="Extends" value="fertilizedFarmland"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="fertilizedFarmland"/>
+    <property name="CustomIcon" value="fertileFarmland"/>
+  </block>
+
+  <block id="*" name="nano_steelBlock">
+    <property name="Extends" value="steelBlock"/>
+    <property name="Class" value="LiquidMoving"/>
+    <property name="LiquidStatic" value="steelBlock"/>
+    <property name="CustomIcon" value="steelBlock"/>
+  </block>
+  
+ <!-- Multiwall steelBlock example, extend height by adding more copies -->
+  <!-- <block id="*" name="multiWall_Steel_4m"> -->
+    <!-- <property name="Class" value="PlantGrowing" /> -->
+    <!-- <property name="CustomIcon" value="steelBlock" /> -->
+    <!-- <property name="Material" value="Msteel" /> -->
+    <!-- <property name="Texture" value="355,355,355,355,355,355" /> -->
+    <!-- <property class="PlantGrowing"> -->
+      <!-- <property name="FertileLevel" value="0" /> -->
+      <!-- <property name="Next" value="steelBlock" /> -->
+      <!-- <property name="GrowthRate" value=".01" /> -->
+      <!-- <property name="LightLevelStay" value="0" /> -->
+      <!-- <property name="IsRandom" value="false" /> -->
+      <!-- <property name="IsGrowOnTopEnabled" value="true" /> -->
+      <!-- <property name="GrowOnTop" value="multiWall_Steel_3m" /> -->
+    <!-- </property> -->
+  <!-- </block> -->
+  <block id="*" name="multiWall_Steel_3m">
+    <property name="Class" value="PlantGrowing" />
+    <property name="CustomIcon" value="steelBlock" />
+    <property name="Material" value="Msteel" />
+    <property name="Texture" value="355,355,355,355,355,355" />
+    <property class="PlantGrowing">
+      <property name="FertileLevel" value="0" />
+      <property name="Next" value="steelBlock" />
+      <property name="GrowthRate" value=".01" />
+      <property name="LightLevelStay" value="0" />
+      <property name="IsRandom" value="false" />
+      <property name="IsGrowOnTopEnabled" value="true" />
+      <property name="GrowOnTop" value="multiWall_Steel_2m" />
+    </property>
+  </block>
+  <block id="*" name="multiWall_Steel_2m">
+    <property name="Class" value="PlantGrowing" />
+    <property name="CustomIcon" value="steelBlock" />
+    <property name="Material" value="Msteel" />
+    <property name="Texture" value="355,355,355,355,355,355" />
+    <property class="PlantGrowing">
+      <property name="FertileLevel" value="0" />
+      <property name="Next" value="steelBlock" />
+      <property name="GrowthRate" value=".01" />
+      <property name="LightLevelStay" value="0" />
+      <property name="IsRandom" value="false" />
+      <property name="IsGrowOnTopEnabled" value="true" />
+      <property name="GrowOnTop" value="steelBlock"/>
+    </property>
+  </block>
+
+  <!-- Swap With above block to spawn nanitesteel on top -->
+  <!-- <block id="*" name="multiWall_Steel_2m"> -->
+    <!-- <property name="Class" value="PlantGrowing" /> -->
+    <!-- <property name="CustomIcon" value="steelBlock" /> -->
+    <!-- <property name="Material" value="Msteel" /> -->
+    <!-- <property name="Texture" value="355,355,355,355,355,355" /> -->
+    <!-- <property class="PlantGrowing"> -->
+      <!-- <property name="FertileLevel" value="0" /> -->
+      <!-- <property name="Next" value="steelBlock" /> -->
+      <!-- <property name="GrowthRate" value=".01" /> -->
+      <!-- <property name="LightLevelStay" value="0" /> -->
+      <!-- <property name="IsRandom" value="false" /> -->
+      <!-- <property name="IsGrowOnTopEnabled" value="true" /> -->
+      <!-- <property name="GrowOnTop" value="nano_steelBlock"/> -->
+    <!-- </property> -->
+  <!-- </block> -->
+  
+  </append>
+  </config>
+</configs>
