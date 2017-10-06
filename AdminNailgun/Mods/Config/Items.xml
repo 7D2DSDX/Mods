@@ -1,0 +1,156 @@
+<configs>
+  <config name="items">
+  <append xpath="/items">
+    <!-- ADMIN ITEMS -->
+  <item id="*" name="Admin_nailgun">
+    <property name="IsDeveloper" value="true"/>
+    <property name="Meshfile" value="Items/Tools/nailgunPrefab"/>
+    <property name="CustomIcon" value="nailgun"/>
+    <property name="CustomIconTint" value="FF0000"/>
+    <property name="Material" value="metal"/>
+    <property name="HoldType" value="37"/>
+    <property name="Stacknumber" value="1"/>
+    <property name="RepairTools" value="repairKit"/>
+    <property name="Degradation" value="5000" param1="false"/>
+    <property name="DegradationBreaksAfter" value="false"/>
+    <property name="SoundJammed" value="Weapons/weapon_jam"/>
+    <property name="Weight" value="33"/>
+    <property class="Action0">
+      <property name="Class" value="Launcher"/>
+      <property name="Delay" value="0.15"/>
+      <property name="Range" value="50"/>
+      <property name="Auto_fire" value="true"/>
+      <property name="Infinite_ammo" value="true"/>
+      <property name="Magazine_items" value="Admin_nail, Admin_nail_x4, Admin_nail_x10, Admin_Grassbomb"/>
+      <property name="Instantiate_on_load" value="false"/>
+      <property name="Reload_time" value="1"/>
+      <property name="Bullet_icon" value="uzi"/>
+      <property name="Sound_start" value=""/>
+      <property name="Sound_repeat" value=""/>
+      <property name="Sound_end" value=""/>
+      <property name="Sound_empty" value="Weapons/weapon_empty"/>
+      <property name="Sound_reload" value="Weapons/Motorized/Nailgun/nailgun_reload"/>
+    </property>
+    <property class="Action1">
+      <property name="Class" value="Repair"/>
+      <property name="Delay" value="0.1"/>
+      <property name="Repair_amount" value="10000"/>
+      <property name="Upgrade_hit_offset" value="-10"/>
+      <property name="Repair_action_sound" value=""/>
+      <property name="Upgrade_action_sound" value="Weapons/Motorized/Nailgun/nailgun_fire"/>
+      <property name="Allowed_upgrade_items" value="wood,clayLump,dirtFragment,snowBall,scrapIron,forgedIron,forgedSteel,steelPolish,concreteMix,cobblestones,yuccaFibers"/>
+    </property>
+    <property name="Group" value="Ammo/Weapons"/>
+    <property class="Preview">
+      <property name="Zoom" value="14"/>
+      <property name="Pos" value="0.1,-0.1"/>
+      <property name="Rot" value="0,-45,0"/>
+    </property>
+    <property name="ActionSkillGroup" value="Construction Tools"/>
+    <property name="CraftingSkillGroup" value="Tool Smithing"/>
+  </item>
+  <item id="*" name="Admin_nail">
+    <property name="IsDeveloper" value="true"/>
+    <property name="Meshfile" value="Items/Tools/nailProjectilePrefab"/>
+    <property name="CustomIcon" value="nail"/>
+    <property name="CustomIconTint" value="FF0000"/>
+    <property name="Material" value="metal"/>
+    <property name="HoldType" value="16"/>
+    <property name="Stacknumber" value="1000"/>
+    <property class="Action1">
+      <property name="Class" value="Projectile"/>
+      <property name="DamageEntity" value="3000"/>
+      <property name="DamageBlock" value="50000"/>
+      <property name="Velocity" value="100"/>
+      <property name="FlyTime" value="10"/>
+      <property name="LifeTime" value="10"/>
+    </property>
+    <property name="Group" value="Ammo/Weapons"/>
+  </item>
+  <item id="*" name="Admin_nail_x4">
+    <property name="IsDeveloper" value="true"/>
+    <property name="Meshfile" value="Items/Tools/nailProjectilePrefab"/>
+    <property name="CustomIcon" value="explodingCrossbowBolt"/>
+    <property name="CustomIconTint" value="FF0000"/>
+    <property name="Material" value="metal"/>
+    <property name="HoldType" value="16"/>
+    <property name="Stacknumber" value="1000"/>
+    <property class="Action1">
+      <property name="Class" value="Projectile"/>
+      <property name="DamageEntity" value="10"/>
+      <property name="DamageBlock" value="5000"/>
+      <property name="Velocity" value="100"/>
+      <property name="FlyTime" value="10"/>
+      <property name="LifeTime" value="10"/>
+      <property name="Explosion.ParticleIndex" value="4"/>
+      <property name="Explosion.RadiusBlocks" value="4"/>
+      <property name="Explosion.BlockDamage" value="50000"/>
+      <property name="Explosion.RadiusEntities" value="4"/>
+      <property name="Explosion.EntityDamage" value="5000"/>
+    </property>
+    <property name="Group" value="Ammo/Weapons"/>
+  </item>
+  <item id="*" name="Admin_nail_x10">
+    <property name="IsDeveloper" value="true"/>
+    <property name="Meshfile" value="Items/Tools/nailProjectilePrefab"/>
+    <property name="CustomIcon" value="rocket"/>
+    <property name="CustomIconTint" value="FF0000"/>
+    <property name="Material" value="metal"/>
+    <property name="HoldType" value="16"/>
+    <property name="Stacknumber" value="1000"/>
+    <property class="Action1">
+      <property name="Class" value="Projectile"/>
+      <property name="DamageEntity" value="10"/>
+      <property name="DamageBlock" value="5000"/>
+      <property name="Velocity" value="100"/>
+      <property name="FlyTime" value="10"/>
+      <property name="LifeTime" value="10"/>
+      <property name="Explosion.ParticleIndex" value="4"/>
+      <property name="Explosion.RadiusBlocks" value="10"/>
+      <property name="Explosion.BlockDamage" value="50000"/>
+      <property name="Explosion.RadiusEntities" value="5"/>
+      <property name="Explosion.EntityDamage" value="100"/>
+    </property>
+    <property name="Group" value="Ammo/Weapons"/>
+  </item>
+  <item id="*" name="Admin_Grassbomb">
+    <property name="IsDeveloper" value="true"/>
+    <property name="Meshfile" value="Items/Tools/nailProjectilePrefab"/>
+    <property name="DropMeshfile" value="Items/Misc/sack_droppedPrefab"/>
+    <property name="CustomIcon" value="yuccaFibers"/>
+    <property name="CustomIconTint" value="FF0000"/>
+    <property name="Material" value="organic"/>
+    <property name="HoldType" value="16"/>
+    <property name="Stacknumber" value="200"/>
+    <property class="Action1">
+      <property name="Class" value="Projectile"/>
+      <property name="Explosion.ParticleIndex" value="7"/>
+      <property name="Explosion.RadiusBlocks" value="10"/>
+      <property name="Explosion.BlockDamage" value="10"/>
+      <property name="Explosion.RadiusEntities" value="1"/>
+      <property name="Explosion.EntityDamage" value="1"/>
+      <property name="Explosion.DamageBonus.boulder" value="0"/>
+      <property name="Explosion.DamageBonus.cloth" value="0"/>
+      <property name="Explosion.DamageBonus.concrete" value="0"/>
+      <property name="Explosion.DamageBonus.earth" value="0.1"/>
+      <property name="Explosion.DamageBonus.glass" value="0"/>
+      <property name="Explosion.DamageBonus.leaves" value="0"/>
+      <property name="Explosion.DamageBonus.metal" value="0"/>
+      <property name="Explosion.DamageBonus.plants" value="0"/>
+      <property name="Explosion.DamageBonus.organic" value="0"/>
+      <property name="Explosion.DamageBonus.snow" value="0"/>
+      <property name="Explosion.DamageBonus.stone" value="0"/>
+      <property name="Explosion.DamageBonus.wood" value="0"/>
+      <property name="Velocity" value="100"/>
+      <property name="FlyTime" value="10"/>
+      <property name="LifeTime" value="10"/>
+    </property>
+    <property class="Attributes">
+      <property name="GetQualityFromWeapon" value="true"/>
+      <property name="EntityDamage" value="1,1"/>
+      <property name="BlockDamage" value="1,1"/>
+    </property>
+  </item>
+  </append>
+  </config>
+</configs>
