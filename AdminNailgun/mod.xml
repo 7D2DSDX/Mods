@@ -1,0 +1,14 @@
+<mod>
+  <info>
+    <author>StompyNZ</author>
+    <name>Admin Nailgun</name>
+    <description>Adds items for an admin nailgun with rapid repair, high damage attacks in multiple modes (hold R)</description>
+    <mod_version>1.0</mod_version>
+    <game_version>16.3</game_version>
+    <launcher_version>0.0.0</launcher_version>
+    <type>XML</type>
+  </info>
+  <config_mods>
+    <import file="Config\Items.xml" />
+  </config_mods>
+</mod>
