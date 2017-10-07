@@ -1,0 +1,192 @@
+<configs>
+	<!--  This tells SDX to add to the blocks.xml -->
+	<config name="blocks">	
+		<!-- This tells SDX to add the following block to the bottom of the block list -->
+		<append xpath="/blocks">	
+			<block id="" name="WinterBirch2">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBirch2" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBirch3">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBirch3" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBirch">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBirch" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBranch2">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBranch2" />
+				<drop event="Harvest" name="wood" count="1,4" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBranch3">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBranch3" />
+				<drop event="Harvest" name="wood" count="1,4" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBranch4">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBranch4" />
+				<drop event="Harvest" name="wood" count="1,4" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBranch5">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBranch5" />
+				<drop event="Harvest" name="wood" count="1,4" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBranch">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBranch" />
+				<drop event="Harvest" name="wood" count="1,4" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBrokenTree1">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBrokenTree1" />
+				<drop event="Harvest" name="wood" count="10" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBrokenTree2">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBrokenTree2" />
+				<drop event="Harvest" name="wood" count="10" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBrokenTree3">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBrokenTree3" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBrokenTree4">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBrokenTree4" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBush1">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBush1" />
+				<drop event="Harvest" name="wood" count="1,4" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBush2">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBush2" />
+				<drop event="Harvest" name="wood" count="1,4" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBush3">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBush3" />
+				<drop event="Harvest" name="wood" count="1,4" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterBush4">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterBush4" />
+				<drop event="Harvest" name="wood" count="1,4" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterConifer1">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterConifer1" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterConifer2">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterConifer2" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterConifer3">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterConifer3" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterPineTree1">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterPineTree1" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterPineTree2">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterPineTree2" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterTree1">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterTree1" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterTree2">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterTree2" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterTree3">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterTree3" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterTree4">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterTree4" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterTree5">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterTree5" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterTreeScene2">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterTreeScene2" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterTreeScene3">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterTreeScene3" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="WinterTreeScene">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#WinterDecorations?WinterTreeScene" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+
+
+
+		</append>
+	</config>
+
+	<config name="biomes">
+		<append xpath="/worldgeneration/biomes/biome[@name='snow']/decorations">	
+			<decoration type="block" blockname="WinterBirch2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBirch3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBirch" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBranch2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBranch3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBranch4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBranch5" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBranch" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBrokenTree1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBrokenTree2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBrokenTree3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBrokenTree4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBush1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBush2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBush3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterBush4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterConifer1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterConifer2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterConifer3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterPineTree1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterPineTree2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterTree1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterTree2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterTree3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterTree4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterTree5" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterTreeScene2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterTreeScene3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="WinterTreeScene" prob="0.001" rotatemax="7" />
+		</append>
+
+
+	</config>
+</configs>

@@ -1,0 +1,385 @@
+<configs>
+	<!--  This tells SDX to add to the blocks.xml -->
+	<config name="blocks">	
+		<!-- This tells SDX to add the following block to the bottom of the block list -->
+		<append xpath="/blocks">	
+			<block id="" name="Grass1">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?Grass1" />
+			</block>
+			<block id="" name="Grass2">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?Grass2" />
+			</block>
+			<block id="" name="Grass3">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?Grass3" />
+			</block>
+			<block id="" name="Grass4">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?Grass4" />
+			</block>
+			<block id="" name="Grass5">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?Grass5" />
+			</block>
+			<block id="" name="SummerBush2">
+				<property name="Extends" value="treeSnowyDeadBush" />
+				<property name="Model" value="#SummerDecorations?SummerBush2" />
+			</block>
+			<block id="" name="SummerBush3">
+				<property name="Extends" value="treeSnowyDeadBush" />
+				<property name="Model" value="#SummerDecorations?SummerBush3" />
+			</block>
+			<block id="" name="SummerBush4">
+				<property name="Extends" value="treeSnowyDeadBush" />
+				<property name="Model" value="#SummerDecorations?SummerBush4" />
+			</block>
+			<block id="" name="SummerBush5">
+				<property name="Extends" value="treeSnowyDeadBush" />
+				<property name="Model" value="#SummerDecorations?SummerBush5" />
+			</block>
+			<block id="" name="SummerBush">
+				<property name="Extends" value="treeSnowyDeadBush" />
+				<property name="Model" value="#SummerDecorations?SummerBush" />
+			</block>
+			<block id="" name="SummerConifer1">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerConifer1" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerConifer2">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerConifer2" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerConifer3">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerConifer3" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerConifer4">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerConifer4" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerConifer5">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerConifer5" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerConifer6">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerConifer6" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerConifer7">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerConifer7" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerConifer8">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerConifer8" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower10">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower10" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower11">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower11" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower12">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower12" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower13">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower13" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower14">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower14" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower15">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower15" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower17">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower17" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower18">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower18" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower19">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower19" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower1">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower1" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower20">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower20" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower21">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower21" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower22">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower22" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower23">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower23" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower2">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower2" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower3">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower3" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower4">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower4" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower5">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower5" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower6">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower6" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower7">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower7" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower8">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower8" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerFlower9">
+				<property name="Extends" value="grass" />
+				<property name="Model" value="#SummerDecorations?SummerFlower9" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree10">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree10" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree11">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree11" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree12">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree12" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree13">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree13" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree14">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree14" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+		
+
+			<block id="" name="SummerTree16">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree16" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree17">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree17" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree1">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree1" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree2">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree2" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree3">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree3" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree4">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree4" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree5">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree5" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree6">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree6" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree7">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree7" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree8">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree8" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+			<block id="" name="SummerTree9">
+				<property name="Extends" value="treeMaster" />
+				<property name="Model" value="#SummerDecorations?SummerTree9" />
+				<drop event="Harvest" name="wood" count="30" tool_category="harvestingTools" />
+			</block>
+
+
+		</append>
+	</config>
+
+	<config name="biomes">
+		<append xpath="/worldgeneration/biomes/biome[@name='pine_forest']/decorations">	
+			<decoration type="block" blockname="Grass1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="Grass2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="Grass3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="Grass4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="Grass5" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerBush2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerBush3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerBush4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerBush5" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerBush" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerConifer1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerConifer2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerConifer3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerConifer4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerConifer5" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerConifer6" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerConifer7" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerConifer8" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower10" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower11" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower12" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower13" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower14" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower15" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower17" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower18" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower19" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower20" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower21" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower22" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower23" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower5" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower6" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower7" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower8" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower9" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree10" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree11" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree12" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree13" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree14" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree16" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree17" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree5" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree6" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree7" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree8" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerTree9" prob="0.001" rotatemax="7" />
+
+		</append>
+
+	
+		<append xpath="/worldgeneration/biomes/biome[@name='plains']/decorations">	
+			<decoration type="block" blockname="Grass1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="Grass2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="Grass3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="Grass4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="Grass5" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerBush2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerBush3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerBush4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerBush5" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerBush" prob="0.001" rotatemax="7" />
+			
+			<decoration type="block" blockname="SummerFlower10" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower11" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower12" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower13" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower14" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower15" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower17" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower18" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower19" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower1" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower20" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower21" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower22" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower23" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower2" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower3" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower4" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower5" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower6" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower7" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower8" prob="0.001" rotatemax="7" />
+			<decoration type="block" blockname="SummerFlower9" prob="0.001" rotatemax="7" />
+			
+
+		</append>
+
+
+	</config>
+</configs>

@@ -1,0 +1,15 @@
+<mod>
+	<info>
+		<author>sphereii</author>
+		<name>Summer Decorations</name>
+		<description>Add more variety of trees, using the Summer Decorations pack</description>
+		<mod_version>1.0</mod_version>
+		<game_version>16.3</game_version>
+		<launcher_version></launcher_version>
+	</info>
+	
+	<config_mods>
+		<import file="Configs\SummerDecorations.xml" />
+	</config_mods>
+	
+</mod>
