@@ -49,22 +49,7 @@ public class EntityZombieCrawlSDX : EntityZombieCrawl
         float minSpeed = 0.0f;
         float maxSpeed = 0.3f;
         
-        // Grab the primary player's game stage, then divide it by 500. This will count how many times 500 goes into the 
-        // gamestage level. We'll use this number as a multiplier base to bump the minimum and maxmum speed of the zombies.
-        /*  
-         *  At Game Stage 537, the gameStageValue would be 1.074, then we multiply it by 0.1f to get a speed boost of 0.1074f to the minSpeed and maxSpeed
-         *  which effective gives the zombie a random multiplier of between 0.1074 to 0.4f, rather than the default of 0.0f to 0.3f.
-         *  
-         *  At Game Stage 3,000, the gameStageValule would be 6, multiplied by 0.1f to give the min and max speed boost of a 0.6. 
-         *  
-         */
-        EntityPlayerLocal player = this.world.GetPrimaryPlayer();
-        float gameStageValue = player.gameStage / 500;
-
-        // uncomment the minSpeed if you want to raise the minimum walk speed for higher game stages.
-        // minSpeed += gameStageValue * 0.1f;
-        maxSpeed += gameStageValue * 0.1f;
-
+     
         // We want to cap the low and top ends. The maxSpeed is the fatest speed boost possible.
         minSpeed = Math.Max(minSpeed, 0.0f);
         maxSpeed = Math.Min(maxSpeed, 1.0f);
