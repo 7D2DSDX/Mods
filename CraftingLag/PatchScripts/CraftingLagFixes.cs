@@ -62,7 +62,7 @@ public class CraftingLagFix : IPatcherMod
         List<String> Workstations = new List<String>();
         Workstations.Add("XUiC_WorkstationOutputGrid");
         Workstations.Add("XUiC_WorkstationInputGrid");
-        Workstations.Add("XUiC_WorkstationFuelGrid");
+        //Workstations.Add("XUiC_WorkstationFuelGrid");
        // Workstations.Add("XUiC_WorkstationToolGrid");
 
         // We want to remove the SetAllChildrenDirty from most calls, so find the reference in the XUIController class, then the method.
