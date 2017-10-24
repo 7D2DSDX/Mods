@@ -8,7 +8,7 @@
 using System;
 using UnityEngine;
 
-public class GameObjectAnimalAnimationSDX : MonoBehaviour, IAvatarController
+public class AnimationSDX : MonoBehaviour, IAvatarController
 {
     // Default animation strings.
     private string AnimationIdle = "";
