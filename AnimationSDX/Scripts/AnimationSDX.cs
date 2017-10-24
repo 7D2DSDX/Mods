@@ -43,7 +43,7 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
             Debug.Log(strLog);
         }
     }
-    public GameObjectAnimalAnimationSDX()
+    public AnimationSDX()
     {
         this.entityAlive = this.transform.gameObject.GetComponent<EntityAlive>();
         EntityClass entityClass = EntityClass.list[this.entityAlive.entityClass];
