@@ -40,6 +40,9 @@ public class EntityZombieSDX: EntityZombie
         if (random.Next(100) <= 5)
             blRunInDark = true;
         
+		GetWalkType();
+		GetApproachSpeed();
+		
     }
     // Returns a random walk type for the spawned entity
     public static int GetRandomWalkType()
@@ -135,7 +138,7 @@ public class EntityZombieSDX: EntityZombie
             return intWalkType;
 
         // Grab a random walk type, and store it for this instance.
-        intWalkType = EntityZombieSDX.GetRandomWalkType();
+        intWalkType = GetRandomWalkType();
 
         // Add another randomess twist for a crouching zombie, by default, it'll be a 1 in 10 chance of crouching.
         // Reducer the number range if you want them to be more abundant. The default 3 for selected crouch is just randomly selected.
