@@ -1,0 +1,16 @@
+<mod>
+	<info>
+		<author>sphereii</author>
+		<name>Val-o-ween Nightmares</name>
+		<description>Val-o-ween's Nightmare Creatures, including custom sound package</description>
+		<mod_version>1.0</mod_version>
+		<game_version>16.4</game_version>
+		<launcher_version>0.5.5</launcher_version>
+	</info>
+	
+	
+	<config_mods>
+		<import file="Configs\Nightmares.xml" />
+	</config_mods>
+	
+</mod>
