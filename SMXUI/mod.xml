@@ -6,8 +6,8 @@
 		<name>SMX UI</name>
 		<description>SMX by Sirillion, ported by sphereii</description>
 		<mod_version>1.0</mod_version>
-		<game_version>16.3</game_version>
-		<launcher_version>0.0.0</launcher_version>
+		<game_version>16.4</game_version>
+		<launcher_version>0.7.1</launcher_version>
     <type>UI</type>
 	</info>
 
