@@ -1,0 +1,18 @@
+<mod>
+	<info>
+		<!-- Information about the Mod, the author and version information -->
+		<!-- These are displayed in the SDX Launcher -->
+		<author>sphereii</author>
+		<name>Auto Favourites</name>
+		<description>Each new item you craft, gets placed in your Favourites window, further reducing your recipe lag.</description>
+		<mod_version>1.0</mod_version>
+		<game_version>16.4</game_version>
+		<launcher_version>0.0.0</launcher_version>
+	</info>
+	
+	<!-- This references any config files that SDX needs to merge into your files -->
+	<config_mods>
+		<!-- no XML -->
+    </config_mods>
+	
+</mod>
