@@ -1,0 +1,10 @@
+<mod>
+  <info>
+    <author>StompyNZ</author>
+    <name>FixedSpawnPoints</name>
+    <description>Set fixed static spawn points</description>
+    <mod_version>1.0</mod_version>
+    <game_version>16.4</game_version>
+    <launcher_version>0.0.0</launcher_version>
+  </info>
+</mod>
