@@ -1,14 +1,38 @@
-﻿// Decompiled with JetBrains decompiler
-// Type: GameObjectAnimalAnimation
-// Assembly: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
-// MVID: 7B66E2A5-B854-4FE4-983E-8D0DC9B247E0
-// Assembly location: C:\Games\Steam\steamapps\common\7 Days To Die SDX\7DaysToDie_Data\Managed\Assembly-CSharp.dll
-// Compiler-generated code is shown
+﻿/*
+ * Class: AnimationSDX
+ * Author:  sphereii, HAL9000, Mortelentus
+ * Category: Legacy Animator
+ * Description:
+ *
+ *      This class provides legacy-style animations to be applied to custom entities. RootMotion is NOT supported, and must be disabled.
+ *
+ * Usage:
+ *      Add the following class to entities that are meant to use these features.
+ *  
+ *         <property name="AvatarController" value="AnimationSDX, Mods" />
+ *
+ *
+ * Features:
+ *      This class is meant to be used in following the Animation Tutorial: https://7d2dsdx.github.io/Tutorials/Howtosetuptheanimatedcustomentit.html
+ *
+ *      Because external entities have different movement speeds than baked assets, this class creates a new entity class via the Configs/AnimationSDX which
+ *      is meant to be inherited.
+ *
+ *      These values are meant as a starting value, and seem to work well for most entities:
+ *
+ *           <property name="WanderSpeed" value="0.8" />
+ *           <property name="ApproachSpeed" value="0.8" />
+ *           <property name="NightWanderSpeed" value="0.8" />
+ *           <property name="NightApproachSpeed" value="1.1" />
+ *           <property name="HasRagdoll" value="false" />
+ */
 
 using System;
 using UnityEngine;
 
-public class AnimationSDX : MonoBehaviour, IAvatarController
+// new controller class, which allows us to assign body parts
+// it's also the first step for full animator control
+public class AnimationSDX : AvatarZombieController
 {
     // Default animation strings.
     private string AnimationIdle = "";
@@ -21,24 +45,68 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
     private string AnimationRun = "";
     private string AnimationWalk = "";
     private string AnimationSpecialAttack = "";
-
-    private string strModelName = "";
+    private string RightHandName = "RightHand";
 
     private EntityAlive entityAlive;
     private bool IsVisible;
     private bool HasDied;
     private bool isAlwaysWalk;
-    private Transform ModelTransform;
-    private Transform GraphicsTransform;
+    public Transform ModelTransform;
+    public Transform GraphicsTransform;
     private float lastPlayerX;
     private float lastPlayerZ;
     private float lastDistance;
     private float DoesntSeemToDoAnything;
 
-    private bool blDisplayLog = true;
-    private void Log( String strLog )
+    protected new int specialAttackTicks;
+    protected new float timeSpecialAttackPlaying;
+    protected new float idleTime;
+    public Animator anim;
+
+    // Support for letting entity shoot weapons
+    private string RightHand = "RightHand";
+    private Transform rightHandItemTransform;
+    protected Animator rightHandAnimator;
+
+    #region Tags Zombie;
+    protected bool isCrippled;
+    protected bool isCrawler;
+    protected bool suppressPainLayer;
+    protected float crawlerTime;
+    protected bool headDismembered;
+    protected bool leftUpperArmDismembered;
+    protected bool leftLowerArmDismembered;
+    protected bool rightUpperArmDismembered;
+    protected bool rightLowerArmDismembered;
+    protected bool leftUpperLegDismembered;
+    protected bool leftLowerLegDismembered;
+    protected bool rightUpperLegDismembered;
+    protected bool rightLowerLegDismembered;
+    protected Transform neck;
+    protected Transform leftUpperArm;
+    protected Transform leftLowerArm;
+    protected Transform rightLowerArm;
+    protected Transform rightUpperArm;
+    protected Transform leftUpperLeg;
+    protected Transform leftLowerLeg;
+    protected Transform rightLowerLeg;
+    protected Transform rightUpperLeg;
+    protected Transform neckGore;
+    protected Transform leftUpperArmGore;
+    protected Transform leftLowerArmGore;
+    protected Transform rightUpperArmGore;
+    protected Transform rightLowerArmGore;
+    protected Transform leftUpperLegGore;
+    protected Transform leftLowerLegGore;
+    protected Transform rightLowerLegGore;
+    protected Transform rightUpperLegGore;
+    #endregion;
+
+
+    private bool blDisplayLog = false;
+    private void Log(String strLog)
     {
-        if ( blDisplayLog)
+        if (blDisplayLog)
         {
             Debug.Log(strLog);
         }
@@ -48,6 +116,7 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
         this.entityAlive = this.transform.gameObject.GetComponent<EntityAlive>();
         EntityClass entityClass = EntityClass.list[this.entityAlive.entityClass];
 
+  
 
         if (entityClass.Properties.Values.ContainsKey("AnimationMainAttack"))
             this.AnimationMainAttack = entityClass.Properties.Values["AnimationMainAttack"];
@@ -79,25 +148,37 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
         if (entityClass.Properties.Values.ContainsKey("AnimationSpecialAttack"))
             this.AnimationSpecialAttack = entityClass.Properties.Values["AnimationSpecialAttack"];
 
+        if (entityClass.Properties.Values.ContainsKey("RightHandJointName"))
+            this.RightHandName = entityClass.Properties.Values["RightHandJointName"];
+
         this.IsVisible = true;
     }
 
-    void Awake()
+    protected override void Awake()
     {
         // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         try
         {
-           
-           this.GraphicsTransform = this.transform.Find("Graphics");
-			
-			if ( this.GraphicsTransform == null )
-				Log(" !! Graphics Transform null!" );
-            
-            this.ModelTransform = this.GraphicsTransform.Find("Model").GetChild(0);
-			if ( this.ModelTransform == null )
-				Log(" !! Model Transform is null!" );
 
+            this.GraphicsTransform = this.transform.Find("Graphics");
+
+            if (this.GraphicsTransform == null)
+            {
+                Log(" !! Graphics Transform null!");
+                return;
+            }
+            if ( this.GraphicsTransform.Find("Model") == null )
+            {
+                Log("!! No Model found in GraphicsTransoform");
+                return;
+            }
+            this.ModelTransform = this.GraphicsTransform.Find("Model").GetChild(0);
+            if (this.ModelTransform == null)
+            {
+                Log(" !! Model Transform is null!");
+                return;
+            }
             //this bit is important for SDXers! It adds the component that links each collider with the Entity class so hits can be registered.
             AddTransformRefs(this.ModelTransform);
 
@@ -112,28 +193,43 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
                 return;
 
             }
-            if ((this.ModelTransform.GetComponent<Animation>()[ this.AnimationIdle]) == null)
+            if ((this.ModelTransform.GetComponent<Animation>()[this.AnimationIdle]) == null)
                 return;
 
-
+         
             this.ModelTransform.GetComponent<Animation>().Play(this.AnimationIdle);
             Log("Playing Animation");
+
+            // Find the right hand joint, if it's set.
+            EntityClass entityClass = EntityClass.list[this.entityAlive.entityClass];
+            if (entityClass.Properties.Values.ContainsKey("RightHandJointName"))
+            {
+                this.RightHand = entityClass.Properties.Values["RightHandJointName"];
+                this.rightHandItemTransform = FindTransform(this.GraphicsTransform, this.GraphicsTransform, RightHand);
+                if (this.rightHandItemTransform)
+                    Log("Right Hand Item Transform: " + this.rightHandItemTransform.name.ToString());
+                else
+                    Log("Right Hand Item Transform: Could not find Transofmr: " + RightHand);
+            }
+
+        
+
         }
-        catch( Exception  ex)
+        catch (Exception ex)
         {
             Log("Exception thrown in Awake() " + ex.ToString());
         }
     }
 
-
     private void AddTransformRefs(Transform t)
     {
-      //  Log("Checking " + t.name + " tag " + t.tag);
+        //   Log("Checking " + t.name + " tag " + t.tag);
         if (t.GetComponent<Collider>() != null && t.GetComponent<RootTransformRefEntity>() == null)
+        //	if (t.GetComponent<Collider>() != null )
         {
             RootTransformRefEntity root = t.gameObject.AddComponent<RootTransformRefEntity>();
             root.RootTransform = this.transform;
-         //   Log("Added root ref on " + t.name + " tag " + t.tag); 
+            Log("Added root ref on " + t.name + " tag " + t.tag);
         }
         foreach (Transform tran in t)
         {
@@ -143,65 +239,162 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
 
     void AddTagRecursively(Transform trans, string tag)
     {
-        trans.gameObject.tag = tag;
+        // If the objects are untagged, then tag them, otherwise ignore setting the tag.
+        if (trans.gameObject.tag.Contains("Untagged"))
+        {
+            // Check to see if the part contains "head", and let it be a headshot tag
+            // otherwise, fall back to default body
+            if (trans.name.ToLower().Contains("head"))
+                trans.gameObject.tag = "E_BP_Head";
+            else
+                trans.gameObject.tag = tag;
+        }
+
+
+        //Log("Transoform Tag: " + trans.name + " : " + trans.tag);
         foreach (Transform t in trans)
             AddTagRecursively(t, tag);
     }
 
-    public void SwitchModelAndView(string _modelName, bool _bFPV, bool _bMale)
+    public override void SwitchModelAndView(string _modelName, bool _bFPV, bool _bMale)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //Debug.Log("MODEL NAME: " + _modelName);
+        Transform transform = this.ModelTransform;
+        if (transform == null)
+        {
+            if (_bFPV)
+            {
+                transform = this.ModelTransform.Find(_modelName);
+                if ( transform == null )
+                {
+                    Log("SwitchModelAndView: Error finding transform!");
+                    return;
+                }
+            }
+            // no main transform, not continueing
+            return;
+        }
+        //if (transform!=null) Debug.Log("TRANSFORM = " + transform.name);
+        this.GraphicsTransform = transform;
+        this.meshTransform = transform;               
+        this.modelName = _modelName;
+        this.bMale = _bMale;
+        this.bFPV = _bFPV;
+        this.assignBodyParts();
+        try
+        {
+            this.anim = this.GraphicsTransform.GetComponent<Animator>();
+            if ( this.anim == null )
+            {
+                Log("SwitchModelAndView: Animator not found!");
+                this.anim = this.GraphicsTransform.gameObject.AddComponent<Animator>();
+                Log("Added Animator");
+               // return;
+            }
+        }
+        catch (Exception)
+        {
+            Log("No Animator, and could not attach");
+            //Debug.Log("NO ANIMATOR");
+        }
+        try
+        {
+            if (this.entityAlive.RootMotion)
+            {
+                Log("Checking if Root MOtion is enabled");
+                AvatarRootMotion avatarRootMotion = this.ModelTransform.GetComponent<AvatarRootMotion>();
+                if (avatarRootMotion == null)
+                {
+                    avatarRootMotion = this.ModelTransform.gameObject.AddComponent<AvatarRootMotion>();
+                }
+                avatarRootMotion.Init(this, this.anim);
+            }
+        }
+        catch (Exception)
+        {
+            Log("Root Motion is not available.");
+        }
+        if (this.rightHandItemTransform != null  )
+        {
+            Debug.Log("Setting Right Hand Item Transform");
+            this.rightHandItemTransform.parent = this.rightHand;
+            Vector3 position = AnimationGunjointOffsetData.AnimationGunjointOffset[this.entityAlive.inventory.holdingItem.HoldType.Value].position;
+            Vector3 rotation = AnimationGunjointOffsetData.AnimationGunjointOffset[this.entityAlive.inventory.holdingItem.HoldType.Value].rotation;
+            this.rightHandItemTransform.localPosition = position;
+            this.rightHandItemTransform.localEulerAngles = rotation;
+            SetInRightHand(this.rightHandItemTransform);
+        }
+        if (this.anim != null)
+        {
+            this.anim.SetBool("IsMale", _bMale);
+            this.anim.SetInteger("WalkType", this.entityAlive.GetWalkType());
+            this.anim.SetBool("IsDead", this.entityAlive.IsDead());
+            this.anim.SetBool("IsFPV", this.bFPV);
+            this.anim.SetBool("IsAlive", this.entityAlive.IsAlive());
+        }
 
+        Log("Done with SwichModelAndView");
     }
 
     public void SetAlwaysWalk(bool _b)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         this.isAlwaysWalk = _b;
     }
 
     public Texture2D SetSkinTexture(Texture2D _newTexture, bool _bMakeACopy)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         return null;
     }
 
-    public Texture2D GetTexture()
+    public override void SetInRightHand(Transform _transform)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        if (this.rightHandItemTransform == null)
+            return;
 
-        return null;
+        Log("Setting Right Hand: " + rightHandItemTransform.name.ToString());
+        
+        this.idleTime = 0f;
+        if (rightHandItemTransform != null)
+        {
+            rightHandItemTransform.parent = this.rightHand;
+        }
+
+        Log("Setting Right Hand Transform");
+        //this.rightHandItemTransform = _transform;
+        this.rightHandAnimator = ((!(rightHandItemTransform != null)) ? null : rightHandItemTransform.GetComponent<Animator>());
+        if (this.rightHandItemTransform != null)
+        {
+            Utils.SetLayerRecursively(this.rightHandItemTransform.gameObject, 0);
+        }
+
+        Log("Done with SetInRightHand");
     }
 
-    public void SetInRightHand(Transform _transform)
+    public override void SetDrunk(float _numBeers)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
-    public void SetDrunk(float _numBeers)
+    public override void SetMinibikeAnimation(string _anim, float _amount)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
-    public virtual void SetMinibikeAnimation(string _anim, float _amount)
+    public override void SetMinibikeAnimation(string _anim, bool _isPlaying)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
-    public virtual void SetMinibikeAnimation(string _anim, bool _isPlaying)
+    public new bool IsAnimationAttackPlaying()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
-
-    }
-
-    public bool IsAnimationAttackPlaying()
-    {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         if (this.ModelTransform.GetComponent<Animation>()[this.AnimationMainAttack] != null && this.ModelTransform.GetComponent<Animation>()[this.AnimationMainAttack].enabled)
             return true;
@@ -210,9 +403,9 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
         return false;
     }
 
-    public void StartAnimationAttack()
+    public override void StartAnimationAttack()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         if (this.ModelTransform.GetComponent<Animation>()[this.AnimationMainAttack] != null && this.ModelTransform.GetComponent<Animation>()[this.AnimationSecondAttack] != null)
         {
@@ -229,157 +422,225 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
         }
     }
 
-    public bool IsAnimationSpecialAttackPlaying()
+    public override bool IsAnimationSpecialAttackPlaying()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
-        return false;
+        return timeSpecialAttackPlaying > 0f;
     }
 
-    public void StartAnimationSpecialAttack(bool _b)
+    public override void StartAnimationSpecialAttack(bool _b)
     {
         if (_b)
         {
             if (this.ModelTransform.GetComponent<Animation>()[this.AnimationSpecialAttack] != null)
+            {
+                Log("Playing Special Attack!");
                 this.ModelTransform.GetComponent<Animation>().Play(this.AnimationSpecialAttack);
+                this.idleTime = 0f;
+                this.specialAttackTicks = 3;
+                this.timeSpecialAttackPlaying = 0.8f;
+            }
         }
     }
 
     public void StartAnimationSpecialAttack()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
-    public virtual bool IsAnimationSpecialAttack2Playing()
+    public override bool IsAnimationSpecialAttack2Playing()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         return false;
     }
 
-    public virtual void StartAnimationSpecialAttack2()
+    public override void StartAnimationSpecialAttack2()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
-    public bool IsAnimationRagingPlaying()
+    public override bool IsAnimationRagingPlaying()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         return false;
     }
 
-    public void StartAnimationRaging()
+    public override void StartAnimationRaging()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
-    public bool IsAnimationHarvestingPlaying()
+    public new bool IsAnimationHarvestingPlaying()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         return false;
     }
 
-    public void StartAnimationHarvesting()
+    public new void StartAnimationHarvesting()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
     public void SetAnimationClimbing(bool _b)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
-    public Transform GetFirstPersonCameraTransform()
+    public override Transform GetFirstPersonCameraTransform()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         return null;
     }
 
-    public Transform GetRightHandTransform()
-    {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
+    // Reutrns the righthand transform
+    public override Transform GetRightHandTransform()
+    {
+        return this.rightHandItemTransform;
+    }
+
+    protected override void assignBodyParts()
+    {
+        if ( this.GraphicsTransform == null )
+        {
+            Log("assignBodyParts: GraphicsTransform is null!");
+            return;
+        }
+
+   
+        //Debug.Log("FIND Head");
+        this.head = FindTransform(this.GraphicsTransform, this.GraphicsTransform, "Head");
+        //Debug.Log("FIND NECK");
+        this.neck = FindTransform(this.GraphicsTransform, this.GraphicsTransform, "Neck");
+        //this.entityLiving.GetRightHandTransformName()
+        //Debug.Log("LOOKING FOR " + rightHandStr);
+        this.rightHand = FindTransform(this.GraphicsTransform, this.GraphicsTransform, RightHandName);
+        //if (this.rightHand != null) Debug.Log("Right HAND = " + this.rightHand.name);
+        //Debug.Log("FIND LEGS");
+        this.leftUpperLeg = FindTransform(this.GraphicsTransform, this.GraphicsTransform, "LeftUpLeg");
+        this.leftLowerLeg = FindTransform(this.GraphicsTransform, this.GraphicsTransform, "LeftLeg");
+        this.rightUpperLeg = FindTransform(this.GraphicsTransform, this.GraphicsTransform, "RightUpLeg");
+        this.rightLowerLeg = FindTransform(this.GraphicsTransform, this.GraphicsTransform, "RightLeg");
+        //Debug.Log("FIND ARMS");
+        this.leftUpperArm = FindTransform(this.GraphicsTransform, this.GraphicsTransform, "LeftArm");
+        this.leftLowerArm = FindTransform(this.GraphicsTransform, this.GraphicsTransform, "LeftForeArm");
+        this.rightUpperArm = FindTransform(this.GraphicsTransform, this.GraphicsTransform, "RightArm");
+        this.rightLowerArm = FindTransform(this.GraphicsTransform, this.GraphicsTransform, "RightForeArm");
+        try
+        {
+            //Debug.Log("FIND GOORES");
+            this.neckGore = GameUtils.FindTagInChilds(this.GraphicsTransform, "L_HeadGore");
+            this.leftUpperArmGore = GameUtils.FindTagInChilds(this.GraphicsTransform, "L_LeftUpperArmGore");
+            this.leftLowerArmGore = GameUtils.FindTagInChilds(this.GraphicsTransform, "L_LeftLowerArmGore");
+            this.rightUpperArmGore = GameUtils.FindTagInChilds(this.GraphicsTransform, "L_RightUpperArmGore");
+            this.rightLowerArmGore = GameUtils.FindTagInChilds(this.GraphicsTransform, "L_RightLowerArmGore");
+            this.leftUpperLegGore = GameUtils.FindTagInChilds(this.GraphicsTransform, "L_LeftUpperLegGore");
+            this.leftLowerLegGore = GameUtils.FindTagInChilds(this.GraphicsTransform, "L_LeftLowerLegGore");
+            this.rightUpperLegGore = GameUtils.FindTagInChilds(this.GraphicsTransform, "L_RightUpperLegGore");
+            this.rightLowerLegGore = GameUtils.FindTagInChilds(this.GraphicsTransform, "L_RightLowerLegGore");
+        }
+        catch (Exception)
+        {
+            Debug.Log("NO GORE FOR YOU, NO SIREE");
+        }
+    }
+
+    private Transform FindTransform(Transform root, Transform t, string objectName)
+    {
+        if (t.name.Contains(objectName))
+        {
+            return t;
+        }
+        //msg += string.Format("transform={0}, tag={1}", t.name, t.tag) + Environment.NewLine;
+        foreach (Transform tran in t)
+        {
+            //msg += string.Format("CHILDREN OF {0}: ", t.name);
+            Transform result = FindTransform(root, tran, objectName);
+            if (result != null) return result;
+        }
         return null;
     }
 
-    public bool IsAnimationUsePlaying()
+    public new bool IsAnimationUsePlaying()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
         return false;
     }
 
-    public void StartAnimationUse()
+    public new void StartAnimationUse()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
-    public void SetRagdollEnabled(bool _b)
+    public new void SetRagdollEnabled(bool _b)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
-    public void StartAnimationFiring()
+    public override void StartAnimationFiring()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
 
     }
 
-    public void StartAnimationReloading()
+    public new void StartAnimationReloading()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void StartAnimationHit(EnumBodyPartHit _bodyPart, int _dir, int _hitDamage, bool _criticalHit, int _movementState, float random)
+    public override void StartAnimationHit(EnumBodyPartHit _bodyPart, int _dir, int _hitDamage, bool _criticalHit, int _movementState, float random)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name + " hit: "+ _bodyPart.ToString());
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name + " hit: "+ _bodyPart.ToString());
         if (this.HasDied || !(bool)(this.ModelTransform.GetComponent<Animation>()[this.AnimationPain]))
             return;
         this.ModelTransform.GetComponent<Animation>().Play(this.AnimationPain);
     }
 
-    public bool IsAnimationHitRunning()
+    public override bool IsAnimationHitRunning()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         return false;
     }
 
-    public void StartAnimationJumping()
+    public override void StartAnimationJumping()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         if (!(this.ModelTransform.GetComponent<Animation>()[this.AnimationJump] != null))
             return;
         this.ModelTransform.GetComponent<Animation>().Play(this.AnimationJump);
     }
 
-    public void StartDeathAnimation(EnumBodyPartHit _bodyPart, int _movementState, float random)
+    public new void StartDeathAnimation(EnumBodyPartHit _bodyPart, int _movementState, float random)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //    Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void SetAlive()
+    public new void SetAlive()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void SetLookPosition(Vector3 _pos)
+    public override void SetLookPosition(Vector3 _pos)
     {
-       //// Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void SetVisible(bool _b)
+    public override void SetVisible(bool _b)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //  Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
         if (_b == this.IsVisible && _b == this.GraphicsTransform.gameObject.activeSelf)
             return;
         this.IsVisible = _b;
@@ -387,50 +648,50 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
 
     }
 
-    public void SetWalkingSpeed(float _f)
+    public new void SetWalkingSpeed(float _f)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //  Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void SetHeadAngles(float _nick, float _yaw)
+    public new void SetHeadAngles(float _nick, float _yaw)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void SetArmsAngles(float _rightArmAngle, float _leftArmAngle)
+    public new void SetArmsAngles(float _rightArmAngle, float _leftArmAngle)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void SetAiming(bool _bEnable)
+    public new void SetAiming(bool _bEnable)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void SetCrouching(bool _bEnable)
+    public new void SetCrouching(bool _bEnable)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     public void SetFPV(bool _fpv)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
     // Helper class to check if the animation is valid or not.
-    public bool HasValidAnimation( String strAnimation )
+    public bool HasValidAnimation(String strAnimation)
     {
         if (this.ModelTransform.GetComponent<Animation>()[strAnimation] != null)
         {
-            Log(strAnimation + " is Valid");
+            //      Log(strAnimation + " is Valid");
             return true;
         }
 
-        Log(strAnimation + " is NOT Valid");
+        //    Log(strAnimation + " is NOT Valid");
         return false;
     }
 
-    public bool HasValidAnimationAndEnabled( String strAnimation )
+    public bool HasValidAnimationAndEnabled(String strAnimation)
     {
         if (HasValidAnimation(strAnimation) && this.ModelTransform.GetComponent<Animation>()[strAnimation].enabled)
             return true;
@@ -438,23 +699,30 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
         return false;
     }
 
-    public void PlayAnimation( String strAnimation )
+    public void PlayAnimation(String strAnimation)
     {
-        if ( HasValidAnimation( strAnimation ))
+        Log("Tesitng Animation: " + strAnimation);
+        if (HasValidAnimation(strAnimation))
         {
             // We only want to play the animation when its not already enabled.
-            if ( !this.ModelTransform.GetComponent<Animation>()[ strAnimation].enabled)
+            if (!this.ModelTransform.GetComponent<Animation>()[strAnimation].enabled)
+            {
+                Log("Playing Animation");
                 this.ModelTransform.GetComponent<Animation>().Play(strAnimation);
+            }
+            else
+                Log("Animation is disabled");
+
         }
     }
-    protected void Update()
+    protected override void Update()
     {
-        if (!this.IsVisible)
+        if (!this.IsVisible || this.entityAlive == null )
             return;
 
-        if (this.entityAlive != null && this.entityAlive.IsDead() && !this.HasDied)
+        if (this.entityAlive.IsDead() && !this.HasDied)
         {
-            Log("Update: Entity is Dead");
+            //     Log("Update: Entity is Dead");
             this.HasDied = true;
             this.ModelTransform.GetComponent<Animation>().Stop();
             PlayAnimation(this.AnimationDeath);
@@ -466,56 +734,62 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
             return;
 
 
-        Log("Update: Checking if any animations are playing");
         // If an animation is already playing, we don't need to process it any more until its done.
         if (HasValidAnimationAndEnabled(this.AnimationMainAttack))
             return;
-        if (HasValidAnimationAndEnabled(this.AnimationSecondAttack)) 
+        if (HasValidAnimationAndEnabled(this.AnimationSecondAttack))
             return;
         if (HasValidAnimationAndEnabled(this.AnimationDeath))
             return;
         if (HasValidAnimationAndEnabled(this.AnimationPain))
             return;
+        if (this.entityAlive != null)
+        {
+            if (this.timeSpecialAttackPlaying > 0f)
+            {
+                // it's playing special attack
+                this.timeSpecialAttackPlaying -= Time.deltaTime;
+                return;
+            }
+        }
+
 
         float playerDistanceX = 0.0f;
         float playerDistanceZ = 0.0f;
         float encroached = this.lastDistance;
 
-        if (this.entityAlive != null)
-        {
 
-            // Calculates how far away the entity is
-            playerDistanceX = Mathf.Abs(this.entityAlive.position.x - this.entityAlive.lastTickPos[0].x) * 6f;
-            playerDistanceZ = Mathf.Abs(this.entityAlive.position.z - this.entityAlive.lastTickPos[0].z) * 6f;
-     
-            if (!this.entityAlive.isEntityRemote)
+        // Calculates how far away the entity is
+        playerDistanceX = Mathf.Abs(this.entityAlive.position.x - this.entityAlive.lastTickPos[0].x) * 6f;
+        playerDistanceZ = Mathf.Abs(this.entityAlive.position.z - this.entityAlive.lastTickPos[0].z) * 6f;
+
+        if (!this.entityAlive.isEntityRemote)
+        {
+            if (Mathf.Abs(playerDistanceX - this.lastPlayerX) > 0.00999999977648258 || Mathf.Abs(playerDistanceZ - this.lastPlayerZ) > 0.00999999977648258)
             {
-                if (Mathf.Abs(playerDistanceX - this.lastPlayerX) > 0.00999999977648258 || Mathf.Abs(playerDistanceZ - this.lastPlayerZ) > 0.00999999977648258)
-                {
-                    encroached = Mathf.Sqrt(playerDistanceX * playerDistanceX + playerDistanceZ * playerDistanceZ);
-                    this.lastPlayerX = playerDistanceX;
-                    this.lastPlayerZ = playerDistanceZ;
-                    this.lastDistance = encroached;
-                }
-            }
-            else if (playerDistanceX <= this.lastPlayerX && playerDistanceZ <= this.lastPlayerZ)
-            {
-                this.lastPlayerX *= 0.9f;
-                this.lastPlayerZ *= 0.9f;
-                this.lastDistance *= 0.9f;
-            }
-            else
-            {
-                encroached = Mathf.Sqrt((playerDistanceX * playerDistanceX + playerDistanceZ * playerDistanceZ));
+                encroached = Mathf.Sqrt(playerDistanceX * playerDistanceX + playerDistanceZ * playerDistanceZ);
                 this.lastPlayerX = playerDistanceX;
                 this.lastPlayerZ = playerDistanceZ;
                 this.lastDistance = encroached;
             }
         }
-
-        if (this.entityAlive != null && (this.isAlwaysWalk || encroached > 0.150000005960464))
+        else if (playerDistanceX <= this.lastPlayerX && playerDistanceZ <= this.lastPlayerZ)
         {
-          
+            this.lastPlayerX *= 0.9f;
+            this.lastPlayerZ *= 0.9f;
+            this.lastDistance *= 0.9f;
+        }
+        else
+        {
+            encroached = Mathf.Sqrt((playerDistanceX * playerDistanceX + playerDistanceZ * playerDistanceZ));
+            this.lastPlayerX = playerDistanceX;
+            this.lastPlayerZ = playerDistanceZ;
+            this.lastDistance = encroached;
+        }
+
+        if ((this.isAlwaysWalk || encroached > 0.150000005960464))
+        {
+
             if (encroached > 1.0)
             {
                 // Since the encroached is above 1, we want the zombie to run if need be, to get to the player faster.
@@ -535,7 +809,7 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
         }
 
         // if the entity is idle, check to see if it has a second idle animation
-        else if ( HasValidAnimation( this.AnimationIdle ) && HasValidAnimation( this.AnimationSecondIdle) )
+        else if (HasValidAnimation(this.AnimationIdle) && HasValidAnimation(this.AnimationSecondIdle))
         {
             // Give it a 50/50 chance of playing either idle animation, if they are available.
             if (UnityEngine.Random.value > 0.5)
@@ -549,70 +823,79 @@ public class AnimationSDX : MonoBehaviour, IAvatarController
         }
     }
 
-    public Transform GetActiveModelRoot()
+    protected override void LateUpdate()
+    {
+        //base.LateUpdate();
+    }
+
+    public new Transform GetActiveModelRoot()
     {
         return this.ModelTransform;
     }
 
-    public void RemoveLimb(EnumBodyPartHit _bodyPart, bool restoreState)
+    public override void RemoveLimb(EnumBodyPartHit _bodyPart, bool restoreState)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //  Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void CrippleLimb(EnumBodyPartHit _bodyPart, bool restoreState)
+    public override void CrippleLimb(EnumBodyPartHit _bodyPart, bool restoreState)
     {
     }
 
-    public void TurnIntoCrawler(bool restoreState)
+    public override void TurnIntoCrawler(bool restoreState)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //  Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void BeginStun(EnumEntityStunType stun, EnumBodyPartHit _bodyPart, bool _criticalHit, float random)
+    public override void BeginStun(EnumEntityStunType stun, EnumBodyPartHit _bodyPart, bool _criticalHit, float random)
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //  Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void EndStun()
+    public override void EndStun()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void StartEating()
+    public override void StartEating()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //   Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void StopEating()
+    public override void StopEating()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //  Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
 
-    public void PlayPlayerFPRevive()
+    public new void PlayPlayerFPRevive()
     {
-       // Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        //  Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
     }
-    public void SetArchetypeStance(Archetype.StanceTypes stance)
+    public new void SetArchetypeStance(Archetype.StanceTypes stance)
     {
 
     }
 
     // sphereii code
-    public bool IsAnimationElectrocutedPlaying()
+    public override bool IsAnimationElectrocutedPlaying()
     {
         return false;
     }
 
-    public void StartAnimationElectrocuted()
+    public override void StartAnimationElectrocuted()
     {
     }
 
-    public void TriggerSleeperPose(int pose)
+    public new void TriggerSleeperPose(int pose)
     {
-
+        if (this.anim != null)
+        {
+            this.anim.SetInteger("SleeperPose", pose);
+            this.anim.SetTrigger("SleeperTrigger");
+        }
     }
 
-    public void NotifyAnimatorMove(UnityEngine.Animator test)
+    public new void NotifyAnimatorMove(UnityEngine.Animator test)
     {
 
     }
