@@ -1,0 +1,262 @@
+<configs>
+	<config name="entityclasses">
+		<append xpath="/entity_classes">
+			<entity_class name="PassiveFlight" extends="animalChicken">
+
+				<!-- Default class and animation class -->
+				<!--property name="Class" value="EntityFlyingBaseSDX, Mods" /-->
+				<property name="Class" value="EntityZombieFlyingSDX, Mods" />
+				<property name="AvatarController" value="MecanimSDX, Mods" />
+
+				<!-- Flying creatures will inheirit what the vultures body does, since it can fly -->
+				<property name="ModelType" value="Standard" />
+				<property name="HasRagdoll" value="false" />
+				<property name="PhysicsBody" value="vulture" />
+				<property name="RootMotion" value="false" />
+				<property name="Immunity" value="sickness;disease;bleeding;wellness" />
+				<property name="EntityType" value="Animal"/>
+
+				<!-- Harmless birds will just fly around and not attack you -->
+				<property name="IsEnemyEntity" value="false"/>
+
+
+				<!-- Controls how big the flock size is, how high they can fly, etc -->
+				<property name="FlockSize" value="0" />
+				<property name="MaxHeight" value="90" />
+				<property name="IsAgressive" value="False" />
+				<property name="FollowPlayer" value="False" />
+
+				<!-- Disables default sounds, so undefined sounds in inherited birds don't sound like chickens -->
+				<property name="SoundRandom" value=""/>
+				<property name="SoundAlert" value="" />
+				<property name="SoundAttack" value="" />
+				<property name="SoundHurt" value="" />
+				<property name="SoundDeath" value="" />
+				<property name="SoundSense" value="" />
+
+				<!-- Default speeds for the birds -->
+				<property name="WanderSpeed" value="0.4" />
+				<property name="ApproachSpeed" value="0.8" />
+				<property name="NightWanderSpeed" value="0.4" />
+				<property name="NightApproachSpeed" value="0.9" />
+				<property name="PanicSpeed" value="1.1" />
+
+
+				<property name="MaxTurnSpeed" value="180"/>
+				<property name="SightRange" value="500"/>
+				<property name="SightScale" value="-5,270"/>
+				<property name="MaxViewAngle" value="180"/>
+				<property name="MaxHealth" value="25" />
+				<property name="ExperienceGain" value="1" />
+				<property name="DeadBodyHitPoints" value="1" />
+				<drop event="Harvest" name="feather" tool_category="Butcher" count="2" />
+
+				<property name="AITask-1" value="Swim" />
+				<property name="AITask-2" value="RunawayWhenHurt" />
+				<property name="AITask-3" value="RunawayFromEntity" param1="EntityPlayer" />
+				<property name="AITask-4" value="RunawayFromEntity" param1="EntityZombie" />
+				<property name="AITask-5" value="Wander" />
+
+			</entity_class>
+
+			<!-- Robins - Legacy Animation -->
+			<entity_class name="RobinBird" extends="PassiveFlight">
+				<property name="AvatarController" value="AnimationSDX, Mods" />
+				<property name="Mesh" value="#Robin?Robin_X" />
+				<property name="MaxHealth" value="25" />
+				<property name="AnimationIdle" value="Idle" />
+				<property name="AnimationMainAttack" value="Attack" />
+				<property name="AnimationPain" value="Idle" />
+				<property name="AnimationDeath" value="Die" />
+				<property name="AnimationRun" value="Fly" />
+				<property name="AnimationWalk" value="Hop" />
+				<property name="SoundRandom" value="robinSounds"/>
+			</entity_class>
+
+			<!-- Flacon Legacy Animation -->
+			<entity_class name="animalFalcon" extends="PassiveFlight">
+				<property name="AvatarController" value="AnimationSDX, Mods" />
+				<property name="Mesh" value="#Falcon?Falcon_X" />
+				<property name="MaxHealth" value="75" />
+				<property name="AnimationIdle" value="Hover" />
+				<property name="AnimationMainAttack" value="Attack" />
+				<property name="AnimationPain" value="Hover" />
+				<property name="AnimationDeath" value="Die" />
+				<property name="AnimationRun" value="FlyFast" />
+				<property name="AnimationWalk" value="Fly" />
+				<property name="SoundRandom" value="falconSounds"/>
+			</entity_class>
+
+			<entity_class name="birdEagle2" extends="PassiveFlight" >
+				<property name="Mesh" value="#Eagle?EagleMec" />
+				<property name="SoundRandom" value="falconSounds"/>
+				<property name="WalkIndexes" value="2" />
+			</entity_class>
+
+			<entity_class name="Goose" extends="animalChicken" >
+				<property name="Class" value="EntityAnimalRabbit" />
+				<property name="Mesh" value="#Goose?Goose_X" />
+				<property name="SoundRandom" value="falconSounds"/>
+				<property name="AvatarController" value="MecanimSDX, Mods" />
+				<property name="SwimOffset" value="0.5" />
+				<property name="WanderSpeed" value="0.3" />
+				<property name="MaxViewAngle" value="360"/>
+				<property name="ApproachSpeed" value="0.8" />
+				<property name="NightWanderSpeed" value="0.4" />
+				<property name="NightApproachSpeed" value="0.9" />
+				<property name="PanicSpeed" value="1.7" />
+				<property name="MaxHealth" value="30"/>
+				<drop event="Harvest" name="rawMeat" tool_category="Butcher" count="3" />
+				<drop event="Harvest" name="feather" tool_category="Butcher" count="30" />
+			</entity_class>
+			<!-- Alcatraz - mecanim-->
+			<entity_class name="birdAlcatraz" extends="PassiveFlight">
+				<property name="Mesh" value="#Alcatraz?Alcatraz_X" />
+				<property name="WalkIndexes" value="2" />
+				<property name="SoundRandom" value="AlcatrazSounds"/>
+			</entity_class>
+
+			<!-- Magpie - mecanim-->
+			<entity_class name="Magpie" extends="PassiveFlight">
+				<property name="Mesh" value="#Magpie?Magpie_X" />
+				<property name="WalkIndexes" value="2" />
+				<property name="SoundRandom" value="MagpieSounds"/>
+			</entity_class>
+
+			<!-- Seagul - mecanim-->
+			<entity_class name="Seagull" extends="PassiveFlight">
+				<property name="Mesh" value="#Seagull?Seagull_X" />
+				<property name="WalkIndexes" value="2" />
+				<property name="SoundRandom" value="SeagullSounds"/>
+			</entity_class>
+
+
+		</append>
+	</config>
+
+	<config name="entitygroups">
+		<append xpath="/entitygroups/entitygroup[@name='ZombiesAll']">
+			<entity name="RobinBird" />
+			<entity name="animalFalcon" />
+			<entity name="birdAlcatraz" />
+			<entity name="Magpie" />
+			<entity name="birdEagle2" />
+			<entity name="Seagull" />
+			<entity name="Goose" />
+		</append>
+	</config>
+
+	<!-- Add in the sounds -->
+	<config name="sounds">
+		<append xpath="/Sounds">
+			<SoundDataNode name="robinSounds">
+				<AudioSource name="Sounds/AudioSource_Creatures"/>
+				<AudioClip ClipName="#RobinSounds?Robin"/>
+				<Channel name="Mouth"/>
+				<Priority name="3"/>
+				<LocalCrouchVolumeScale name="1.0"/>
+				<CrouchNoiseScale name="0.5"/>
+				<NoiseScale name="1"/>
+				<MaxVoices name="10"/>
+				<MaxRepeatRate name="5"/>
+			</SoundDataNode>
+			<SoundDataNode name="falconSounds">
+				<AudioSource name="Sounds/AudioSource_Creatures"/>
+				<AudioClip ClipName="#FalconSounds?Falcon"/>
+				<Channel name="Mouth"/>
+				<Priority name="3"/>
+				<LocalCrouchVolumeScale name="1.0"/>
+				<CrouchNoiseScale name="0.5"/>
+				<NoiseScale name="1"/>
+				<MaxVoices name="10"/>
+				<MaxRepeatRate name="5"/>
+			</SoundDataNode>
+
+			<SoundDataNode name="AlcatrazSounds">
+				<AudioSource name="Sounds/AudioSource_Creatures"/>
+				<AudioClip ClipName="#BirdBundle?AlcatrazSound"/>
+				<Channel name="Mouth"/>
+				<Priority name="3"/>
+				<LocalCrouchVolumeScale name="1.0"/>
+				<CrouchNoiseScale name="0.5"/>
+				<NoiseScale name="1"/>
+				<MaxVoices name="10"/>
+				<MaxRepeatRate name="5"/>
+			</SoundDataNode>
+			<SoundDataNode name="BennuSounds">
+				<AudioSource name="Sounds/AudioSource_Creatures"/>
+				<AudioClip ClipName="#BirdBundle?AlcatrazSound"/>
+				<Channel name="Mouth"/>
+				<Priority name="3"/>
+				<LocalCrouchVolumeScale name="1.0"/>
+				<CrouchNoiseScale name="0.5"/>
+				<NoiseScale name="1"/>
+				<MaxVoices name="10"/>
+				<MaxRepeatRate name="5"/>
+			</SoundDataNode>
+
+			<SoundDataNode name="EagleSounds">
+				<AudioSource name="Sounds/AudioSource_Creatures"/>
+				<AudioClip ClipName="#BirdBundle?EagleSound"/>
+				<Channel name="Mouth"/>
+				<Priority name="3"/>
+				<LocalCrouchVolumeScale name="1.0"/>
+				<CrouchNoiseScale name="0.5"/>
+				<NoiseScale name="1"/>
+				<MaxVoices name="10"/>
+				<MaxRepeatRate name="5"/>
+			</SoundDataNode>
+			<SoundDataNode name="eFalconSounds">
+				<AudioSource name="Sounds/AudioSource_Creatures"/>
+				<AudioClip ClipName="#BirdBundle?FalconSound"/>
+				<Channel name="Mouth"/>
+				<Priority name="3"/>
+				<LocalCrouchVolumeScale name="1.0"/>
+				<CrouchNoiseScale name="0.5"/>
+				<NoiseScale name="1"/>
+				<MaxVoices name="10"/>
+				<MaxRepeatRate name="5"/>
+			</SoundDataNode>
+			<SoundDataNode name="MagpieSounds">
+				<AudioSource name="Sounds/AudioSource_Creatures"/>
+				<AudioClip ClipName="#BirdBundle?MagpieSound"/>
+				<Channel name="Mouth"/>
+				<Priority name="3"/>
+				<LocalCrouchVolumeScale name="1.0"/>
+				<CrouchNoiseScale name="0.5"/>
+				<NoiseScale name="1"/>
+				<MaxVoices name="10"/>
+				<MaxRepeatRate name="5"/>
+			</SoundDataNode>
+			<SoundDataNode name="RavenSounds">
+				<AudioSource name="Sounds/AudioSource_Creatures"/>
+				<AudioClip ClipName="#BirdBundle?RavenSound"/>
+				<Channel name="Mouth"/>
+				<Priority name="3"/>
+				<LocalCrouchVolumeScale name="1.0"/>
+				<CrouchNoiseScale name="0.5"/>
+				<NoiseScale name="1"/>
+				<MaxVoices name="10"/>
+				<MaxRepeatRate name="5"/>
+			</SoundDataNode>
+			<SoundDataNode name="SeagullSounds">
+				<AudioSource name="Sounds/AudioSource_Creatures"/>
+				<AudioClip ClipName="#BirdBundle?SeagullSound"/>
+				<Channel name="Mouth"/>
+				<Priority name="3"/>
+				<LocalCrouchVolumeScale name="1.0"/>
+				<CrouchNoiseScale name="0.5"/>
+				<NoiseScale name="1"/>
+				<MaxVoices name="10"/>
+				<MaxRepeatRate name="5"/>
+			</SoundDataNode>
+		</append>
+	</config>
+
+	
+
+	<!-- End of Butterfly blocks and biome additions -->
+</configs>
+
+
+

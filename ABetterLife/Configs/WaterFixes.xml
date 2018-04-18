@@ -1,0 +1,426 @@
+<configs>
+  <config name="entityclasses">
+    <append xpath="/entity_classes">
+      
+      <!-- Not everything in the water is friendly, let's add a threat-->
+      <entity_class name="WellWalker" extends="zombieTemplateMale" >
+        <property name="Mesh" value="#WellWalker?WellWalker_X" />
+        <property name="AvatarController" value="MecanimSDX, Mods" />
+        <property name="Class" value="EntityZombieSDX, Mods" />
+        <property name="RandomSpeeds" value="false" />
+		<property name="RandomSize" value="false" /> 
+        <property name="RootMotion" value="false" />
+        <property name="HasRagdoll" value="false" />
+        <property name="HandItem" value="handWellWalker"/>
+        <property name="MaxHealth" value="300"/>
+        <property name="MaxViewAngle" value="270"/>
+        <property name="MaxTurnSpeed" value="180" />
+        <property name="Weight" value="200"/>
+        <property name="AttackTimeoutDay" value="1.5"/>
+        <property name="AttackTimeoutNight" value="1.5"/>
+        <property name="CanClimbLadders" value="true"/>
+        <property name="CanClimbVertical" value="false"/>
+        <property name="SightRange" value="500"/>
+        <property name="SightScale" value="-5,270"/>
+        <property name="AttackAnimations" value="Zombie Neck Bite, Zombie Punching" />
+        <property name="AttackIndexes" value="2" />
+        <property name="SpecialAttackIndexes" value="0" />
+        <property name="SpecialSecondAttackIndexes" value="0" />
+        <property name="RagingIndexes" value="0" />
+        <property name="ElectrocutionIndexes" value="0" />
+        <property name="CrouchIndexes" value="0" />
+        <property name="StunIndexes" value="0" />
+        <property name="SleeperIndexes" value="0" />
+        <property name="HarvestIndexes" value="0" />
+        <property name="PainIndexes" value="0" />
+        <property name="DeathIndexes" value="2" />
+        <property name="RunIndexes" value="0" />
+        <property name="WalkIndexes" value="0" />
+        <property name="IdleIndexes" value="2" />
+        <property name="JumpIndexes" value="0" />
+        <property name="WanderSpeed" value="0.1"/>
+        <property name="ApproachSpeed" value="0.2"/>
+        <property name="NightWanderSpeed" value="0.1"/>
+        <property name="NightApproachSpeed" value="1.1"/>
+        <property name="PanicSpeed" value="0.55"/>
+      </entity_class>
+
+      <!-- We want to  create a master passive fish class that will allow us to spawn in friendly fish -->
+      <!-- with the option to be more aggressive later -->
+      <entity_class name="PassiveFish" >
+
+        <property name="Mesh" value="Animals/Stag/STAG" />
+        <property name="Parent" value="Animals" />
+
+        <!-- The swiming class is an extended flying class-->
+        <property name="Class" value="EntitySwimingSDX, Mods" />
+        <property name="AvatarController" value="MecanimSDX, Mods" />
+        <property name="MaxHealth" value="25" />
+        <property name="Prefab" value="NPC" />
+        <property name="Weight" value="70" />
+        <property name="RotateToGround" value="true" />
+        <property name="IsEntityAnimal" value="true" />
+        <property name="Faction" value="animals" />
+        <property name="CanClimbLadders" value="false" />
+        
+
+        <!-- Swimming creatures will inherit what the chickens body does, since it can't fly -->
+        <property name="ModelType" value="Standard" />
+        <property name="HasRagdoll" value="false" />
+        <property name="PhysicsBody" value="chicken" />
+        <property name="RootMotion" value="false" />
+        <property name="Immunity" value="sickness;disease;bleeding;wellness" />
+        <property name="EntityType" value="Animal"/>
+
+        <property name="AITask-1" value="Swim" />
+        
+        <property name="AITask-2" value="RunawayWhenHurt" />
+        <property name="AITask-3" value="RunawayFromEntity" param1="EntityPlayer" />
+        <property name="AITask-4" value="RunawayFromEntity" param1="EntityZombie" />
+        <property name="AITask-5" value="Wander" />
+
+        <property name="IsEnemyEntity" value="false"/>
+        <property name="IsAgressive" value="false" />
+
+        <!-- Since fish are actually birds, we can access some of those features, including flocking -->
+        <property name="FlockSize" value="0" />
+        <property name="MaxHeight" value="90" />
+        <property name="IsAgressive" value="False" />
+        <property name="FollowPlayer" value="False" />
+
+        <property name="SoundRandom" value=""/>
+        <property name="SoundAlert" value="" />
+        <property name="SoundAttack" value="" />
+        <property name="SoundHurt" value="" />
+        <property name="SoundDeath" value="" />
+        <property name="SoundSense" value="" />
+
+        <property name="WanderSpeed" value="0.4" />
+        <property name="ApproachSpeed" value="0.8" />
+        <property name="NightWanderSpeed" value="0.4" />
+        <property name="NightApproachSpeed" value="0.9" />
+        <property name="PanicSpeed" value="1.0" />
+
+        <property name="MaxTurnSpeed" value="180"/>
+        <property name="SightRange" value="500"/>
+        <property name="SightScale" value="-5,270"/>
+        <property name="MaxViewAngle" value="180"/>
+        <property name="MaxHealth" value="25" />
+        <property name="ExperienceGain" value="1" />
+        <property name="DeadBodyHitPoints" value="1" />
+
+        <!-- we'll default drop raw fish items -->
+        <drop event="Harvest" name="Raw Fish" tool_category="Butcher" count="1" />
+      </entity_class>
+
+      <entity_class name="aFish" extends="PassiveFish" >
+        <property name="Class" value="EntitySwimingSDX, Mods" />
+        <property name="Mesh" value="#Fish?cruscarp" />
+        <property name="WalkIndexes" value="2" />
+        
+        <!-- They are small fish, so let's flock them a bit -->
+        <property name="FlockSize" value="2" />
+      </entity_class>
+
+      <!-- Sting rays don't need a flock -->
+      <entity_class name="aStingRay" extends="PassiveFish" >
+        <property name="Class" value="EntitySwimingSDX, Mods" />
+        <property name="Mesh" value="#Stingray?Stingray_X" />
+        <drop event="Harvest" name="rawMeat" tool_category="Butcher" count="1" />
+      </entity_class>
+
+      <entity_class name="aTurtle" extends="PassiveFish" >
+        <property name="Class" value="EntitySwimingSDX, Mods" />
+        <property name="Mesh" value="#Turtle?Turtle_X" />
+        <property name="AttackAnimations" value="Attack0" />
+        <drop event="Harvest" name="rawMeat" tool_category="Butcher" count="1" />
+      </entity_class>
+
+      <entity_class name="aBarracuda" extends="PassiveFish" >
+        <property name="Class" value="EntitySwimingSDX, Mods" />
+        <property name="Mesh" value="#Barracuda?Barracuda_X" />
+        <property name="AttackAnimations" value="Attack0" />
+        <property name="FlockSize" value="2" />
+      </entity_class>
+
+      <!-- sardine is disabled by default, due to a look vector issue we were unable to resolve -->
+      <entity_class name="Sardine" extends="PassiveFish" >
+        <property name="Class" value="EntitySwimingSDX, Mods" />
+        <property name="Mesh" value="#Sardine?Sardine_X" />
+        <property name="FlockSize" value="10" />
+      </entity_class>
+
+      <entity_class name="Clownfish" extends="PassiveFish" >
+        <property name="Class" value="EntitySwimingSDX, Mods" />
+        <property name="Mesh" value="#Clownfish?Clownfish_X" />
+        <property name="FlockSize" value="3" />
+      </entity_class>
+
+    </append>
+  </config>
+
+  <!-- Fill up a new swiming entity group with all the spawns-->
+  <config name="entitygroups">
+    <append xpath="/entitygroups">
+      <entitygroup name="AnimalSwiming">
+		<entity name="Sardine" />
+        <entity name="WellWalker" prob="0.05"/>
+        <entity name="aFish" />
+        <entity name="aTurtle" />
+        <entity name="aStingRay" prob="0.5" />
+        <entity name="aBarracuda" />
+        <entity name="Clownfish" />
+      </entitygroup>
+    </append>
+  </config>
+
+  <config name="biomes">
+    <!-- Under water scenes look boring and bleak with sand -->
+    <set xpath="/worldgeneration/biomes/biome[@name='water']/subbiome/layers/layer[@blockname='sand']/@blockname">clay</set>
+    <set xpath="/worldgeneration/biomes/biome[@name='water']/layers/layer[@blockname='sand']/@blockname">clay</set>
+
+    <!-- We want to set down terrain decovrations as resources for the water. In order to pull this off, we need to change -->
+    <!-- the layer to 1, and spawn the blocks up -->
+    <set xpath="/worldgeneration/biomes/biome[@name='water']/subbiome/layers//layer[1]/@depth">1</set>
+
+    <!-- main biome layer for water has a fillupto for it's first layer, so we need to go with layer 2 to get it.-->
+    <set xpath="/worldgeneration/biomes/biome[@name='water']/layers/layer[2]/@depth">1</set>
+
+    <!-- If there's too many resource blocks, things further down the list often don't spawn -->
+    <!-- To Get around this, we are using sub-biomes to allow more of a colourful distribution -->
+    <append xpath="/worldgeneration/biomes/biome[@name='water']/subbiome[1]/layers/layer[1]" >
+      <resource blockname="SeaShell" cluster="1" prob="0.01" rwgGenerationType="all" />
+      <resource blockname="SeaWeed01Prefab" cluster="1" prob="0.1" rwgGenerationType="all" />
+      <resource blockname="SeaWeed02Prefab" cluster="2" prob="0.1" rwgGenerationType="all" />
+      <resource blockname="SeaWeed03Prefab" cluster="1" prob="0.1" rwgGenerationType="all" />
+    </append>
+    <!-- Second Sub-biome -->
+    <append xpath="/worldgeneration/biomes/biome[@name='water']/subbiome[2]/layers/layer[1]" >
+      <resource blockname="gravelPlusIron" cluster="1" prob="0.01" rwgGenerationType="all" />
+      <resource blockname="SeaWeed04Prefab" cluster="1" prob="0.8" rwgGenerationType="all" />
+      <resource blockname="SeaWeed05Prefab" cluster="1" prob="0.1" rwgGenerationType="all" />
+      <resource blockname="SeaWeed06Prefab" cluster="2" prob="0.1" rwgGenerationType="all" />
+      <resource blockname="WaterPlant" cluster="1" prob="0.01" rwgGenerationType="all" />
+    </append>
+    <!-- Third sub biome -->
+    <append xpath="/worldgeneration/biomes/biome[@name='water']/subbiome[3]/layers/layer[1]" >
+      <resource blockname="RustyBucket" cluster="2" prob="0.01" rwgGenerationType="all" />
+      <resource blockname="Syringodium" cluster="1" prob="0.08" rwgGenerationType="all" />
+      <resource blockname="Pavonica" cluster="1" prob="0.08" rwgGenerationType="all" />
+    </append>
+    <!-- Fourth sub biome -->
+    <append xpath="/worldgeneration/biomes/biome[@name='water']/subbiome[4]/layers/layer[1]" >
+      <resource blockname="SeaShell" cluster="1" prob="0.08" rwgGenerationType="all" />
+      <resource blockname="Halophila" cluster="1" prob="0.08" rwgGenerationType="all" />
+      <resource blockname="RustyCar01" cluster="2" prob="0.01" rwgGenerationType="all" />
+      <resource blockname="gravelPlusIron" cluster="1" prob="0.071" rwgGenerationType="all" />
+    </append>
+    <!-- Fith sub biome -->
+    <append xpath="/worldgeneration/biomes/biome[@name='water']/subbiome[5]/layers/layer[1]" >
+      <resource blockname="SeaShell" cluster="1" prob="0.01" rwgGenerationType="all" />
+      <resource blockname="SeaWeed01Prefab" cluster="1" prob="0.1" rwgGenerationType="all" />
+      <resource blockname="RustyCar01" cluster="2" prob="0.001" rwgGenerationType="all" />
+    </append>
+
+    <!-- main biome has a filluptoorg for the first layer, so we'll want to do layer 2 for its resource distribution-->
+    <append xpath="/worldgeneration/biomes/biome[@name='water']/layers/layer[2]" >
+      <resource blockname="SeaShell" cluster="1" prob="0.01" rwgGenerationType="all" />
+      <resource blockname="cntSecureTreasureChest" cluster="1" prob="0.001" rwgGenerationType="all" />
+      <resource blockname="shoppingCartEmpty" cluster="2" prob="0.001" rwgGenerationType="all" />
+      <resource blockname="SeaWeed01Prefab" cluster="2" prob="0.2" rwgGenerationType="all" />
+      <resource blockname="SeaWeed02Prefab" cluster="0" prob="0.2" rwgGenerationType="all" />
+      <resource blockname="SeaWeed03Prefab" cluster="1" prob="0.2" rwgGenerationType="all" />
+      <resource blockname="SeaWeed04Prefab" cluster="0" prob="0.2" rwgGenerationType="all" />
+      <resource blockname="SeaWeed05Prefab" cluster="2" prob="0.2" rwgGenerationType="all" />
+      <resource blockname="SeaWeed06Prefab" cluster="1" prob="0.2" rwgGenerationType="all" />
+      <resource blockname="WaterPlant" cluster="1" prob="0.01" rwgGenerationType="all" />
+      <resource blockname="Halophila" cluster="0" prob="0.04" rwgGenerationType="all" />
+      <resource blockname="cntSecureTreasureChest" cluster="2" prob="0.01" rwgGenerationType="all" />
+      <resource blockname="RustyCar01" cluster="2" prob="0.001" rwgGenerationType="all" />
+      <resource blockname="shoppingCartEmpty" cluster="2" prob="0.01" rwgGenerationType="all" />
+    </append>
+
+    <!-- We do want the cat tails to spawn as biome decorations, so they won't appear in the water -->
+    <!-- Not every sub-biome actually has decorations, so we'll just add the ones that are available -->
+    <append xpath="/worldgeneration/biomes/biome[@name='water']/subbiome[1]/decorations" >
+      <decoration type="block" blockname="Cattails" prob="0.01" rotatemax="4" />
+      <decoration type="block" blockname="Thalassia" prob="0.01" rotatemax="4" />
+      <decoration type="block" blockname="Stipa" prob="0.01" rotatemax="4" />
+      <decoration type="block" blockname="Fanplant" prob="0.01" rotatemax="4" />
+    </append>
+    <append xpath="/worldgeneration/biomes/biome[@name='water']/subbiome[2]/decorations" >
+      <decoration type="block" blockname="Cattails" prob="0.01" rotatemax="4" />
+      <decoration type="block" blockname="Thalassia" prob="0.01" rotatemax="4" />
+      <decoration type="block" blockname="Stipa" prob="0.01" rotatemax="4" />
+      <decoration type="block" blockname="Fanplant" prob="0.01" rotatemax="4" />
+    </append>
+    <append xpath="/worldgeneration/biomes/biome[@name='water']/decorations" >
+      <decoration type="block" blockname="Cattails" prob="0.01" rotatemax="4" />
+      <decoration type="block" blockname="Thalassia" prob="0.01" rotatemax="4" />
+      <decoration type="block" blockname="Stipa" prob="0.01" rotatemax="4" />
+      <decoration type="block" blockname="Fanplant" prob="0.01" rotatemax="4" />
+    </append>
+
+  </config>
+
+  <!-- We want to add a new biome spawning group for water, so the game will automatically spawn water entities in there -->
+  <config name="spawning">
+    <append xpath="/spawning">
+      <biome name="water">
+        <spawn maxcount="20"  time="Any" entitygroup="AnimalSwiming" />
+
+      </biome>
+    </append>
+  </config>
+
+
+  <config name="blocks">
+    <append xpath="/blocks">
+      
+      <!-- Our master water block will hold most of our custom entities-->
+      <!-- The model offset will never really be correct, because of the way it spawns in as a resource block -->
+      <!-- Sometimes the block will be spawned underneath the sand block, and needs to be offset, while others -->
+      <!-- spawn on top of the block, and will appear floating. -->
+      <!-- The balance is an attempt because either the blocks spawn completely under the ground, or flush on top. -->
+      <block id="" name="WaterBlock-Master" >
+        <property name="Material" value="plants" />
+        <property name="Shape" value="ModelEntity" />
+        <property name="Model" value="#WaterPlant?WaterPlant_X" />
+        <property name="IsTerrainDecoration" value="true" />
+        <property name="ModelOffset" value="0,0.8,0" />
+        <property name="Collide" value="melee,bullet,arrow,rocket" />
+		<drop event="Destroy" name="yuccaFibers" count="1" />
+      </block>
+      <block id="" name="WaterPlant">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#WaterPlant?WaterPlant_X" />
+      </block>
+      <block id="" name="SeaShell">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#SeaShell?SeaShell_X" />
+        <property name="ModelOffset" value="0,0.85,0" />
+      </block>
+      <block id="" name="SeaWeed01Prefab">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#SeaWeed?SeaWeed01Prefab" />
+      </block>
+      <block id="" name="SeaWeed02Prefab">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#SeaWeed?SeaWeed02Prefab" />
+      </block>
+      <block id="" name="SeaWeed03Prefab">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#SeaWeed?SeaWeed03Prefab" />
+      </block>
+      <block id="" name="SeaWeed04Prefab">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#SeaWeed?SeaWeed04Prefab" />
+      </block>
+      <block id="" name="SeaWeed05Prefab">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#SeaWeed?SeaWeed05Prefab" />
+      </block>
+      <block id="" name="SeaWeed06Prefab">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#SeaWeed?SeaWeed06Prefab" />
+      </block>
+      <block id="" name="Halophila">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#Halophila?Halophila_X" />
+      </block>
+      <block id="" name="Syringodium">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#Syringodium?Syringodium_X" />
+      </block>
+      <block id="" name="Pavonica">
+        <property name="Extends" value="WaterBlock-Master" />
+        <property name="Model" value="#Pavonica?Pavonica_X" />
+      </block>
+
+      <!-- Cat tails spawn as terrain documentation, so their offset can sit flush to the block -->
+      <block id="" name="Cattails">
+        <property name="Material" value="plants" />
+        <property name="Shape" value="ModelEntity" />
+        <property name="IsTerrainDecoration" value="true" />
+        <property name="Collide" value="melee,bullet,arrow,rocket" />
+        <property name="Model" value="#Cattails?Cattails_X" />
+        <property name="ModelOffset" value="0,0,0" />
+		<drop event="Destroy" name="yuccaFibers" count="2" />
+      </block>
+
+      <block id="" name="Stipa">
+        <property name="Material" value="plants" />
+        <property name="Shape" value="ModelEntity" />
+        <property name="IsTerrainDecoration" value="true" />
+        <property name="Collide" value="melee,bullet,arrow,rocket" />
+        <property name="Model" value="#Stipa?Stipa_X" />
+        <property name="ModelOffset" value="0,0,0" />
+		<drop event="Destroy" name="yuccaFibers" count="2" />
+      </block>
+      <block id="" name="Thalassia">
+        <property name="Material" value="plants" />
+        <property name="Shape" value="ModelEntity" />
+        <property name="IsTerrainDecoration" value="true" />
+        <property name="Collide" value="melee,bullet,arrow,rocket" />
+        <property name="Model" value="#Thalassia?Thalassia_X" />
+        <property name="ModelOffset" value="0,0,0" />
+		<drop event="Destroy" name="yuccaFibers" count="2" />
+      </block>
+      <block id="" name="Fanplant">
+        <property name="Material" value="plants" />
+        <property name="Shape" value="ModelEntity" />
+        <property name="IsTerrainDecoration" value="true" />
+        <property name="Collide" value="melee,bullet,arrow,rocket" />
+        <property name="Model" value="#Fanplant?Fanplant_X" />
+        <property name="ModelOffset" value="0,0,0" />
+		<drop event="Destroy" name="yuccaFibers" count="2" />
+      </block>
+      <!-- Rusty block has the same issue as the plants, so we want to update the offset on that-->
+      <!-- and change the material to metal for the correct sound -->
+      <block id="" name="RustyBucket">
+        <property name="Material" value="metal" />
+        <property name="Shape" value="ModelEntity" />
+        <property name="Model" value="#RustyBucket?RustyBucket_X" />
+        <property name="IsTerrainDecoration" value="true" />
+        <property name="DowngradeBlock" value="water" />
+        <property name="ModelOffset" value="0,1,0" />
+        <property name="Collide" value="melee,bullet,arrow,rocket" />
+		</block>
+
+      <!-- Rusty car is a multi-dim -->
+      <!-- Because of the spawning as a resource block, sometimes it looks sunken in clay / mud. -->
+      <block id="" name="RustyCar01">
+        <property name="Material" value="metal" />
+        <property name="Shape" value="ModelEntity" />
+        <property name="Model" value="#RustyCar01?RustyCar01_X" />
+        <property name="IsTerrainDecoration" value="true" />
+		<property name="BigDecorationRadius" value="7" />
+        <property name="DowngradeBlock" value="water" />
+        <property name="MultiBlockDim" value ="7,2,3" />
+        <property name="Collide" value="movement,melee,bullet,arrow,rocket" />
+        <property name="Class" value="MortSpawner, Mods" />
+        <property name="EntityGroup" value="AnimalSwiming" />
+        <property name="MaxSpawned" value="5" />
+        <property name="NumberToSpawn" value="5" />
+        <property name="LootList" value="101" />         
+      </block>
+  
+    </append>
+  </config>
+
+  <!-- Hand item for the Well Walker -->
+  <config name="items">
+    <append xpath="/items">
+      <item id="" name="handWellWalker">
+        <property name="Extends" value="handZombie"/>
+        <property name="CreativeMode" value="None"/>
+        <property class="Action0">
+          <property name="DamageEntity" value="50"/>
+          <property name="DamageBlock" value="30"/>
+          <property name="Buff" value="criticalBlunt,stunned,sprainedLeg" />
+          <property name="Buff_chance" value="0.5,0.3,0.3" />
+        </property>
+      </item>
+    </append>
+  </config>
+</configs>

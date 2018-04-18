@@ -1,0 +1,112 @@
+<!-- The icons and XML are from Clockwork Orange's fishing mod -->
+<!-- https://7daystodie.com/forums/showthread.php?68123-ACP-Fishing -->
+<!-- We removed the fishing rod, since you can just kill the fish yourself.-->
+<configs>
+  <config name="items">
+    <item id="" name="Raw Fish">
+      <property name="Meshfile" value="Items/Misc/parcelPrefab"/>
+      <property name="Material" value="organic"/>
+      <property name="HoldType" value="31"/>
+      <property name="Stacknumber" value="10"/>
+      <property name="EconomicValue" value="10"/>
+      <property name="CraftingIngredientTime" value="15"/>
+      <property class="Action1">
+        <!-- UseAction -->
+        <property name="Class" value="Eat"/>
+        <property name="Delay" value="1.0"/>
+        <property name="Use_time" value="..."/>
+        <property name="Gain_health" value="2"/>
+        <property name="Gain_food" value="5"/>
+        <property name="Gain_water" value="0"/>
+        <property name="Gain_stamina" value="0"/>
+        <property name="Gain_sickness" value="30"/>
+        <property name="Buff" value="foodPoisoning"/>
+        <property name="Buff_chance" value="0.5"/>
+        <property name="Sound_start" value="player_eating"/>
+      </property>
+      <property name="DescriptionKey" value="rawFishDesc"/>
+      <property name="Smell" value="ExLargeSmell"/>
+      <property name="Group" value="Food/Cooking"/>
+    </item>
+    <item id="" name="Grilled Fish">
+      <property name="Meshfile" value="Items/Misc/parcelPrefab"/>
+      <property name="DropMeshfile" value="Items/Misc/sack_droppedPrefab"/>
+      <property name="HoldType" value="31"/>
+      <property name="Material" value="organic"/>
+      <property name="Stacknumber" value="50"/>
+      <!-- STK food -->
+      <property name="EconomicValue" value="24"/>
+      <property class="Action1">
+        <property name="Class" value="Eat"/>
+        <property name="Delay" value="2.1"/>
+        <property name="Use_time" value="..."/>
+        <property name="Gain_health" value="0"/>
+        <property name="Gain_food" value="5"/>
+        <property name="Gain_water" value="-2"/>
+        <property name="Gain_wellness" value="0.042"/>
+        <property name="Sound_start" value="player_eating"/>
+      </property>
+      <property name="DescriptionKey" value="rawFishDesc"/>
+      <property name="Smell" value="mediumSmell"/>
+      <property name="Group" value="Food/Cooking"/>
+    </item>
+    <item id="" name="Boiled Fish">
+      <property name="Meshfile" value="Items/Misc/parcelPrefab"/>
+      <property name="Material" value="organic"/>
+      <property name="HoldType" value="31"/>
+      <property name="Stacknumber" value="50"/>
+      <property name="EconomicValue" value="10"/>
+      <property class="Action1">
+        <!-- UseAction -->
+        <property name="Class" value="Eat"/>
+        <property name="Delay" value="2.1"/>
+        <property name="Use_time" value="..."/>
+        <property name="Gain_health" value="0"/>
+        <property name="Gain_food" value="5"/>
+        <property name="Gain_water" value="0"/>
+        <property name="Gain_wellness" value="0.084"/>
+        <property name="Sound_start" value="player_eating"/>
+      </property>
+      <property name="DescriptionKey" value="rawFishDesc"/>
+      <property name="Smell" value="mediumSmell"/>
+      <property name="Group" value="Food/Cooking"/>
+    </item>
+    <item id="" name="Charred Fish">
+      <property name="Meshfile" value="Items/Misc/parcelPrefab"/>
+      <property name="Material" value="organic"/>
+      <property name="HoldType" value="31"/>
+      <property name="Stacknumber" value="50"/>
+      <property name="EconomicValue" value="10"/>
+      <property name="SellableToTrader" value="false"/>
+      <property class="Action1">
+        <!-- UseAction -->
+        <property name="Class" value="Eat"/>
+        <property name="Delay" value="2.1"/>
+        <property name="Use_time" value="..."/>
+        <property name="Gain_health" value="0"/>
+        <property name="Gain_food" value="5"/>
+        <property name="Gain_water" value="-5"/>
+        <property name="Gain_wellness" value="0"/>
+        <property name="Sound_start" value="player_eating"/>
+      </property>
+      <property name="DescriptionKey" value="rawFishDesc"/>
+      <property name="Smell" value="largeSmell"/>
+      <property name="Group" value="Food/Cooking"/>
+    </item>
+
+
+  </config>
+  <config name="recipes">
+    <recipe name="Boiled Fish" count="1" craft_time = "8" craft_area="campfire" craft_tool="cookingPot" >
+      <ingredient name="Raw Fish" count="1"/>
+      <ingredient name="bottledWater" count="1"/>
+    </recipe>
+    <recipe name="Grilled Fish" count="1" craft_time = "8" craft_area="campfire" craft_tool="cookingGrill" >
+      <ingredient name="Raw Fish" count="1"/>
+    </recipe>
+    <recipe name="Charred Fish" count="1" craft_time = "8" craft_area="campfire">
+      <ingredient name="Raw Fish" count="1"/>
+    </recipe>
+  </config>
+
+</configs>
