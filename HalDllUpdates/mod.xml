@@ -1,0 +1,11 @@
+<mod>
+	<info>
+		<author>HAL9000</author>
+		<name>Hal's DLL Fixes</name>
+		<description>Changes the base DLL to be more modding friendly</description>
+		<mod_version>1.0</mod_version>
+		<game_version>15.1</game_version>
+		<launcher_version>0.7.0</launcher_version>
+		<guid>hal-dll-fixes</guid>
+	</info>
+</mod>

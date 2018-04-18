@@ -12,4 +12,7 @@
 		<import file="Configs\EntityClasses.xml" />
 	</config_mods>
 	
+	<dependencies>
+		<dependency>Hal's DLL Fixes</dependency>
+	</dependencies>
 </mod>

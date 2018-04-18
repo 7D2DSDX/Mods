@@ -1,7 +1,24 @@
 <configs>
 	<config name="entityclasses">
 		<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombieTemplateMale')]/property[@name='Class']/@value">EntityZombieSDX, Mods</set>
-		<set xpath="/entity_classes/entity_class[starts-with(@name, 'zombieFatCop')]/property[@name='Class']/@value">EntityZombieCopSDX, Mods</set>
-		
+    <set xpath="/entity_classes/entity_class[starts-with(@name, 'zombieFatCop')]/property[@name='Class']/@value">EntityZombieCopSDX, Mods</set>
+    <set xpath="/entity_classes/entity_class[starts-with(@name, 'zombieSteveCrawler')]/property[@name='Class']/@value">EntityZombieCrawlSDX, Mods</set>
+
+    <!-- Turn on head shots, and random speeds for entities-->
+    <append xpath="/entity_classes/entity_class[starts-with(@name, 'zombieTemplateMale')]" >
+   	  <property name="HeadShots" value="true" />
+		  <property name="RandomSpeeds" value="true" />
+      <property name="RandomSize" value="true" />
+      
+      <!-- Allows the zombies to go to sleep when idle. -->
+      <property name="IdleSleep" value="false" />
+      <property name="SleeperPose" value="1" />
+    </append>
+ 
+    <!-- turn off headshots for the zombie Cops -->
+     <append xpath="/entity_classes/entity_class[starts-with(@name, 'zombieFatCop')]" >
+   	  <property name="HeadShots" value="true" />
+		  <property name="RandomSpeeds" value="true" />
+    </append>
 	</config>
 </configs>

@@ -1,0 +1,638 @@
+﻿using UnityEngine;
+using System.Collections;
+using System.Collections.Generic;
+using System;
+
+public class BipedAnimations : MonoBehaviour, IAvatarController
+{
+
+
+    public Transform UpperBody;
+
+    private const string Idle1 = "Idle1";
+    private const string Idle2 = "Idle2";
+    private const string Attack1 = "Attack1";
+    private const string Attack2 = "Attack2";
+    private const string Pain = "Pain";
+    private const string Jump = "Jump";
+    private const string Death = "Death";
+    private const string Run = "Run";
+    private const string Walk = "Walk";
+
+    Dictionary<string, AnimationClip> Clips = new Dictionary<string, AnimationClip>();
+
+    Animation ani;
+
+    public bool IsWalking
+    {
+        get
+        {
+            if (ani[Walk] != null)
+                return ani[Walk].enabled;
+
+            return false;
+        }
+    }
+    public bool IsRunning
+    {
+        get
+        {
+            if (ani[Run] != null)
+                return ani[Run].enabled;
+
+            return false;
+        }
+    }
+    public bool IsMoving
+    {
+        get
+        {
+            return IsWalking || IsRunning;
+        }
+    }
+
+
+
+    private EntityAlive entityAlive;
+    private bool IsVisible = true;
+    private bool HasDied;
+    private bool isAlwaysWalk;
+    private Transform ModelTransform;
+    private Transform GraphicsTransform;
+    private float lastX;
+    private float lastZ;
+    private float lastDistance;
+    private float DoesntSeemToDoAnything;
+
+
+    bool CanAttack1, CanAttack2, CanJump, IsAttacking;
+    void Start()
+    {
+        this.entityAlive = this.transform.gameObject.GetComponent<EntityAlive>();
+        this.GraphicsTransform = this.transform.Find("Graphics");
+
+        if (GraphicsTransform != null)
+        {
+            this.ModelTransform = this.GraphicsTransform.Find("Model").GetChild(0);
+
+            //this bit is important for SDXers! It adds the component that links each collider with the Entity class so hits can be registered.
+            AddTransformRefs(this.ModelTransform);
+
+            //if you're using A14 or haven't set specific tags for the collision in Unity un-comment this and it will set them all to being body contacts
+            //using this method means things like head shot multiplers won't work but it will enable basic collision
+            //AddTagRecursively(this.ModelTransform, "E_BP_Body");
+
+
+
+
+            FindSpine(this.gameObject.transform);
+
+            List<string> anims = new List<string>(); // { Idle1, Idle2, Attack1, Attack2, Pain, Jump, Death, Run, Walk };
+            anims.Add(Idle1);
+            anims.Add(Idle2);
+            anims.Add(Attack1);
+            anims.Add(Attack2);
+            anims.Add(Pain);
+            anims.Add(Jump);
+            anims.Add(Death);
+            anims.Add(Run);
+            anims.Add(Walk);
+            ani = ModelTransform.GetComponent<Animation>();
+
+            if (ani == null)
+            {
+                Debug.Log("No animation component on Model " + ModelTransform.name);
+            }
+            else
+            {
+                foreach (string s in anims)
+                {
+                    AnimationClip clip = ani.GetClip(s);
+
+                   // string de = "Checking " + s;
+
+                    if (clip != null)
+                    {
+
+                        Clips.Add(s, clip);
+                        if (s == "Attack1")
+                            CanAttack1 = true;
+                        else if (s == "Attack2")
+                            CanAttack2 = true;
+                        else if (s == "Jump")
+                            CanJump = true;
+                        else if (s == "Pain")
+                        { }
+                        else if (s == "Death")
+                        { }
+                        else
+                            ani[s].wrapMode = WrapMode.Loop;
+
+                    }
+
+                   // de += " clip: " + (clip == null ? "null" : "ok");
+                   // Debug.Log(de);
+                }
+            }
+        }
+        else
+        {
+            Debug.Log("Graphics Transfrom not found on " + this.name);
+        }
+   
+        //PlayAnimation(Idle2);
+        //StartCoroutine(Test());
+
+    }
+
+    IEnumerator Test()
+    {
+
+        List<string> anims = new List<string>(); // { Idle1, Idle2, Attack1, Attack2, Pain, Jump, Death, Run, Walk };
+        anims.Add(Idle1);
+        anims.Add(Idle2);
+        anims.Add(Attack1);
+        anims.Add(Attack2);
+        anims.Add(Pain);
+        anims.Add(Jump);
+        anims.Add(Death);
+        anims.Add(Run);
+        anims.Add(Walk);
+
+
+        //foreach (var clip in anims)
+        //{
+        //    PlayAnimation(clip);
+        //    yield return new WaitForSeconds(3);
+        //}
+        //foreach (var clip in anims)
+        //{
+        //    PlayAnimation(clip);
+        //    yield return new WaitForSeconds(3);
+        //}
+
+        PlayAnimation(Attack1);
+        yield return new WaitForSeconds(2);
+        PlayAnimation(Run);
+        yield return new WaitForSeconds(1);
+        PlayAnimation(Attack1);
+        yield return new WaitForSeconds(3);
+        PlayAnimation(Walk);
+        yield return new WaitForSeconds(3);
+        PlayAnimation(Attack2);
+        yield return new WaitForSeconds(3);
+        PlayAnimation(Run);
+        yield return new WaitForSeconds(3);
+        PlayAnimation(Attack1);
+        yield return new WaitForSeconds(3);
+        PlayAnimation(Jump);
+        
+
+    }
+
+
+    IEnumerator WaitThenCrossFade(float waitFor, AnimationState anim)
+    {
+        yield return new WaitForSeconds(waitFor); 
+        ani.CrossFade(anim.name);
+    }
+
+    private void PlayAnimation(string clipName)
+    {
+        
+        AnimationClip clip = ani.GetClip(clipName);
+
+        if (clip != null && !ani[clipName].enabled)
+        {
+            Debug.Log("Playing " + clipName + " " + (clip == null ? "null" : "true") + " walking: " + IsWalking + " running: " + IsRunning + " enabled: " + ani[clipName].enabled);
+            if ((clipName == "Attack1" || clipName == "Attack2"))
+            {
+                if (IsMoving)
+                {
+                    ani[clipName].layer = 5;
+                    ani[clipName].AddMixingTransform(UpperBody);
+                    ani.Blend(clipName);
+                }
+                else
+                {
+                    ani[clipName].layer = 0;
+                    ani[clipName].AddMixingTransform(UpperBody);
+                    ani[clipName].RemoveMixingTransform(UpperBody);
+                    ani.CrossFade(clipName);
+                }
+                StartCoroutine(WaitThenCrossFade(ani[clipName].length - 0.5f, ani[Idle1]));
+
+            }
+            else
+            {
+                ani[clipName].layer = 0;
+                ani[clipName].AddMixingTransform(UpperBody);
+                ani[clipName].RemoveMixingTransform(UpperBody);
+                ani.CrossFade(clipName);
+            }
+        }
+    }
+
+    private void AddTransformRefs(Transform t)
+    {
+        if (t.GetComponent<Collider>() != null && t.GetComponent<RootTransformRefEntity>() == null)
+        {
+            RootTransformRefEntity root = t.gameObject.AddComponent<RootTransformRefEntity>();
+            root.RootTransform = this.transform;
+            // Debug.Log("Added root ref on " + t.name + " tag " + t.tag); 
+        }
+        foreach (Transform tran in t)
+        {
+            AddTransformRefs(tran);
+        }
+    }
+
+    void AddTagRecursively(Transform trans, string tag)
+    {
+        trans.gameObject.tag = tag;
+        foreach (Transform t in trans)
+            AddTagRecursively(t, tag);
+    }
+    private bool FindSpine(Transform t)
+    {
+        if (t.name.ToLower().Contains("spine"))
+        {
+            UpperBody = t;
+            return true;
+        }
+
+        foreach (Transform tChild in t)
+        {
+            if (FindSpine(tChild))
+                return true;
+        }
+
+        return false;
+    }
+
+
+    // Update is called once per frame
+    void Update()
+    {
+        
+        if (!this.IsVisible)
+            return;
+        if (this.entityAlive != null && this.entityAlive.IsDead() && !this.HasDied)
+        {
+            this.HasDied = true;
+            PlayAnimation(Death);
+        }
+
+        if (HasDied)
+            return;
+
+        if (!ani.isPlaying)
+            PlayAnimation(Idle2);
+
+
+        if (CanAttack1 && ani[Attack1].enabled)
+            return;
+        if (CanAttack2 && ani[Attack2].enabled)
+            return;
+
+        if (ani[Death] != null && ani[Death].enabled)
+            return;
+        //if (ani[Pain] != null && ani[Pain].enabled)
+        //    return;
+
+        float travelledX = 0.0f;
+        float travelledZ = 0.0f;
+        float moveAmount = this.lastDistance;
+        if (this.entityAlive != null)
+        {
+            travelledX = Mathf.Abs(this.entityAlive.position.x - this.entityAlive.lastTickPos[0].x) * 6f;
+            travelledZ = Mathf.Abs(this.entityAlive.position.z - this.entityAlive.lastTickPos[0].z) * 6f;
+
+            if (!this.entityAlive.isEntityRemote)
+            {
+                if (Mathf.Abs(travelledX - this.lastX) > 0.01 || Mathf.Abs(travelledZ - this.lastZ) > 0.01)
+                {
+                    moveAmount = Mathf.Sqrt(travelledX * travelledX + travelledZ * travelledZ);
+                    this.lastX = travelledX;
+                    this.lastZ = travelledZ;
+                    this.lastDistance = moveAmount;
+                }
+            }
+            else if (travelledX <= this.lastX && travelledZ <= this.lastZ)
+            {
+                this.lastX *= 0.9f;
+                this.lastZ *= 0.9f;
+                this.lastDistance *= 0.9f;
+            }
+            else
+            {
+                moveAmount = Mathf.Sqrt((travelledX * travelledX + travelledZ * travelledZ));
+                this.lastX = travelledX;
+                this.lastZ = travelledZ;
+                this.lastDistance = moveAmount;
+            }
+        }
+        if (this.entityAlive != null) // && (this.isAlwaysWalk || moveAmount > 0.150000005960464))
+        {
+
+            if (moveAmount > 1.0)
+            {
+                PlayAnimation(Run);
+                ani[Run].speed = moveAmount;
+            }
+            else if (moveAmount != 0)
+            {
+                PlayAnimation(Walk);
+                ani[Walk].speed = moveAmount * 2f;
+            }
+            else
+            {
+                PlayAnimation(Idle1);
+            }
+
+            //if (this.DoesntSeemToDoAnything > 0.0)
+            //    return;
+            //this.DoesntSeemToDoAnything = 0.3f;
+        }
+        else if (!ani[Idle1].enabled && !ani[Idle2].enabled)
+        {
+            if (UnityEngine.Random.value > 0.5)
+                PlayAnimation(Idle1);
+            else
+                PlayAnimation(Idle2);
+        }
+        else if (!ani[Idle2].enabled)
+        {
+            PlayAnimation(Idle1);
+        }
+    }
+
+    public void BeginStun(EnumEntityStunType stun, EnumBodyPartHit _bodyPart, bool _criticalHit, float random)
+    {
+        // throw new NotImplementedException();
+    }
+
+    public void CrippleLimb(EnumBodyPartHit _bodyPart, bool restoreState)
+    {
+        //  throw new NotImplementedException();
+    }
+
+    public void EndStun()
+    {
+        //  throw new NotImplementedException();
+    }
+
+    public Transform GetActiveModelRoot()
+    {
+        return this.ModelTransform;
+    }
+
+    public Transform GetRightHandTransform()
+    {
+        return null;
+    }
+
+    public Texture2D GetTexture()
+    {
+        return null;
+    }
+
+    public bool IsAnimationAttackPlaying()
+    {
+
+        if (CanAttack1 && ani[Attack1].enabled)
+            return IsAttacking = true;
+        if (CanAttack2)
+            return IsAttacking = ani[Attack2].enabled;
+
+        return IsAttacking = false;
+    }
+
+    public void StartAnimationElectrocuted()
+    {
+    }
+
+    public bool IsAnimationHarvestingPlaying()
+    {
+        return false;
+    }
+
+    public bool IsAnimationHitRunning()
+    {
+        return false;
+    }
+
+    public bool IsAnimationRagingPlaying()
+    {
+        return false;
+    }
+
+    public void StartAnimationSpecialAttack(bool _b)
+    {
+        throw new NotImplementedException();
+    }
+
+    public bool IsAnimationSpecialAttack2Playing()
+    {
+        return false;
+    }
+
+    public bool IsAnimationSpecialAttackPlaying()
+    {
+        return false;
+    }
+
+    public bool IsAnimationUsePlaying()
+    {
+        return false;
+    }
+
+    public void PlayPlayerFPRevive()
+    {
+
+    }
+
+    public void RemoveLimb(EnumBodyPartHit _bodyPart, bool restoreState)
+    {
+
+    }
+
+    public void SetAiming(bool _bEnable)
+    {
+
+    }
+
+    public void SetAlive()
+    {
+
+    }
+
+    public void SetArmsAngles(float _rightArmAngle, float _leftArmAngle)
+    {
+
+    }
+
+    public void SetCrouching(bool _bEnable)
+    {
+
+    }
+
+    public void SetDrunk(float _numBeers)
+    {
+
+    }
+
+    public void SetHeadAngles(float _nick, float _yaw)
+    {
+
+    }
+
+    public void SetInRightHand(Transform _transform)
+    {
+
+    }
+
+    public void SetLookPosition(Vector3 _pos)
+    {
+
+    }
+
+    public void SetMinibikeAnimation(string _animSuffix, float _amount)
+    {
+
+    }
+
+    public void SetMinibikeAnimation(string _animSuffix, bool _isPlaying)
+    {
+
+    }
+
+    public void SetRagdollEnabled(bool _b)
+    {
+
+    }
+
+    public void SetVisible(bool _b)
+    {
+
+        this.IsVisible = _b;
+        if (GraphicsTransform != null)
+            this.GraphicsTransform.gameObject.SetActive(_b);
+    }
+
+    public void SetWalkingSpeed(float _f)
+    {
+
+    }
+
+    public void StartAnimationAttack()
+    {
+        if (CanAttack1 && (UnityEngine.Random.value < 0.5f || !CanAttack2))
+            PlayAnimation(Attack1);
+        else if (CanAttack2)
+            PlayAnimation(Attack2);
+
+        //if (CanAttack1 && CanAttack2)
+        //{
+        //    if (UnityEngine.Random.value > 0.5)
+        //        PlayAnimation(Attack1);
+        //    else
+        //        PlayAnimation(Attack2);
+        //}
+        //else if (CanAttack2)
+        //{
+        //    PlayAnimation(Attack2);
+        //}
+    }
+
+    public void StartAnimationFiring()
+    {
+
+    }
+
+    public void StartAnimationHarvesting()
+    {
+
+    }
+
+    public void StartAnimationHit(EnumBodyPartHit _bodyPart, int _dir, int _hitDamage, bool _criticalHit, int _movementState, float random)
+    {
+
+        //Debug.Log("Ouch my " + _bodyPart.ToString() + " hurts. Damage " + _hitDamage);
+        if (!this.HasDied)
+            PlayAnimation(Pain);
+    }
+
+    public void StartAnimationJumping()
+    {
+        PlayAnimation(Jump);
+    }
+
+    public void StartAnimationRaging()
+    {
+
+    }
+
+    public bool IsAnimationElectrocutedPlaying()
+    {
+        return false;
+    }
+
+    public void StartAnimationReloading()
+    {
+
+    }
+
+    public void StartAnimationSpecialAttack()
+    {
+
+    }
+
+    public void StartAnimationSpecialAttack2()
+    {
+
+    }
+
+    public void StartAnimationUse()
+    {
+
+    }
+
+    public void StartDeathAnimation(EnumBodyPartHit _bodyPart, int _movementState, float random)
+    {
+        PlayAnimation(Death);
+    }
+
+    public void StartEating()
+    {
+
+    }
+
+    public void StopEating()
+    {
+
+    }
+
+    public void SwitchModelAndView(string _modelName, bool _bFPV, bool _bMale)
+    {
+
+    }
+
+    public void TurnIntoCrawler(bool restoreState)
+    {
+
+    }
+
+    public void SetArchetypeStance(Archetype.StanceTypes stance)
+    {
+
+    }
+
+    public void NotifyAnimatorMove(Animator instigator)
+    {
+    }
+
+    public void TriggerSleeperPose(int pose)
+    {
+    }
+}

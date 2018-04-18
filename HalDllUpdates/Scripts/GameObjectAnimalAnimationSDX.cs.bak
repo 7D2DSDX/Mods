@@ -1,0 +1,494 @@
+﻿// Decompiled with JetBrains decompiler
+// Type: GameObjectAnimalAnimation
+// Assembly: Assembly-CSharp, Version=0.0.0.0, Culture=neutral, PublicKeyToken=null
+// MVID: 7B66E2A5-B854-4FE4-983E-8D0DC9B247E0
+// Assembly location: C:\Games\Steam\steamapps\common\7 Days To Die SDX\7DaysToDie_Data\Managed\Assembly-CSharp.dll
+// Compiler-generated code is shown
+
+using System;
+using UnityEngine;
+
+public class GameObjectAnimalAnimationSDX : MonoBehaviour, IAvatarController
+{
+    private const string Idle1 = "Idle1";
+    private const string Idle2 = "Idle2";
+    private const string Attack1 = "Attack1";
+    private const string Attack2 = "Attack2";
+    private const string Pain = "Pain";
+    private const string Jump = "Jump";
+    private const string Death = "Death";
+    private const string Run = "Run";
+    private const string Walk = "Walk";
+    private EntityAlive entityAlive;
+    private bool IsVisible;
+    private bool HasDied;
+    private bool isAlwaysWalk;
+    private Transform ModelTransform;
+    private Transform GraphicsTransform;
+    private float lastPlayerX;
+    private float lastPlayerZ;
+    private float lastDistance;
+    private float DoesntSeemToDoAnything;
+
+    public GameObjectAnimalAnimationSDX()
+    {
+        this.IsVisible = true;
+    }
+
+    void Awake()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        this.entityAlive = this.transform.gameObject.GetComponent<EntityAlive>();
+
+        this.GraphicsTransform = this.transform.Find("Graphics");
+        this.ModelTransform = this.GraphicsTransform.Find("Model").GetChild(0);
+
+        //this bit is important for SDXers! It adds the component that links each collider with the Entity class so hits can be registered.
+        AddTransformRefs(this.ModelTransform);
+
+        //if you're using A14 or haven't set specific tags for the collision in Unity un-comment this and it will set them all to being body contacts
+        //using this method means things like head shot multiplers won't work but it will enable basic collision
+        //AddTagRecursively(this.ModelTransform, "E_BP_Body");
+
+        if ((this.ModelTransform.GetComponent<Animation>()[Idle1]) == null)
+            return;
+
+        this.ModelTransform.GetComponent<Animation>().Play(Idle1);
+    }
+
+
+    private void AddTransformRefs(Transform t)
+    {
+      //  Debug.Log("Checking " + t.name + " tag " + t.tag);
+        if (t.GetComponent<Collider>() != null && t.GetComponent<RootTransformRefEntity>() == null)
+        {
+            RootTransformRefEntity root = t.gameObject.AddComponent<RootTransformRefEntity>();
+            root.RootTransform = this.transform;
+         //   Debug.Log("Added root ref on " + t.name + " tag " + t.tag); 
+        }
+        foreach (Transform tran in t)
+        {
+            AddTransformRefs(tran);
+        }
+    }
+
+    void AddTagRecursively(Transform trans, string tag)
+    {
+        trans.gameObject.tag = tag;
+        foreach (Transform t in trans)
+            AddTagRecursively(t, tag);
+    }
+
+    public void SwitchModelAndView(string _modelName, bool _bFPV, bool _bMale)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public void SetAlwaysWalk(bool _b)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        this.isAlwaysWalk = _b;
+    }
+
+    public Texture2D SetSkinTexture(Texture2D _newTexture, bool _bMakeACopy)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        return null;
+    }
+
+    public Texture2D GetTexture()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        return null;
+    }
+
+    public void SetInRightHand(Transform _transform)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public void SetDrunk(float _numBeers)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public virtual void SetMinibikeAnimation(string _anim, float _amount)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public virtual void SetMinibikeAnimation(string _anim, bool _isPlaying)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public bool IsAnimationAttackPlaying()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        if (this.ModelTransform.GetComponent<Animation>()[Attack1] != null && this.ModelTransform.GetComponent<Animation>()[Attack1].enabled)
+            return true;
+        if (this.ModelTransform.GetComponent<Animation>()[Attack2] != null)
+            return this.ModelTransform.GetComponent<Animation>()[Attack2].enabled;
+        return false;
+    }
+
+    public void StartAnimationAttack()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        if (this.ModelTransform.GetComponent<Animation>()[Attack1] != null && this.ModelTransform.GetComponent<Animation>()[Attack2] != null)
+        {
+            if (UnityEngine.Random.value > 0.5)
+                this.ModelTransform.GetComponent<Animation>().Play(Attack1);
+            else
+                this.ModelTransform.GetComponent<Animation>().Play(Attack2);
+        }
+        else
+        {
+            if ((this.ModelTransform.GetComponent<Animation>()[Attack1] == null))
+                return;
+            this.ModelTransform.GetComponent<Animation>().Play(Attack1);
+        }
+    }
+
+    public bool IsAnimationSpecialAttackPlaying()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        return false;
+    }
+
+    public void StartAnimationSpecialAttack(bool _b)
+    {
+
+    }
+
+    public void StartAnimationSpecialAttack()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public virtual bool IsAnimationSpecialAttack2Playing()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        return false;
+    }
+
+    public virtual void StartAnimationSpecialAttack2()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public bool IsAnimationRagingPlaying()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        return false;
+    }
+
+    public void StartAnimationRaging()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public bool IsAnimationElectrocutedPlaying()
+    {
+        return false;
+    }
+
+    public void StartAnimationElectrocuted()
+    {
+    }
+
+    public bool IsAnimationHarvestingPlaying()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        return false;
+    }
+
+    public void StartAnimationHarvesting()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public void SetAnimationClimbing(bool _b)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public Transform GetFirstPersonCameraTransform()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        return null;
+    }
+
+    public Transform GetRightHandTransform()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        return null;
+    }
+
+    public bool IsAnimationUsePlaying()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+        return false;
+    }
+
+    public void StartAnimationUse()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public void SetRagdollEnabled(bool _b)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public void StartAnimationFiring()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+
+    }
+
+    public void StartAnimationReloading()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void StartAnimationHit(EnumBodyPartHit _bodyPart, int _dir, int _hitDamage, bool _criticalHit, int _movementState, float random)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name + " hit: "+ _bodyPart.ToString());
+        if (this.HasDied || !(bool)(this.ModelTransform.GetComponent<Animation>()[Pain]))
+            return;
+        this.ModelTransform.GetComponent<Animation>().Play(Pain);
+    }
+
+    public bool IsAnimationHitRunning()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        return false;
+    }
+
+    public void StartAnimationJumping()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        if (!(this.ModelTransform.GetComponent<Animation>()[Jump] != null))
+            return;
+        this.ModelTransform.GetComponent<Animation>().Play(Jump);
+    }
+
+    public void StartDeathAnimation(EnumBodyPartHit _bodyPart, int _movementState, float random)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void SetAlive()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void SetLookPosition(Vector3 _pos)
+    {
+       //// Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void SetVisible(bool _b)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+        if (_b == this.IsVisible && _b == this.GraphicsTransform.gameObject.activeSelf)
+            return;
+        this.IsVisible = _b;
+        this.GraphicsTransform.gameObject.SetActive(_b);
+
+    }
+
+    public void SetWalkingSpeed(float _f)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void SetHeadAngles(float _nick, float _yaw)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void SetArmsAngles(float _rightArmAngle, float _leftArmAngle)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void SetAiming(bool _bEnable)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void SetCrouching(bool _bEnable)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void SetFPV(bool _fpv)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+        
+
+    protected void Update()
+    {
+        if (!this.IsVisible)
+            return;
+        if (this.entityAlive != null && this.entityAlive.IsDead() && !this.HasDied)
+        {
+            this.HasDied = true;
+            this.ModelTransform.GetComponent<Animation>().Stop();
+            if (this.ModelTransform.GetComponent<Animation>()[Death] != null)
+                this.ModelTransform.GetComponent<Animation>().Play(Death);
+        }
+        if (!(this.ModelTransform.GetComponent<Animation>()[Attack1] == null) && this.ModelTransform.GetComponent<Animation>()[Attack1].enabled || !(this.ModelTransform.GetComponent<Animation>()[Attack2] == null) && this.ModelTransform.GetComponent<Animation>()[Attack2].enabled || (!(this.ModelTransform.GetComponent<Animation>()[Death] == null) && this.ModelTransform.GetComponent<Animation>()[Death].enabled || !(this.ModelTransform.GetComponent<Animation>()[Pain] == null) && this.ModelTransform.GetComponent<Animation>()[Pain].enabled) || this.entityAlive.IsDead())
+            return;
+        float playerDistanceX = 0.0f;
+        float playerDistanceZ = 0.0f;
+        float encroached = this.lastDistance;
+        if (this.entityAlive != null)
+        {
+            playerDistanceX = Mathf.Abs(this.entityAlive.position.x - this.entityAlive.lastTickPos[0].x) * 6f;
+            playerDistanceZ = Mathf.Abs(this.entityAlive.position.z - this.entityAlive.lastTickPos[0].z) * 6f;
+     
+            if (!this.entityAlive.isEntityRemote)
+            {
+                if (Mathf.Abs(playerDistanceX - this.lastPlayerX) > 0.00999999977648258 || Mathf.Abs(playerDistanceZ - this.lastPlayerZ) > 0.00999999977648258)
+                {
+                    encroached = Mathf.Sqrt(playerDistanceX * playerDistanceX + playerDistanceZ * playerDistanceZ);
+                    this.lastPlayerX = playerDistanceX;
+                    this.lastPlayerZ = playerDistanceZ;
+                    this.lastDistance = encroached;
+                }
+            }
+            else if (playerDistanceX <= this.lastPlayerX && playerDistanceZ <= this.lastPlayerZ)
+            {
+                this.lastPlayerX *= 0.9f;
+                this.lastPlayerZ *= 0.9f;
+                this.lastDistance *= 0.9f;
+            }
+            else
+            {
+                encroached = Mathf.Sqrt((playerDistanceX * playerDistanceX + playerDistanceZ * playerDistanceZ));
+                this.lastPlayerX = playerDistanceX;
+                this.lastPlayerZ = playerDistanceZ;
+                this.lastDistance = encroached;
+            }
+        }
+        if (this.entityAlive != null && (this.isAlwaysWalk || encroached > 0.150000005960464))
+        {
+          
+            if (encroached > 1.0)
+            {
+                if (!this.ModelTransform.GetComponent<Animation>()[Run].enabled)
+                    this.ModelTransform.GetComponent<Animation>().Play(Run);
+                this.ModelTransform.GetComponent<Animation>()[Run].speed = encroached;
+            }
+            else
+            {
+                if (!this.ModelTransform.GetComponent<Animation>()[Walk].enabled)
+                    this.ModelTransform.GetComponent<Animation>().Play(Walk);
+                this.ModelTransform.GetComponent<Animation>()[Walk].speed = encroached * 2f;
+            }
+
+            if (this.DoesntSeemToDoAnything > 0.0)
+                return;
+            this.DoesntSeemToDoAnything = 0.3f;
+        }
+        else if (this.ModelTransform.GetComponent<Animation>()[Idle2] != null && !this.ModelTransform.GetComponent<Animation>()[Idle1].enabled && !this.ModelTransform.GetComponent<Animation>()[Idle2].enabled)
+        {
+            if (UnityEngine.Random.value > 0.5)
+                this.ModelTransform.GetComponent<Animation>().Play(Idle1);
+            else
+                this.ModelTransform.GetComponent<Animation>().Play(Idle2);
+        }
+        else
+        {
+            if (this.ModelTransform.GetComponent<Animation>()[Idle1].enabled)
+                return;
+            this.ModelTransform.GetComponent<Animation>().Play(Idle1);
+        }
+    }
+
+    public Transform GetActiveModelRoot()
+    {
+        return this.ModelTransform;
+    }
+
+    public void RemoveLimb(EnumBodyPartHit _bodyPart, bool restoreState)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void CrippleLimb(EnumBodyPartHit _bodyPart, bool restoreState)
+    {
+    }
+
+    public void TurnIntoCrawler(bool restoreState)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void BeginStun(EnumEntityStunType stun, EnumBodyPartHit _bodyPart, bool _criticalHit, float random)
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void EndStun()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void StartEating()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void StopEating()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+
+    public void PlayPlayerFPRevive()
+    {
+       // Debug.Log("Method: " + System.Reflection.MethodBase.GetCurrentMethod().Name);
+    }
+    public void SetArchetypeStance(Archetype.StanceTypes stance)
+    {
+
+    }
+
+    public void NotifyAnimatorMove(Animator instigator)
+    {
+    }
+
+    public void TriggerSleeperPose(int pose)
+    {
+    }
+}

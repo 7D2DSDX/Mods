@@ -16,7 +16,20 @@ public class EntityAliveChange : IPatcherMod
         var gm = module.Types.First(d => d.Name == "EntityAlive");
         var method = gm.Methods.First(d => d.Name == "GetWalkType");
         SetMethodToVirtual(method);
-  
+
+        method = gm.Methods.First(d => d.Name == "Attack");
+        SetMethodToVirtual(method);
+
+        gm = module.Types.First(d => d.Name == "Entity");
+        method = gm.Methods.First(d => d.Name == "ccEntityCollision");
+        SetMethodToPublic(method);
+        SetMethodToVirtual(method);
+
+        gm = module.Types.First(d => d.Name == "LegacyAvatarController");
+        var field = gm.Fields.First(d => d.Name == "anim");
+        SetFieldToPublic(field);
+
+
         return true;
     }
 
@@ -35,4 +48,18 @@ public class EntityAliveChange : IPatcherMod
         meth.IsVirtual = true;
     }
 
+    private void SetFieldToPublic(FieldDefinition field)
+    {
+        field.IsFamily = false;
+        field.IsPrivate = false;
+        field.IsPublic = true;
+
+    }
+    private void SetMethodToPublic(MethodDefinition field)
+    {
+        field.IsFamily = false;
+        field.IsPrivate = false;
+        field.IsPublic = true;
+
+    }
 }
