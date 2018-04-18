@@ -45,11 +45,10 @@ public class BlockTakeAndReplace : Block
         }
 
         entityPlayerLocal.PlayOneShot("Sounds/DestroyBlock/wooddestroy1");
-        // Replace it with the downgrade block
-        BlockValue blockValue2 = this.DowngradeBlock;
-        blockValue2.rotation = _blockValue.rotation;
-        blockValue2.meta = _blockValue.meta;
-        world.SetBlockRPC(clrIdx, vector3i, blockValue2);
+        
+        // Damage the block for its full health 
+        this.DamageBlock(world, clrIdx, vector3i, block, block.Block.blockMaterial.MaxDamage, entityPlayerLocal.entityId, false);
+
     }
 
 
