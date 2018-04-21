@@ -1,3 +1,8 @@
+Bigger Back Pack SDX Edition
+============================
+
+The Bigger Back Pack allows you to easily update the backpack size up to 45. The latest version also allows you to add additional tool belt slots too.
+
 For different sized back packs,
 
 Edit   PatchScripts/BiggerBackPack.cs:
