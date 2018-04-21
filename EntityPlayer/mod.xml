@@ -1,0 +1,18 @@
+<mod>
+	<info>
+		<author>sphereii</author>
+		<name>Entity Player</name>
+		<description>Mod that changes the default player</description>
+		<mod_version>1.0</mod_version>
+		<game_version>16.4</game_version>
+		<launcher_version></launcher_version>
+	</info>
+	
+	<config_mods>
+		<import file="Configs\EntityClasses.xml" />
+	</config_mods>
+	
+	<dependencies>
+		<dependency>Hal's DLL Fixes</dependency>
+	</dependencies>
+</mod>

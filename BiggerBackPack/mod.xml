@@ -1,18 +1,18 @@
 <mod>
-	<info>
-		<!-- Information about the Mod, the author and version information -->
-		<!-- These are displayed in the SDX Launcher -->
-		<author>sphereii</author>
-		<name>Bigger Back Pack</name>
-		<description>Bigger Back Pack SDX Mod 5x9 45</description>
-		<mod_version>1.0</mod_version>
-		<game_version>16.4</game_version>
-		<launcher_version>0.7.1</launcher_version>
-	</info>
-	
-	<!-- This references any config files that SDX needs to merge into your files -->
-	<config_mods>
-		<import file="Config\BiggerBackPack.xml" />
-    </config_mods>
-	
+  <info>
+    <!-- Information about the Mod, the author and version information -->
+    <!-- These are displayed in the SDX Launcher -->
+    <author>sphereii</author>
+    <name>Bigger Back Pack</name>
+    <description>Bigger Back Pack SDX Mod 5x9 45</description>
+    <mod_version>1.0</mod_version>
+    <game_version>16.4</game_version>
+    <launcher_version>0.7.1</launcher_version>
+  </info>
+
+  <!-- This references any config files that SDX needs to merge into your files -->
+  <config_mods>
+    <import file="Config\BiggerBackPack.xml" />
+  </config_mods>
+
 </mod>

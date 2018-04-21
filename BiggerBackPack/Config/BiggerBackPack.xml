@@ -1,18 +1,26 @@
 <configs>
-	<config name="XUi/windows">	
-		<!-- Back pack dimensions are set for 5 x 9, based on a 45 slot back pack -->
-		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@rows">5</set>
-		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cols">9</set>
+  <config name="XUi/windows">
+    <!-- Back pack dimensions are set for 5 x 9, based on a 45 slot back pack -->
+    <set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@rows">5</set>
+    <set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cols">9</set>
 
-		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cell_width">67</set>
-		<set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cell_height">67</set>
+    <set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cell_width">67</set>
+    <set xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/@cell_height">67</set>
 
-		<remove xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/item_stack" />
-		<append xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']">
-			<item_stack_inventory name="0"/>
-		</append>
+    <remove xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']/item_stack" />
+    <append xpath="/windows/window[@name='windowBackpack']/panel[@name='content']/grid[@name='inventory']">
+      <item_stack_inventory name="0"/>
+    </append>
 
-	</config>
+    <!-- Set the tool belt to be 9 wide-->
+    <set xpath="/windows/window[@name='S420windowToolbelt']/rect/grid[1]/@cols">9</set>
+    <set xpath="/windows/window[@name='S420windowToolbelt']/rect/grid[2]/@cols">9</set>
+    <!-- Add a new row for the slot -->
+    <append xpath="/windows/window[@name='S420windowToolbelt']/rect/grid[2]">
+      <label depth="50" width="12" height="22" text="9" font_size="22" effect="outline" color="[white]" justify="center" />
+    </append>
+    
+  </config>
 
 	<config name="XUi/controls" >
 		<append xpath="/controls">
@@ -34,6 +42,8 @@
 				</rect>
 			</item_stack_inventory>
 		</append>
+    
+    
 	</config>
 	<!-- changing the scale of the panel to better fit -->
 	<config name="xui">
