@@ -1,0 +1,22 @@
+﻿<configs>
+	<config name="blocks">
+		<block id="" name="waterStaticBucket">
+			<property name="CreativeMode" value="Dev"/>
+			<property name="CustomIcon" value="waterSource8"/>
+
+			<!-- Irrigation Block Class -->
+			<property name="Class" value="IrrigationBlock, Mods" />
+			<property name="EvaporationTime" value="1" />
+			<property name="UpdateRate" value="64" />
+
+			<property name="Count" value="3"/>
+			<property name="Material" value="water"/>
+			<property name="Shape" value="Water"/>
+			<property name="Mesh" value="water"/>
+			<property name="Model" value="water_full"/>
+			<property name="Texture" value="223"/>
+			<property name="Map.Color" value="20,20,120"/>
+		</block>
+
+	</config>
+</configs>
