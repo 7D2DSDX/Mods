@@ -80,10 +80,13 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
     public Transform bipedTransform;
 
     // If the displayLog is true, verbosely log out put. Disable in production!
-    private readonly bool blDisplayLog = false;
+    private readonly bool blDisplayLog = true;
 
+    // for the particle system
+    protected int specialAttackTicks;
+    protected float timeSpecialAttackPlaying;
+    protected float idleTime;
 
-        
     private readonly int CrouchIndexes;
 
     // Animator's current state
@@ -98,7 +101,6 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
     private readonly int HarvestIndexes;
     private readonly int IdleIndexes;
 
-    protected float idleTime;
     protected int IdleTime = Animator.StringToHash("IdleTime");
     protected int IsBreakingBlocks = Animator.StringToHash("IsBreakingBlocks");
 
@@ -124,6 +126,7 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
     private string RightHand = "RightHand";
     protected Animator rightHandAnimator;
     private Transform rightHandItemTransform;
+    private Transform rightHand;
     private readonly int RunIndexes;
     private readonly int SleeperIndexes;
     private readonly int SpecialAttackIndexes;
@@ -154,7 +157,7 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
         var entityClass = EntityClass.list[entityAlive.entityClass];
 
 
-        AttackHash = GenerateLists(entityClass, "Attacks");
+        AttackHash = GenerateLists(entityClass, "AttackAnimations");
 
 
         // The following will read our Index values from the XML to determine the maximum attack animations.
@@ -186,6 +189,11 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
 
         int.TryParse(entityClass.Properties.Values["RandomIndexes"], out RandomIndexes);
         int.TryParse(entityClass.Properties.Values["AttackIdleIndexes"], out AttackIdleIndexes);
+
+        if (entityClass.Properties.Values.ContainsKey("RightHandJointName"))
+            this.RightHand = entityClass.Properties.Values["RightHandJointName"];
+
+    
 
     }
 
@@ -237,23 +245,22 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
         if (rightHandItemTransform != null)
         {
             Log("Reading Right hand Items to equipment weapons");
-
+            Debug.Log("Setting Right hand position");
             //Debug.Log("RIGHTHAND ITEM TRANSFORM");
             rightHandItemTransform.parent = rightHandItemTransform;
-            var position = AnimationGunjointOffsetData
-                .AnimationGunjointOffset[entityAlive.inventory.holdingItem.HoldType.Value].position;
-            var rotation = AnimationGunjointOffsetData
-                .AnimationGunjointOffset[entityAlive.inventory.holdingItem.HoldType.Value].rotation;
+            var position = AnimationGunjointOffsetData.AnimationGunjointOffset[entityAlive.inventory.holdingItem.HoldType.Value].position;
+            var rotation = AnimationGunjointOffsetData.AnimationGunjointOffset[entityAlive.inventory.holdingItem.HoldType.Value].rotation;
             rightHandItemTransform.localPosition = position;
             rightHandItemTransform.localEulerAngles = rotation;
+            SetInRightHand(this.rightHandItemTransform);
+
         }
     }
 
     // Check if the Animation attack is still playing.
     public bool IsAnimationAttackPlaying()
     {
-        return ActionTime > 0f ||
-               !anim.IsInTransition(0) && AttackHash.Contains(currentBaseState.fullPathHash);
+        return  !anim.IsInTransition(0) && AttackHash.Contains(currentBaseState.fullPathHash);
     }
 
     // Picks a random attack index, and then fires off the attack trigger. 
@@ -290,8 +297,13 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
     {
         if (_b)
         {
+            Log("Firing Special attack");
+            anim.Play("Attack1");
             SetRandomIndex("SpecialAttackIndex");
             anim.SetTrigger("SpecialAttack");
+            this.idleTime = 0f;
+            this.specialAttackTicks = 3;
+            this.timeSpecialAttackPlaying = 0.8f;
         }
     }
 
@@ -303,6 +315,7 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
 
     public void StartAnimationSpecialAttack2()
     {
+        Log("Firing Second Special attack");
         SetRandomIndex("SpecialSecondAttack");
         anim.SetTrigger("SpecialSecondAttack");
     }
@@ -473,13 +486,34 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
     // Code from Mortelentus, that allows us to set an animator in the right hand for weapons
     public void SetInRightHand(Transform _transform)
     {
-        if (rightHandItemTransform == null) return;
-        idleTime = 0f;
-        if (_transform != null) _transform.parent = rightHandItemTransform;
+       if (this.rightHandItemTransform == null || _transform == null )
+            return;
 
-        rightHandItemTransform = _transform;
-        rightHandAnimator = !(_transform != null) ? null : _transform.GetComponent<Animator>();
-        if (rightHandItemTransform != null) Utils.SetLayerRecursively(rightHandItemTransform.gameObject, 0);
+        Log("Setting Right Hand: " + rightHandItemTransform.name.ToString());
+
+        this.idleTime = 0f;
+    
+        Log("Setting Right Hand Transform");
+        this.rightHandItemTransform = _transform;
+        if (this.rightHandItemTransform == null)
+        {
+            Log("Right Hand Animator is Null");
+            return;
+        }
+        else
+        {
+            // Animator is important to show the particle
+            Log("Right Hand Animator is NOT NULL ");
+            this.rightHandAnimator = rightHandItemTransform.GetComponent<Animator>();
+        }
+        
+        if (this.rightHandItemTransform != null)
+        {
+            Utils.SetLayerRecursively(this.rightHandItemTransform.gameObject, 0);
+        }
+
+        Log("Done with SetInRightHand");
+
     }
 
     // Reutrns the righthand transform
@@ -647,13 +681,16 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
     {
         var hash = new HashSet<int>();
 
+        Log("Searching for AnimationType: " + strAnimationType);
         if (entityClass.Properties.Values.ContainsKey(strAnimationType))
+        {
+            Log("Animation Type found: " + entityClass.Properties.Values[strAnimationType].ToString());
             foreach (var strAnimationState in entityClass.Properties.Values[strAnimationType].Split(','))
             {
-                AttackStrings.Add(strAnimationState.Trim());
-                hash.Add(Animator.StringToHash(strAnimationState));
+                Log("Adding Attack Hash: " + strAnimationState);
+                hash.Add(Animator.StringToHash(strAnimationState.Trim()));
             }
-
+        }
         return hash;
     }
 
@@ -735,12 +772,17 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
             Log("Searching for possible Right Hand Joint");
             var entityClass = EntityClass.list[entityAlive.entityClass];
 
-            // Grabs what Right Hand Joint we have in our XML
+            // Find the right hand joint, if it's set.
             if (entityClass.Properties.Values.ContainsKey("RightHandJointName"))
             {
-                RightHand = entityClass.Properties.Values["RightHandJointName"];
-                rightHandItemTransform = FindTransform(bipedTransform, bipedTransform, RightHand);
+                this.RightHand = entityClass.Properties.Values["RightHandJointName"];
+                this.rightHandItemTransform = FindTransform(this.bipedTransform, this.bipedTransform, RightHand);
+                if (this.rightHandItemTransform)
+                    Log("Right Hand Item Transform: " + this.rightHandItemTransform.name.ToString());
+                else
+                    Log("Right Hand Item Transform: Could not find Transofmr: " + RightHand);
             }
+
         }
         catch (Exception ex)
         {
@@ -844,9 +886,23 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
 
                 UpdateCurrentState();
 
+                if (this.timeSpecialAttackPlaying > 0f)
+                {
+                    // it's playing special attack
+                    this.timeSpecialAttackPlaying -= Time.deltaTime;
+                    return;
+                }
+
                 // Test condition while we evaluate the effectiveness of using encroachment for state machine triggers.
                 if (true)
                 {
+
+                    if (this.timeSpecialAttackPlaying > 0f)
+                    {
+                        // it's playing special attack
+                        this.timeSpecialAttackPlaying -= Time.deltaTime;
+                        return;
+                    }
 
                     Log("Last Distance: " + this.lastDistance);
                     float playerDistanceX = 0.0f;
@@ -1140,7 +1196,7 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
         neck = FindTransform(bipedTransform, bipedTransform, "Neck");
         //this.entityLiving.GetRightHandTransformName()
         //Debug.Log("LOOKING FOR " + rightHandStr);
-        //this.rightHand = FindTransform(this.bipedTransform, this.bipedTransform, RightHandName);
+        this.rightHand = FindTransform(this.bipedTransform, this.bipedTransform, RightHand);
         //if (this.rightHand != null) Debug.Log("Right HAND = " + this.rightHand.name);
         //Debug.Log("FIND LEGS");
         leftUpperLeg = FindTransform(bipedTransform, bipedTransform, "LeftUpLeg");

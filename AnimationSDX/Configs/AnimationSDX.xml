@@ -1,37 +1,25 @@
 <configs>
-	<config name="entityclasses">
-		<append xpath="/entity_classes">
+  <config name="entityclasses">
+    <append xpath="/entity_classes">
 
-			<entity_class name="SDXTemplate" extends="zombieTemplateMale">
-				<!-- We are using the Animal Animation, since the BipedAnimation is a bit wonky with the hit animation -->
-				<property name="AvatarController" value="AnimationSDX, Mods" />
+      <entity_class name="SDXTemplate" extends="zombieTemplateMale">
+        <!-- For fun, let's use the zombie transmogrifier class -->
+        <!--property name="Class" value="EntityZombieSDX, Mods" /-->
 
-				<!-- With true, the zombie just kind of chills out in one place. Set to false to watch it move. -->
-				<property name="RootMotion" value="false" />
+        <!-- We are using the Animal Animation, since the BipedAnimation is a bit wonky with the hit animation -->
+        <property name="AvatarController" value="AnimationSDX, Mods" />
 
-				<!-- Baseline Speed is way too slow, so we need to bump it up a notch or 5 -->
-				<property name="WanderSpeed" value="0.8" />
-				<property name="ApproachSpeed" value="0.8" />
-				<property name="NightWanderSpeed" value="0.8" />
-				<property name="NightApproachSpeed" value="1.1" />
-				<property name="HasRagdoll" value="false" />
-			</entity_class>
+        <!-- With true, the zombie just kind of chills out in one place. Set to false to watch it move. -->
+        <property name="RootMotion" value="false" />
 
-			<entity_class name="SDXTemplateMecanim" extends="zombieTemplateMale">
-				<!-- We are using the Animal Animation, since the BipedAnimation is a bit wonky with the hit animation -->
-				<property name="AvatarController" value="MecanimSDX, Mods" />
+        <!-- Baseline Speed is way too slow, so we need to bump it up a notch or 5 -->
+        <property name="WanderSpeed" value="0.8" />
+        <property name="ApproachSpeed" value="0.8" />
+        <property name="NightWanderSpeed" value="0.8" />
+        <property name="NightApproachSpeed" value="1.1" />
+        <property name="HasRagdoll" value="false" />
+      </entity_class>
 
-				<!-- With true, the zombie just kind of chills out in one place. Set to false to watch it move. -->
-				<property name="RootMotion" value="false" />
-
-				<!-- Baseline Speed is way too slow, so we need to bump it up a notch or 5 -->
-				<property name="WanderSpeed" value="0.8" />
-				<property name="ApproachSpeed" value="0.8" />
-				<property name="NightWanderSpeed" value="0.8" />
-				<property name="NightApproachSpeed" value="1.1" />
-				<property name="HasRagdoll" value="false" />
-			</entity_class>
-
-		</append>
-	</config>
+    </append>
+  </config>
 </configs>
