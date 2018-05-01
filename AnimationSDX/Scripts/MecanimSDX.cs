@@ -80,7 +80,7 @@ internal class MecanimSDX : MonoBehaviour, IAvatarController
     public Transform bipedTransform;
 
     // If the displayLog is true, verbosely log out put. Disable in production!
-    private readonly bool blDisplayLog = true;
+    private readonly bool blDisplayLog = false;
 
     // for the particle system
     protected int specialAttackTicks;
