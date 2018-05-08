@@ -273,7 +273,7 @@ public class EntityZombieSDX : EntityZombie
     }
 
     // Randomize the Walk types.
-    public int GetWalkType()
+    public override int GetWalkType()
     {
         // Grab the current walk type in the baes class
         int WalkType = base.GetWalkType();
