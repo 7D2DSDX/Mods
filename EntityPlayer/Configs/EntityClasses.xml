@@ -9,7 +9,30 @@
       <!-- take a stamina hit for jumping -->
       <property name="JumpingDrain" value="true" />
       
-   
+      <property name="MaxEncumbrance" value="10000" />
+      <property name="UseEncumbrance" value="false" />
     </append>
 	</config>
+
+  <!-- Buffs are used for the encumbrance feature, and can be adjusted how you please. -->
+  <config name="buffs">
+    <append xpath="/buffs">
+      <buff id="Encumbered" mutex="Encumbered,HeavyEncumbered,MaxEncumbered" actions="debuff(Unencumbered);debuff(HeavyEncumbered);debuff(MaxEncumbered)" icon="ui_game_symbol_drunk" name_key="encumbered" description_key="encumberedDesc" tooltip_key="encumbreredTooltip">
+        <modify id="0" stat="stamina" amount="-2" rate="1" />
+        <modify id="0" stat="speedmodifier" setValue="0.90" />
+      </buff>
+      <buff id="HeavyEncumbered" mutex="HeavyEncumbered,MaxEncumbered" actions="debuff(Encumbered);debuff(Unencumbered);debuff(MaxEncumbered)" icon="ui_game_symbol_drunk" name_key="heavyencumbered" description_key="heavyencumberedDesc" tooltip_key="heavyencumbreredTooltip">
+        <modify id="0" stat="stamina" amount="-5" rate="1" />
+        <modify id="0" stat="speedmodifier" setValue="0.50" />
+      </buff>
+      <buff id="MaxEncumbered" mutex="MaxEncumbered" actions="debuff(Encumbered);debuff(HeavyEncumbered);debuff(Unencumbered)" icon="ui_game_symbol_drunk" name_key="Maxencumbered" description_key="MaxencumberedDesc" tooltip_key="MaxencumbreredTooltip">
+        <modify id="0" stat="stamina" amount="-5" rate="1" />
+        <modify id="0" stat="speedmodifier" setValue="0.1" />
+      </buff>
+      <buff id="Unencumbered" actions="debuff(Encumbered);debuff(HeavyEncumbered);debuff(MaxEncumbered)" icon="" name_key="Unencumbered" description_key="UnencumberedDesc" tooltip_key="UnencumberedTooltip" >
+        <modify id="0" stat="speedmodifier" setValue="1.0" />
+      </buff>
+    </append>
+    
+  </config>
 </configs>

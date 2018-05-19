@@ -7,12 +7,13 @@
  *
  *      Currently this class is just a stub class.
  */
+using System;
+using System.IO;
+
 class EntityPlayerSDX : EntityPlayer
 {
     public override void Init(int _entityClass)
     {
         base.Init(_entityClass);
-        
     }
-
 }
