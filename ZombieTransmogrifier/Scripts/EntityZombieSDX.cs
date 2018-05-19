@@ -110,8 +110,8 @@ public class EntityZombieSDX : EntityZombie
         //if (random.Next(100) <= 5)
         //    blRunInDark = true;
 
-     //   GetWalkType();
-      //  GetApproachSpeed();
+        GetWalkType();
+        GetApproachSpeed();
 
         // Sets the hand value, so we can give our entities ranged weapons.
         this.inventory.SetSlots(new ItemStack[]
@@ -273,7 +273,7 @@ public class EntityZombieSDX : EntityZombie
     }
 
     // Randomize the Walk types.
-    public int GetWalkType()
+    public override int GetWalkType()
     {
         // Grab the current walk type in the baes class
         int WalkType = base.GetWalkType();
