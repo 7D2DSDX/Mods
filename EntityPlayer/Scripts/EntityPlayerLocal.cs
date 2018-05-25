@@ -60,63 +60,69 @@ class EntityPlayerSDXLocal : EntityPlayerLocal
         // Re-set the encumbrance, since we'll just re-calculate it.
         this.flTotalEncumbrance = 0f;
 
-        ItemStack[] slots = this.bag.GetSlots();
-        while (num < slots.Length && num < slots.Length)
+        try
         {
-            if (slots[num].IsEmpty())
+            ItemStack[] slots = this.bag.GetSlots();
+            while (num < slots.Length && num < slots.Length)
             {
+                if (slots[num].IsEmpty())
+                {
+                    num++;
+                    continue;
+                }
+                // By default, set everything as 0.1 weight (pounds? ounces? magic?  )
+                float itemWeight = 0.1f;
+
+                // Check if the item value has an item weight attached to it, and if so, use that number instead.
+                if (ItemClass.list[slots[num].itemValue.type].Properties.Values.ContainsKey("ItemWeight"))
+                    float.TryParse(ItemClass.list[slots[num].itemValue.type].Properties.Values["ItemWeight"], out itemWeight);
+
+                // Calculate the total weight of the stack
+                float flTotalWeight = itemWeight * slots[num].count;
+
+                this.flTotalEncumbrance += flTotalWeight;
                 num++;
-                continue;
             }
-            // By default, set everything as 0.1 weight (pounds? ounces? magic?  )
-            float itemWeight = 0.1f;
 
-            // Check if the item value has an item weight attached to it, and if so, use that number instead.
-            if (ItemClass.list[slots[num].itemValue.type].Properties.Values.ContainsKey("ItemWeight"))
-                float.TryParse(ItemClass.list[slots[num].itemValue.type].Properties.Values["ItemWeight"], out itemWeight);
+            String strBuff = string.Empty;
 
-            // Calculate the total weight of the stack
-            float flTotalWeight = itemWeight * slots[num].count;
+            // 1 being at Max loaded, and anything above is extra encumberance.
+            float over = this.flTotalEncumbrance / this.flMaxEncumbrance;
 
-            this.flTotalEncumbrance += flTotalWeight;
-            num++;
+            // 25% Over weight
+            if (over > 1 && over < 1.25)
+            {
+                strBuff = "Encumbered";
+            }
+            // 26 to 50%
+            else if (over >= 1.25 && over < 1.5)
+            {
+                strBuff = "HeavyEncumbered";
+            }
+            // Over 50%
+            else if (over >= 1.5)
+            {
+                strBuff = "MaxEncumbered";
+            }
+            else
+            {
+                // Under 100%
+                strBuff = "Unencumbered";
+            }
+
+            if (!String.IsNullOrEmpty(strBuff))
+            {
+                MultiBuffClass multiBuffClass = MultiBuffClass.FindClass(strBuff);
+                if (multiBuffClass != null)
+                    MultiBuffClassAction.Execute(this.entityId, multiBuffClass, this, multiBuffClass.ExpiryBuffChance, false, false, EnumBodyPartHit.None, null);
+
+            }
+
         }
-
-        String strBuff = string.Empty;
-
-        // 1 being at Max loaded, and anything above is extra encumberance.
-        float over = this.flTotalEncumbrance / this.flMaxEncumbrance;
-
-        // 25% Over weight
-        if (over > 1 && over < 1.25)
+        catch (Exception ex)
         {
-            strBuff = "Encumbered";
+            Debug.Log("Encumbrance Mod Unloading");
         }
-        // 26 to 50%
-        else if (over >= 1.25 && over < 1.5)
-        {
-            strBuff = "HeavyEncumbered";
-        }
-        // Over 50%
-        else if (over >= 1.5)
-        {
-            strBuff = "MaxEncumbered";
-        }
-        else
-        {
-            // Under 100%
-            strBuff = "Unencumbered";
-        }
-
-        if (!String.IsNullOrEmpty(strBuff))
-        {
-            MultiBuffClass multiBuffClass = MultiBuffClass.FindClass(strBuff);
-            if (multiBuffClass != null)
-                MultiBuffClassAction.Execute(this.entityId, multiBuffClass, this, multiBuffClass.ExpiryBuffChance, false, false, EnumBodyPartHit.None, null);
-
-        }
-
-
     }
 
     public override bool IsAttackValid()
@@ -164,7 +170,7 @@ class EntityPlayerSDXLocal : EntityPlayerLocal
                     this.Stamina -= 2f;
         }
 
-   
+
         base.OnUpdateLive();
     }
 
@@ -172,8 +178,8 @@ class EntityPlayerSDXLocal : EntityPlayerLocal
     protected override void Awake()
     {
         base.Awake();
-        if ( this.blUseEncumbrance )
+        if (this.blUseEncumbrance)
             this.bag.OnBackpackItemsChangedInternal += this.CheckEncumbrance;
     }
-   
+
 }
